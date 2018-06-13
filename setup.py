@@ -5,8 +5,7 @@
 # This file is a part of HUD mirror script. For more information
 # visit official site: https://www.easycoding.org/projects/hudman
 #
-# Copyright (c) 2015 - 2018 EasyCoding Team (ECTeam).
-# Copyright (c) 2005 - 2018 EasyCoding Team.
+# Copyright (c) 2016 - 2018 EasyCoding Team.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
