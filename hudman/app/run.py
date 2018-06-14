@@ -21,9 +21,18 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+from argparse import ArgumentParser
+from hudman import HUDMirror
+
 
 def main():
-    print('')
+    # Parse command-line arguments...
+    parser = ArgumentParser()
+    parser.add_argument('--gamedb', '-d', help='Specify path to game database file.', required=True)
+    cmdline = parser.parse_args()
+
+    # Run mirror script...
+    HUDMirror(cmdline.gamedb)
 
 
 if __name__ == '__main__':
