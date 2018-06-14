@@ -22,8 +22,14 @@
 #
 
 from .hudlist import HUDEntry
+from os import path
 
 
 class HUDMirror:
+    def __checkdb(self) -> bool:
+        return path.isfile(self.__gamedb)
+
     def __init__(self, gamedb):
-        print('')
+        self.__gamedb = gamedb
+        if self.__checkdb():
+            print('Game database file found: %s.' % self.__gamedb)
