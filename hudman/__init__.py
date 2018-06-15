@@ -32,7 +32,7 @@ class HUDMirror:
 
     def __readdb(self):
         if not self.__checkdb():
-            raise Exception("Game database file not found: %s." % self.__gamedb)
+            raise FileNotFoundError("Game database file not found: %s." % self.__gamedb)
 
         huddb = minidom.parse(self.__gamedb)
         for hud in huddb.getElementsByTagName('HUD'):
