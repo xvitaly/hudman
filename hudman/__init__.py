@@ -30,7 +30,7 @@ from calendar import timegm
 
 class HUDMirror:
     @staticmethod
-    def gmt2unix(gtime):
+    def gmt2unix(gtime: str) -> int:
         do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
         return int(timegm(do.timetuple()))
 
