@@ -23,13 +23,27 @@
 
 from .hudlist import HUDEntry
 from os import path
+from xml.dom import minidom
 
 
 class HUDMirror:
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
 
+    def __readdb(self):
+        huddb = minidom.parse(self.__gamedb)
+        for hud in huddb.getElementsByTagName('HUD'):
+            self.__hudlist.append(HUDEntry(hud.getElementsByTagName("Name")[0].firstChild.data,
+                                           hud.getElementsByTagName("InstallDir")[0].firstChild.data,
+                                           hud.getElementsByTagName("UpURI")[0].firstChild.data,
+                                           hud.getElementsByTagName("RepoPath")[0].firstChild.data,
+                                           hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
+                                           hud.getElementsByTagName("URI")[0].firstChild.data))
+
     def __init__(self, gamedb):
         self.__gamedb = gamedb
+        self.__hudlist = []
+
         if self.__checkdb():
             print('Game database file found: %s.' % self.__gamedb)
+            self.__readdb()
