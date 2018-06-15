@@ -24,9 +24,16 @@
 from .hudlist import HUDEntry
 from os import path
 from xml.dom import minidom
+from datetime import datetime
+from calendar import timegm
 
 
 class HUDMirror:
+    @staticmethod
+    def gmt2unix(gtime):
+        do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
+        return int(timegm(do.timetuple()))
+
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
 
