@@ -22,12 +22,12 @@
 #
 
 from .hudlist import HUDEntry
-from os import path
+from os import path, getcwd, makedirs, rename
 from xml.dom import minidom
 from datetime import datetime
 from calendar import timegm
 from json import loads
-from urllib.request import Request, urlopen
+from urllib.request import Request, urlopen, urlretrieve
 
 
 class HUDMirror:
@@ -44,6 +44,14 @@ class HUDMirror:
             raise Exception('GitHub API returned %d error code.' % response.status)
         data = loads(response.read().decode('utf-8'))
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
+
+    def __downloadfile(self, url, name):
+        fdir = path.join(self.__outdir, name)
+        if not path.exists(fdir):
+            makedirs(fdir)
+        filepath = path.join(fdir, '%s.zip' % name)
+        urlretrieve(url, filepath)
+        return filepath
 
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
@@ -64,4 +72,5 @@ class HUDMirror:
     def __init__(self, gamedb):
         self.__gamedb = gamedb
         self.__hudlist = []
+        self.__outdir = path.join(getcwd(), 'huds')
         self.__readdb()
