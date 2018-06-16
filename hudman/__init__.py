@@ -26,6 +26,8 @@ from os import path
 from xml.dom import minidom
 from datetime import datetime
 from calendar import timegm
+from json import loads
+from urllib.request import Request, urlopen
 
 
 class HUDMirror:
@@ -33,6 +35,15 @@ class HUDMirror:
     def gmt2unix(gtime: str) -> int:
         do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
         return int(timegm(do.timetuple()))
+
+    @staticmethod
+    def fetchgithub(repourl):
+        url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
+        response = urlopen(Request(url, data=None, headers={'User-Agent': 'curl'}))
+        if response.status_code != 200:
+            raise Exception('GitHub API returned %d error code.' % response.status_code)
+        data = loads(response.read().decode('utf-8'))
+        return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
