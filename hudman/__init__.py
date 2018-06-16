@@ -27,7 +27,7 @@ from xml.dom import minidom
 from datetime import datetime
 from calendar import timegm
 from json import loads
-from urllib.request import Request, urlopen, urlretrieve
+from urllib.request import Request, urlopen
 
 
 class HUDMirror:
@@ -50,7 +50,8 @@ class HUDMirror:
         if not path.exists(fdir):
             makedirs(fdir)
         filepath = path.join(fdir, '%s.zip' % name)
-        urlretrieve(url, filepath)
+        with urlopen(url) as response, open(filepath, 'wb') as result:
+            result.write(response.read())
         return filepath
 
     def __renamefile(self, fname, chash):
