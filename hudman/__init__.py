@@ -22,7 +22,7 @@
 #
 
 from .hudlist import HUDEntry
-from os import path, getcwd, makedirs, rename
+from os import path, makedirs, rename
 from xml.dom import minidom
 from datetime import datetime
 from calendar import timegm
