@@ -69,8 +69,8 @@ class HUDMirror:
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
-    def __init__(self, gamedb):
+    def __init__(self, gamedb, outdir):
         self.__gamedb = gamedb
+        self.__outdir = outdir
         self.__hudlist = []
-        self.__outdir = path.join(getcwd(), 'huds')
         self.__readdb()
