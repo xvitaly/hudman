@@ -53,6 +53,12 @@ class HUDMirror:
         urlretrieve(url, filepath)
         return filepath
 
+    def __renamefile(self, fname, chash):
+        fdir = path.dirname(fname)
+        result = path.join(fdir, '%s_%s.zip' % (path.splitext(path.basename(fname))[0], chash[:8]))
+        rename(fname, result)
+        return result
+
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
 
