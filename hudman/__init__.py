@@ -40,8 +40,8 @@ class HUDMirror:
     def fetchgithub(repourl):
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
         response = urlopen(Request(url, data=None, headers={'User-Agent': 'curl'}))
-        if response.status_code != 200:
-            raise Exception('GitHub API returned %d error code.' % response.status_code)
+        if response.status != 200:
+            raise Exception('GitHub API returned %d error code.' % response.status)
         data = loads(response.read().decode('utf-8'))
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
