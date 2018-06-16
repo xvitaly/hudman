@@ -45,7 +45,7 @@ class HUDMirror:
         data = loads(response.read().decode('utf-8'))
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
-    def __downloadfile(self, url, name):
+    def __downloadfile(self, url: str, name: str) -> str:
         fdir = path.join(self.__outdir, name)
         if not path.exists(fdir):
             makedirs(fdir)
