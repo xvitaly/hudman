@@ -39,7 +39,7 @@ class HUDMirror:
         return int(timegm(do.timetuple()))
 
     @staticmethod
-    def callgithubapi(repourl):
+    def callgithubapi(repourl: str) -> list:
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
         response = urlopen(Request(url, data=None, headers={'User-Agent': 'curl'}))
         if response.status != 200:
