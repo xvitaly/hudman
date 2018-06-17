@@ -26,6 +26,7 @@ from os import path, makedirs, rename
 from xml.dom import minidom
 from datetime import datetime
 from calendar import timegm
+from hashlib import md5, sha1
 from json import loads
 from urllib.request import Request, urlopen
 
@@ -59,6 +60,10 @@ class HUDMirror:
         result = path.join(fdir, '%s_%s.zip' % (path.splitext(path.basename(fname))[0], chash[:8]))
         rename(fname, result)
         return result
+
+    @staticmethod
+    def md5hash(fname):
+        return md5(open(fname, 'rb').read()).hexdigest()
 
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
