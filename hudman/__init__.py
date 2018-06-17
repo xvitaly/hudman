@@ -21,14 +21,15 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-from .hudlist import HUDEntry
-from os import path, makedirs, rename
-from xml.dom import minidom
-from datetime import datetime
 from calendar import timegm
+from datetime import datetime
 from hashlib import md5, sha1
 from json import loads
+from os import path, makedirs, rename
 from urllib.request import Request, urlopen
+from xml.dom import minidom
+
+from .hudlist import HUDEntry
 
 
 class HUDMirror:
