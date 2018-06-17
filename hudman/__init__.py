@@ -65,6 +65,10 @@ class HUDMirror:
     def md5hash(fname):
         return md5(open(fname, 'rb').read()).hexdigest()
 
+    @staticmethod
+    def sha1hash(fname):
+        return sha1(open(fname, 'rb').read()).hexdigest()
+
     def __checkdb(self) -> bool:
         return path.isfile(self.__gamedb)
 
