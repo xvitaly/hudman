@@ -68,7 +68,7 @@ class HUDMirror:
         return md5(open(fname, 'rb').read()).hexdigest()
 
     @staticmethod
-    def sha1hash(fname):
+    def sha1hash(fname: str) -> str:
         return sha1(open(fname, 'rb').read()).hexdigest()
 
     def __checkdb(self) -> bool:
