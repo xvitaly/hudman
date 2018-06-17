@@ -55,7 +55,8 @@ class HUDMirror:
             result.write(response.read())
         return filepath
 
-    def __renamefile(self, fname, chash):
+    @staticmethod
+    def renamefile(self, fname, chash):
         fdir = path.dirname(fname)
         result = path.join(fdir, '%s_%s.zip' % (path.splitext(path.basename(fname))[0], chash[:8]))
         rename(fname, result)
