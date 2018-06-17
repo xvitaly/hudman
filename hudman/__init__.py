@@ -48,7 +48,7 @@ class HUDMirror:
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
     @staticmethod
-    def downloadfile(outdir: str, url: str, name: str) -> str:
+    def downloadfile(url: str, name: str, outdir: str) -> str:
         fdir = path.join(outdir, name)
         if not path.exists(fdir):
             makedirs(fdir)
