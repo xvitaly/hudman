@@ -64,7 +64,7 @@ class HUDMirror:
         return result
 
     @staticmethod
-    def md5hash(fname):
+    def md5hash(fname: str) -> str:
         return md5(open(fname, 'rb').read()).hexdigest()
 
     @staticmethod
