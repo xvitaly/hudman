@@ -88,10 +88,13 @@ class HUDMirror:
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
+    def __handlehud(self, hud):
+        print(hud.hudname)
+
     def getall(self):
         for hud in self.__hudlist:
             try:
-                print(hud.hudname)
+                self.__handlehud(hud)
             except Exception as ex:
                 print('Error while checking %s updates: %s' % (hud[0], ex))
 
