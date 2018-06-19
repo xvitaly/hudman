@@ -33,7 +33,8 @@ def main():
     cmdline = parser.parse_args()
 
     # Run mirror script...
-    HUDMirror(cmdline.gamedb, cmdline.outdir)
+    hm = HUDMirror(cmdline.gamedb, cmdline.outdir)
+    hm.getall()
 
 
 if __name__ == '__main__':
