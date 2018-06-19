@@ -88,6 +88,13 @@ class HUDMirror:
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
+    def getall(self):
+        for hud in self.__hudlist:
+            try:
+                print(hud.hudname)
+            except Exception as ex:
+                print('Error while checking %s updates: %s' % (hud[0], ex))
+
     def __init__(self, gamedb, outdir):
         self.__gamedb = gamedb
         self.__outdir = outdir
