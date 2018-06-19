@@ -26,6 +26,7 @@ from datetime import datetime
 from hashlib import md5, sha1
 from json import loads
 from os import path, makedirs, rename
+from shutil import rmtree
 from urllib.request import Request, urlopen
 from xml.dom import minidom
 
@@ -89,7 +90,23 @@ class HUDMirror:
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
     def __handlehud(self, hud):
-        print(hud.hudname)
+        if hud.repopath.find('https://github.com/') != -1:
+            r = self.callgithubapi(hud.repopath)
+            if r[1] > hud.lastupdate:
+                f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
+                print('%s has been updated. Hash: %s, time: %s, filename: %s.' % (
+                    hud.installdir, self.md5hash(f), r[1], path.basename(f)))
+            else:
+                print('%s is up to date.' % hud.installdir)
+        else:
+            filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
+            fullfile = self.renamefile(filednl, self.sha1hash(filednl))
+            shortfile = path.basename(fullfile)
+            if shortfile != hud.filename:
+                print('%s downloaded. Hash: %s, filename: %s.' % (hud.installdir, self.md5hash(fullfile), shortfile))
+            else:
+                rmtree(path.dirname(fullfile))
+                print('%s is up to date.' % hud.installdir)
 
     def getall(self):
         for hud in self.__hudlist:
