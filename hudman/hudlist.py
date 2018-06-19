@@ -30,10 +30,6 @@ class HUDEntry:
         return self.__hudname
 
     @property
-    def installdir(self):
-        return self.__installdir
-
-    @property
     def upstreamuri(self):
         return self.__upstreamuri
 
@@ -49,9 +45,12 @@ class HUDEntry:
     def filename(self):
         return self.__filename
 
-    def __init__(self, hudname, installdir, upstreamuri, repopath, lastupdate, filename):
+    @property
+    def ghhosted(self):
+        return self.__repopath.find('https://github.com/') != -1
+
+    def __init__(self, hudname, upstreamuri, repopath, lastupdate, filename):
         self.__hudname = hudname
-        self.__installdir = installdir
         self.__upstreamuri = upstreamuri
         self.__repopath = repopath
         self.__lastupdate = int(lastupdate)

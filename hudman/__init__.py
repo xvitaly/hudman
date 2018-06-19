@@ -82,38 +82,37 @@ class HUDMirror:
 
         huddb = minidom.parse(self.__gamedb)
         for hud in huddb.getElementsByTagName('HUD'):
-            self.__hudlist.append(HUDEntry(hud.getElementsByTagName("Name")[0].firstChild.data,
-                                           hud.getElementsByTagName("InstallDir")[0].firstChild.data,
+            self.__hudlist.append(HUDEntry(hud.getElementsByTagName("InstallDir")[0].firstChild.data,
                                            hud.getElementsByTagName("UpURI")[0].firstChild.data,
                                            hud.getElementsByTagName("RepoPath")[0].firstChild.data,
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
     def __handlehud(self, hud):
-        if hud.repopath.find('https://github.com/') != -1:
+        if hud.ghhosted:
             r = self.callgithubapi(hud.repopath)
             if r[1] > hud.lastupdate:
-                f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
+                f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
                 print('%s has been updated. Hash: %s, time: %s, filename: %s.' % (
-                    hud.installdir, self.md5hash(f), r[1], path.basename(f)))
+                    hud.hudname, self.md5hash(f), r[1], path.basename(f)))
             else:
-                print('%s is up to date.' % hud.installdir)
+                print('%s is up to date.' % hud.hudname)
         else:
-            filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
+            filednl = self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir)
             fullfile = self.renamefile(filednl, self.sha1hash(filednl))
             shortfile = path.basename(fullfile)
             if shortfile != hud.filename:
-                print('%s downloaded. Hash: %s, filename: %s.' % (hud.installdir, self.md5hash(fullfile), shortfile))
+                print('%s downloaded. Hash: %s, filename: %s.' % (hud.hudname, self.md5hash(fullfile), shortfile))
             else:
                 rmtree(path.dirname(fullfile))
-                print('%s is up to date.' % hud.installdir)
+                print('%s is up to date.' % hud.hudname)
 
     def getall(self):
         for hud in self.__hudlist:
             try:
                 self.__handlehud(hud)
             except Exception as ex:
-                print('Error while checking %s updates: %s' % (hud[0], ex))
+                print('Error while checking %s updates: %s' % (hud.hudname, ex))
 
     def __init__(self, gamedb, outdir):
         self.__gamedb = gamedb
