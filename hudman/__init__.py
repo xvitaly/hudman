@@ -89,24 +89,30 @@ class HUDMirror:
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
+    def __usegh(self, hud):
+        r = self.callgithubapi(hud.repopath)
+        if r[1] > hud.lastupdate:
+            f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
+            print('%s has been updated. Hash: %s, time: %s, filename: %s.' % (
+                hud.hudname, self.md5hash(f), r[1], path.basename(f)))
+        else:
+            print('%s is up to date.' % hud.hudname)
+
+    def __useother(self, hud):
+        filednl = self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir)
+        fullfile = self.renamefile(filednl, self.sha1hash(filednl))
+        shortfile = path.basename(fullfile)
+        if shortfile != hud.filename:
+            print('%s downloaded. Hash: %s, filename: %s.' % (hud.hudname, self.md5hash(fullfile), shortfile))
+        else:
+            rmtree(path.dirname(fullfile))
+            print('%s is up to date.' % hud.hudname)
+
     def __handlehud(self, hud):
         if hud.ghhosted:
-            r = self.callgithubapi(hud.repopath)
-            if r[1] > hud.lastupdate:
-                f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
-                print('%s has been updated. Hash: %s, time: %s, filename: %s.' % (
-                    hud.hudname, self.md5hash(f), r[1], path.basename(f)))
-            else:
-                print('%s is up to date.' % hud.hudname)
+            self.__usegh(hud)
         else:
-            filednl = self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir)
-            fullfile = self.renamefile(filednl, self.sha1hash(filednl))
-            shortfile = path.basename(fullfile)
-            if shortfile != hud.filename:
-                print('%s downloaded. Hash: %s, filename: %s.' % (hud.hudname, self.md5hash(fullfile), shortfile))
-            else:
-                rmtree(path.dirname(fullfile))
-                print('%s is up to date.' % hud.hudname)
+            self.__useother(hud)
 
     def getall(self):
         for hud in self.__hudlist:
