@@ -54,7 +54,8 @@ class HUDMirror:
         if not path.exists(fdir):
             makedirs(fdir)
         filepath = path.join(fdir, '%s.zip' % name)
-        with urlopen(url) as response, open(filepath, 'wb') as result:
+        request = Request(url, data=None, headers={'User-Agent': 'curl'})
+        with urlopen(request) as response, open(filepath, 'wb') as result:
             result.write(response.read())
         return filepath
 
