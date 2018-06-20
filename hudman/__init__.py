@@ -60,6 +60,13 @@ class HUDMirror:
 
     @staticmethod
     def downloadfile(url: str, name: str, outdir: str) -> str:
+        """
+        Download file from Internet and save it to specified directory.
+        :param url: URL of remote file
+        :param name: name of result file
+        :param outdir: output directory
+        :return: full local path of downloaded file
+        """
         fdir = path.join(outdir, name)
         if not path.exists(fdir):
             makedirs(fdir)
