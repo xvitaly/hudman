@@ -100,6 +100,11 @@ class HUDMirror:
 
     @staticmethod
     def sha1hash(fname: str) -> str:
+        """
+        Calculate SHA1 hash sum of specified file.
+        :param fname: Source file name.
+        :return: SHA1 hash of source file.
+        """
         return sha1(open(fname, 'rb').read()).hexdigest()
 
     def __checkdb(self) -> bool:
