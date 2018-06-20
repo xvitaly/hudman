@@ -177,6 +177,11 @@ class HUDMirror:
                 print('Error while checking {} updates: {}'.format(hud.hudname, ex))
 
     def __init__(self, gamedb: str, outdir: str):
+        """
+        Main constructor of HUDMirror class.
+        :param gamedb: Full path to game database file.
+        :param outdir: Full path to output directory.
+        """
         self.__gamedb = gamedb
         self.__outdir = outdir
         self.__hudlist = []
