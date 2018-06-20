@@ -157,6 +157,10 @@ class HUDMirror:
             print('%s is up to date.' % hud.hudname)
 
     def __handlehud(self, hud: HUDEntry):
+        """
+        Process and download specified HUD using different backends.
+        :param hud: HUD entry to process and download.
+        """
         if hud.ghhosted:
             self.__usegh(hud)
         else:
