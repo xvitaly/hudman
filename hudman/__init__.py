@@ -115,6 +115,9 @@ class HUDMirror:
         return path.isfile(self.__gamedb)
 
     def __readdb(self):
+        """
+        Read and parse HUD XML database file.
+        """
         if not self.__checkdb():
             raise FileNotFoundError("Game database file not found: %s." % self.__gamedb)
 
