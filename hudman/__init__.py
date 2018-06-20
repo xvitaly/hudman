@@ -37,9 +37,9 @@ class HUDMirror:
     @staticmethod
     def gmt2unix(gtime: str) -> int:
         """
-        Converts datetime string to unixtime.
-        :param gtime: datetime string
-        :return: unixtime integer
+        Convert datetime string to unixtime.
+        :param gtime: Datetime string.
+        :return: UnixTime integer.
         """
         do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
         return int(timegm(do.timetuple()))
@@ -48,8 +48,8 @@ class HUDMirror:
     def callgithubapi(repourl: str) -> list:
         """
         Call GitHub API and fetch useful information about project.
-        :param repourl: GitHub repository URL
-        :return: list with SHA1 hash and datetime of latest commit
+        :param repourl: GitHub repository URL.
+        :return: List with SHA1 hash and datetime of latest commit.
         """
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
         response = urlopen(Request(url, data=None, headers={'User-Agent': 'curl'}))
@@ -62,10 +62,10 @@ class HUDMirror:
     def downloadfile(url: str, name: str, outdir: str) -> str:
         """
         Download file from Internet and save it to specified directory.
-        :param url: URL of remote file
-        :param name: name of result file
-        :param outdir: output directory
-        :return: full local path of downloaded file
+        :param url: URL of remote file.
+        :param name: Name of result file.
+        :param outdir: Output directory.
+        :return: Full local path of downloaded file.
         """
         fdir = path.join(outdir, name)
         if not path.exists(fdir):
