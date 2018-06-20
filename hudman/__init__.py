@@ -46,6 +46,11 @@ class HUDMirror:
 
     @staticmethod
     def callgithubapi(repourl: str) -> list:
+        """
+        Call GitHub API and fetch useful information about project.
+        :param repourl: GitHub repository URL
+        :return: list with SHA1 hash and datetime of latest commit
+        """
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
         response = urlopen(Request(url, data=None, headers={'User-Agent': 'curl'}))
         if response.status != 200:
