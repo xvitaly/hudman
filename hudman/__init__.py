@@ -78,6 +78,12 @@ class HUDMirror:
 
     @staticmethod
     def renamefile(fname: str, chash: str) -> str:
+        """
+        Rename file using it's hash.
+        :param fname: Source file name.
+        :param chash: Source file hash sum.
+        :return: Full local path of renamed file.
+        """
         fdir = path.dirname(fname)
         result = path.join(fdir, '%s_%s.zip' % (path.splitext(path.basename(fname))[0], chash[:8]))
         rename(fname, result)
