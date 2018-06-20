@@ -89,7 +89,7 @@ class HUDMirror:
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
-    def __usegh(self, hud):
+    def __usegh(self, hud: HUDEntry):
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
