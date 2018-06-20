@@ -108,7 +108,7 @@ class HUDMirror:
             rmtree(path.dirname(fullfile))
             print('%s is up to date.' % hud.hudname)
 
-    def __handlehud(self, hud):
+    def __handlehud(self, hud: HUDEntry):
         if hud.ghhosted:
             self.__usegh(hud)
         else:
