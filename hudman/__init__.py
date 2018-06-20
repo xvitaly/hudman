@@ -167,6 +167,9 @@ class HUDMirror:
             self.__useother(hud)
 
     def getall(self):
+        """
+        Process and download updates for all HUDs from database.
+        """
         for hud in self.__hudlist:
             try:
                 self.__handlehud(hud)
