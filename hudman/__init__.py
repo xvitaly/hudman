@@ -91,6 +91,11 @@ class HUDMirror:
 
     @staticmethod
     def md5hash(fname: str) -> str:
+        """
+        Calculate MD5 hash sum of specified file.
+        :param fname: Source file name.
+        :return: MD5 hash of source file.
+        """
         return md5(open(fname, 'rb').read()).hexdigest()
 
     @staticmethod
