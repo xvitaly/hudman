@@ -98,7 +98,7 @@ class HUDMirror:
         else:
             print('%s is up to date.' % hud.hudname)
 
-    def __useother(self, hud):
+    def __useother(self, hud: HUDEntry):
         filednl = self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir)
         fullfile = self.renamefile(filednl, self.sha1hash(filednl))
         shortfile = path.basename(fullfile)
