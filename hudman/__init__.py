@@ -143,6 +143,10 @@ class HUDMirror:
             print('%s is up to date.' % hud.hudname)
 
     def __useother(self, hud: HUDEntry):
+        """
+        Download specified HUD from unknown location.
+        :param hud: HUD entry to process and download.
+        """
         filednl = self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir)
         fullfile = self.renamefile(filednl, self.sha1hash(filednl))
         shortfile = path.basename(fullfile)
