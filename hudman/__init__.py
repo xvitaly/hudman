@@ -36,6 +36,11 @@ from .hudlist import HUDEntry
 class HUDMirror:
     @staticmethod
     def gmt2unix(gtime: str) -> int:
+        """
+        Converts datetime string to unixtime.
+        :param gtime: datetime string
+        :return: unixtime integer
+        """
         do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
         return int(timegm(do.timetuple()))
 
