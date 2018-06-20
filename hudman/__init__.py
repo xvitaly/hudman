@@ -130,6 +130,10 @@ class HUDMirror:
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
     def __usegh(self, hud: HUDEntry):
+        """
+        Call GitHub and download latest revision of specified HUD.
+        :param hud: HUD entry to process and download.
+        """
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
