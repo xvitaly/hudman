@@ -108,6 +108,10 @@ class HUDMirror:
         return sha1(open(fname, 'rb').read()).hexdigest()
 
     def __checkdb(self) -> bool:
+        """
+        Check if specified HUD database file exists.
+        :return: Return True if HUD database file exists.
+        """
         return path.isfile(self.__gamedb)
 
     def __readdb(self):
