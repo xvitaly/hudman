@@ -121,7 +121,7 @@ class HUDMirror:
             except Exception as ex:
                 print('Error while checking %s updates: %s' % (hud.hudname, ex))
 
-    def __init__(self, gamedb, outdir):
+    def __init__(self, gamedb: str, outdir: str):
         self.__gamedb = gamedb
         self.__outdir = outdir
         self.__hudlist = []
