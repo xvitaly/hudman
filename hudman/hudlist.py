@@ -43,6 +43,10 @@ class HUDEntry:
 
     @property
     def repopath(self) -> str:
+        """
+        Get or set upstream repository URL.
+        :return: Upstream repository URL.
+        """
         return self.__repopath
 
     @property
