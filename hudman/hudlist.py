@@ -27,6 +27,10 @@ from os import path
 class HUDEntry:
     @property
     def hudname(self) -> str:
+        """
+        Get or set name of HUD.
+        :return: HUD name.
+        """
         return self.__hudname
 
     @property
