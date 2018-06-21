@@ -30,7 +30,7 @@ class HUDSettings:
 class HUDMessages:
     gh_errcode: str = 'GitHub API returned {:d} error code.'
     db_notfound: str = 'Game database file not found: {}.'
-    hud_updated_gh = '{} has been updated. Hash: {}, time: {}, filename: {}.'
-    hud_updated_oth = '{} downloaded. Hash: {}, filename: {}.'
-    hud_uptodate = '{} is up to date.'
-    hud_error = 'Error while checking {} updates: {}'
+    hud_updated_gh: str = '{} has been updated. Hash: {}, time: {}, filename: {}.'
+    hud_updated_oth: str = '{} downloaded. Hash: {}, filename: {}.'
+    hud_uptodate: str = '{} is up to date.'
+    hud_error: str = 'Error while checking {} updates: {}'
