@@ -74,6 +74,14 @@ class HUDEntry:
         return self.__repopath.find('https://github.com/') != -1
 
     def __init__(self, hudname: str, upstreamuri: str, repopath: str, lastupdate: str, filename: str) -> None:
+        """
+        Main constructor of HUDEntry class.
+        :param hudname: Value of InstallDir value from HUD database.
+        :param upstreamuri: Value of UpURI value from HUD database.
+        :param repopath: Value of RepoPath value from HUD database.
+        :param lastupdate: Value of LastUpdate value from HUD database.
+        :param filename: Value of URI value from HUD database.
+        """
         self.__hudname = hudname
         self.__upstreamuri = upstreamuri
         self.__repopath = repopath
