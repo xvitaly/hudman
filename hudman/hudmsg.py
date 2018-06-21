@@ -25,6 +25,7 @@
 class HUDSettings:
     ua_curl: str = 'Curl'
     ua_wget: str = 'Wget'
+    log_dtfmt = '%d.%m.%Y %H:%M:%S'
 
 
 class HUDMessages:

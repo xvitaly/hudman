@@ -27,6 +27,7 @@ from hashlib import md5, sha1
 from json import loads
 from os import path, makedirs, rename
 from shutil import rmtree
+from time import time
 from urllib.request import Request, urlopen
 from xml.dom import minidom
 
@@ -111,10 +112,10 @@ class HUDMirror:
     @staticmethod
     def logmessage(msg: str) -> None:
         """
-        Print message to log.
+        Print message to log including current timestamp.
         :param msg: Message to print.
         """
-        print(msg)
+        print('({}) {}'.format(datetime.fromtimestamp(time()).strftime(HUDSettings.log_dtfmt), msg))
 
     def __checkdb(self) -> bool:
         """
