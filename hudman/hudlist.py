@@ -26,30 +26,30 @@ from os import path
 
 class HUDEntry:
     @property
-    def hudname(self):
+    def hudname(self) -> str:
         return self.__hudname
 
     @property
-    def upstreamuri(self):
+    def upstreamuri(self) -> str:
         return self.__upstreamuri
 
     @property
-    def repopath(self):
+    def repopath(self) -> str:
         return self.__repopath
 
     @property
-    def lastupdate(self):
+    def lastupdate(self) -> int:
         return self.__lastupdate
 
     @property
-    def filename(self):
+    def filename(self) -> str:
         return self.__filename
 
     @property
-    def ghhosted(self):
+    def ghhosted(self) -> bool:
         return self.__repopath.find('https://github.com/') != -1
 
-    def __init__(self, hudname, upstreamuri, repopath, lastupdate, filename):
+    def __init__(self, hudname: str, upstreamuri: str, repopath: str, lastupdate: str, filename: str) -> None:
         self.__hudname = hudname
         self.__upstreamuri = upstreamuri
         self.__repopath = repopath
