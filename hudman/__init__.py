@@ -31,6 +31,7 @@ from urllib.request import Request, urlopen
 from xml.dom import minidom
 
 from .hudlist import HUDEntry
+from .hudmsg import HUDMessages, HUDSettings
 
 
 class HUDMirror:
@@ -52,9 +53,9 @@ class HUDMirror:
         :return: List with SHA1 hash and datetime of latest commit.
         """
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
-        response = urlopen(Request(url, data=None, headers={'User-Agent': 'curl'}))
+        response = urlopen(Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
         if response.status != 200:
-            raise Exception('GitHub API returned %d error code.' % response.status)
+            raise Exception(HUDMessages.gh_errcode.format(response.status))
         data = loads(response.read().decode('utf-8'))
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
@@ -70,8 +71,8 @@ class HUDMirror:
         fdir = path.join(outdir, name)
         if not path.exists(fdir):
             makedirs(fdir)
-        filepath = path.join(fdir, '%s.zip' % name)
-        request = Request(url, data=None, headers={'User-Agent': 'wget'})
+        filepath = path.join(fdir, '{}.zip'.format(name))
+        request = Request(url, data=None, headers={'User-Agent': HUDSettings.ua_wget})
         with urlopen(request) as response, open(filepath, 'wb') as result:
             result.write(response.read())
         return filepath
@@ -85,7 +86,7 @@ class HUDMirror:
         :return: Full local path of renamed file.
         """
         fdir = path.dirname(fname)
-        result = path.join(fdir, '%s_%s.zip' % (path.splitext(path.basename(fname))[0], chash[:8]))
+        result = path.join(fdir, '{}_{}.zip'.format(path.splitext(path.basename(fname))[0], chash[:8]))
         rename(fname, result)
         return result
 
@@ -119,7 +120,7 @@ class HUDMirror:
         Read and parse HUD XML database file.
         """
         if not self.__checkdb():
-            raise FileNotFoundError("Game database file not found: %s." % self.__gamedb)
+            raise FileNotFoundError(HUDMessages.db_notfound.format(self.__gamedb))
 
         huddb = minidom.parse(self.__gamedb)
         for hud in huddb.getElementsByTagName('HUD'):
@@ -137,10 +138,9 @@ class HUDMirror:
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
-            print('%s has been updated. Hash: %s, time: %s, filename: %s.' % (
-                hud.hudname, self.md5hash(f), r[1], path.basename(f)))
+            print(HUDMessages.hud_updated_gh.format(hud.hudname, self.md5hash(f), r[1], path.basename(f)))
         else:
-            print('%s is up to date.' % hud.hudname)
+            print(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __useother(self, hud: HUDEntry) -> None:
         """
@@ -151,10 +151,10 @@ class HUDMirror:
         fullfile = self.renamefile(filednl, self.sha1hash(filednl))
         shortfile = path.basename(fullfile)
         if shortfile != hud.filename:
-            print('%s downloaded. Hash: %s, filename: %s.' % (hud.hudname, self.md5hash(fullfile), shortfile))
+            print(HUDMessages.hud_updated_oth.format(hud.hudname, self.md5hash(fullfile), shortfile))
         else:
             rmtree(path.dirname(fullfile))
-            print('%s is up to date.' % hud.hudname)
+            print(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __handlehud(self, hud: HUDEntry) -> None:
         """
@@ -174,7 +174,7 @@ class HUDMirror:
             try:
                 self.__handlehud(hud)
             except Exception as ex:
-                print('Error while checking {} updates: {}'.format(hud.hudname, ex))
+                print(HUDMessages.hud_error.format(hud.hudname, ex))
 
     def __init__(self, gamedb: str, outdir: str) -> None:
         """
