@@ -114,7 +114,7 @@ class HUDMirror:
         """
         return path.isfile(self.__gamedb)
 
-    def __readdb(self):
+    def __readdb(self) -> None:
         """
         Read and parse HUD XML database file.
         """
@@ -129,7 +129,7 @@ class HUDMirror:
                                            hud.getElementsByTagName("LastUpdate")[0].firstChild.data,
                                            hud.getElementsByTagName("URI")[0].firstChild.data))
 
-    def __usegh(self, hud: HUDEntry):
+    def __usegh(self, hud: HUDEntry) -> None:
         """
         Call GitHub and download latest revision of specified HUD.
         :param hud: HUD entry to process and download.
@@ -142,7 +142,7 @@ class HUDMirror:
         else:
             print('%s is up to date.' % hud.hudname)
 
-    def __useother(self, hud: HUDEntry):
+    def __useother(self, hud: HUDEntry) -> None:
         """
         Download specified HUD from unknown location.
         :param hud: HUD entry to process and download.
@@ -156,7 +156,7 @@ class HUDMirror:
             rmtree(path.dirname(fullfile))
             print('%s is up to date.' % hud.hudname)
 
-    def __handlehud(self, hud: HUDEntry):
+    def __handlehud(self, hud: HUDEntry) -> None:
         """
         Process and download specified HUD using different backends.
         :param hud: HUD entry to process and download.
@@ -166,7 +166,7 @@ class HUDMirror:
         else:
             self.__useother(hud)
 
-    def getall(self):
+    def getall(self) -> None:
         """
         Process and download updates for all HUDs from database.
         """
@@ -176,7 +176,7 @@ class HUDMirror:
             except Exception as ex:
                 print('Error while checking {} updates: {}'.format(hud.hudname, ex))
 
-    def __init__(self, gamedb: str, outdir: str):
+    def __init__(self, gamedb: str, outdir: str) -> None:
         """
         Main constructor of HUDMirror class.
         :param gamedb: Full path to game database file.
