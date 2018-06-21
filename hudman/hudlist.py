@@ -51,6 +51,10 @@ class HUDEntry:
 
     @property
     def lastupdate(self) -> int:
+        """
+        Get or set last update time in Unixtime format.
+        :return: Last update time.
+        """
         return self.__lastupdate
 
     @property
