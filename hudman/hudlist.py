@@ -28,7 +28,7 @@ class HUDEntry:
     @property
     def hudname(self) -> str:
         """
-        Get or set name of HUD.
+        Get name of HUD.
         :return: HUD name.
         """
         return self.__hudname
@@ -36,7 +36,7 @@ class HUDEntry:
     @property
     def upstreamuri(self) -> str:
         """
-        Get or set upstream URI.
+        Get upstream URI.
         :return: Upstream URI.
         """
         return self.__upstreamuri
@@ -44,7 +44,7 @@ class HUDEntry:
     @property
     def repopath(self) -> str:
         """
-        Get or set upstream repository URL.
+        Get upstream repository URL.
         :return: Upstream repository URL.
         """
         return self.__repopath
@@ -52,13 +52,17 @@ class HUDEntry:
     @property
     def lastupdate(self) -> int:
         """
-        Get or set last update time in Unixtime format.
+        Get last update time in Unixtime format.
         :return: Last update time.
         """
         return self.__lastupdate
 
     @property
     def filename(self) -> str:
+        """
+        Get final download filename for HUD.
+        :return: Download filename for HUD.
+        """
         return self.__filename
 
     @property
