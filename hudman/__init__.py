@@ -109,7 +109,11 @@ class HUDMirror:
         return sha1(open(fname, 'rb').read()).hexdigest()
 
     @staticmethod
-    def logmessage(msg):
+    def logmessage(msg: str) -> None:
+        """
+        Print message to log.
+        :param msg: Message to print.
+        """
         print(msg)
 
     def __checkdb(self) -> bool:
