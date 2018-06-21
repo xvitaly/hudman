@@ -35,6 +35,10 @@ class HUDEntry:
 
     @property
     def upstreamuri(self) -> str:
+        """
+        Get or set upstream URI.
+        :return: Upstream URI.
+        """
         return self.__upstreamuri
 
     @property
