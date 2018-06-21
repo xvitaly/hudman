@@ -67,6 +67,10 @@ class HUDEntry:
 
     @property
     def ghhosted(self) -> bool:
+        """
+        Check if HUD hosted on GitHub.
+        :return: Return True if HUD hosted on GitHub.
+        """
         return self.__repopath.find('https://github.com/') != -1
 
     def __init__(self, hudname: str, upstreamuri: str, repopath: str, lastupdate: str, filename: str) -> None:
