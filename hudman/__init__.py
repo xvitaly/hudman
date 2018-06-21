@@ -108,6 +108,10 @@ class HUDMirror:
         """
         return sha1(open(fname, 'rb').read()).hexdigest()
 
+    @staticmethod
+    def logmessage(msg):
+        print(msg)
+
     def __checkdb(self) -> bool:
         """
         Check if specified HUD database file exists.
@@ -138,9 +142,9 @@ class HUDMirror:
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.hudname, self.__outdir), r[0])
-            print(HUDMessages.hud_updated_gh.format(hud.hudname, self.md5hash(f), r[1], path.basename(f)))
+            self.logmessage(HUDMessages.hud_updated_gh.format(hud.hudname, self.md5hash(f), r[1], path.basename(f)))
         else:
-            print(HUDMessages.hud_uptodate.format(hud.hudname))
+            self.logmessage(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __useother(self, hud: HUDEntry) -> None:
         """
@@ -151,10 +155,10 @@ class HUDMirror:
         fullfile = self.renamefile(filednl, self.sha1hash(filednl))
         shortfile = path.basename(fullfile)
         if shortfile != hud.filename:
-            print(HUDMessages.hud_updated_oth.format(hud.hudname, self.md5hash(fullfile), shortfile))
+            self.logmessage(HUDMessages.hud_updated_oth.format(hud.hudname, self.md5hash(fullfile), shortfile))
         else:
             rmtree(path.dirname(fullfile))
-            print(HUDMessages.hud_uptodate.format(hud.hudname))
+            self.logmessage(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __handlehud(self, hud: HUDEntry) -> None:
         """
@@ -174,7 +178,7 @@ class HUDMirror:
             try:
                 self.__handlehud(hud)
             except Exception as ex:
-                print(HUDMessages.hud_error.format(hud.hudname, ex))
+                self.logmessage(HUDMessages.hud_error.format(hud.hudname, ex))
 
     def __init__(self, gamedb: str, outdir: str) -> None:
         """
