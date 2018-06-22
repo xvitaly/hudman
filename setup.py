@@ -37,5 +37,5 @@ setup(
     install_requires=['requests'],
     author='Vitaly Zaitsev',
     author_email='vitaly@easycoding.org',
-    description=' Simple script to create a local HUD mirror'
+    description='Simple script to create a local HUD mirror'
 )

@@ -28,7 +28,7 @@ from hudman import HUDMirror
 def main():
     # Parse command-line arguments...
     parser = ArgumentParser()
-    parser.add_argument('--gamedb', '-d', help='Specify path to game database file.', required=True)
+    parser.add_argument('--gamedb', '-d', help='Specify path to HUDs database file.', required=True)
     parser.add_argument('--outdir', '-o', help='Specify path to save downloaded files.', required=True)
     cmdline = parser.parse_args()
 
