@@ -22,18 +22,8 @@ BuildRequires: python3dist(requests)
 %description
 %{appdesc}.
 
-%package -n python2-%{appname}
-Summary: %{appsum}
-Requires: python2-networkmanager
-Requires: python2dist(requests)
-%{?python_provide:%python_provide python2-%{appname}}
-
-%description -n python2-%{appname}
-%{appdesc}.
-
 %package -n python3-%{appname}
 Summary: %{appsum}
-Requires: python3-networkmanager
 Requires: python3dist(requests)
 %{?python_provide:%python_provide python3-%{appname}}
 
@@ -45,22 +35,13 @@ Requires: python3dist(requests)
 
 %build
 doxygen
-%py2_build
 %py3_build
 
 %install
-%py2_install
 %py3_install
 
 %check
-%{__python2} setup.py test
 %{__python3} setup.py test
-
-%files -n python2-%{appname}
-%license LICENSE
-%doc README.md
-%doc docs/html
-%{python2_sitelib}/*
 
 %files -n python3-%{appname}
 %license LICENSE
