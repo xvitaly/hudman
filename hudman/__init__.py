@@ -42,6 +42,7 @@ class HUDMirror:
         Convert datetime string to unixtime.
         :param gtime: Datetime string.
         :return: UnixTime integer.
+        :rtype: int
         """
         do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
         return int(timegm(do.timetuple()))
@@ -52,6 +53,7 @@ class HUDMirror:
         Call GitHub API and fetch useful information about project.
         :param repourl: GitHub repository URL.
         :return: List with SHA1 hash and datetime of latest commit.
+        :rtype: list
         """
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
         response = urlopen(Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
@@ -68,6 +70,7 @@ class HUDMirror:
         :param name: Name of result file.
         :param outdir: Output directory.
         :return: Full local path of downloaded file.
+        :rtype: str
         """
         fdir = path.join(outdir, name)
         if not path.exists(fdir):
@@ -85,6 +88,7 @@ class HUDMirror:
         :param fname: Source file name.
         :param chash: Source file hash sum.
         :return: Full local path of renamed file.
+        :rtype: str
         """
         fdir = path.dirname(fname)
         result = path.join(fdir, '{}_{}.zip'.format(path.splitext(path.basename(fname))[0], chash[:8]))
@@ -97,6 +101,7 @@ class HUDMirror:
         Calculate MD5 hash sum of specified file.
         :param fname: Source file name.
         :return: MD5 hash of source file.
+        :rtype: str
         """
         return md5(open(fname, 'rb').read()).hexdigest()
 
@@ -106,6 +111,7 @@ class HUDMirror:
         Calculate SHA1 hash sum of specified file.
         :param fname: Source file name.
         :return: SHA1 hash of source file.
+        :rtype: str
         """
         return sha1(open(fname, 'rb').read()).hexdigest()
 
@@ -121,6 +127,7 @@ class HUDMirror:
         """
         Check if specified HUD database file exists.
         :return: Return True if HUD database file exists.
+        :rtype: bool
         """
         return path.isfile(self.__gamedb)
 
