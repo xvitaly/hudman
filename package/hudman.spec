@@ -4,7 +4,7 @@
 %global appdesc Simple script to create a local HUD mirror by EasyCoding Team
 
 Name: python-%{appname}
-Version: 1.0
+Version: 1.0.0
 Release: 1%{?dist}
 Summary: %{appsum}
 
