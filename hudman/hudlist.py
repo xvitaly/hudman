@@ -98,6 +98,14 @@ class HUDEntry:
         return int(self.__lastupdate)
 
     @property
+    def homepage(self) -> str:
+        """
+        Get homepage of HUD.
+        :return: Homepage of HUD.
+        """
+        return self.__homepage
+
+    @property
     def installdir(self) -> str:
         """
         Get install directory of HUD.
