@@ -26,12 +26,12 @@ from os import path
 
 class HUDEntry:
     @property
-    def hudname(self) -> str:
+    def installdir(self) -> str:
         """
-        Get name of HUD.
-        :return: HUD name.
+        Get install directory of HUD.
+        :return: HUD install directory.
         """
-        return self.__hudname
+        return self.__installdir
 
     @property
     def upstreamuri(self) -> str:
@@ -73,7 +73,7 @@ class HUDEntry:
         """
         return self.__repopath.find('https://github.com/') != -1
 
-    def __init__(self, hudname: str, upstreamuri: str, repopath: str, lastupdate: str, filename: str) -> None:
+    def __init__(self, installdir: str, upstreamuri: str, repopath: str, lastupdate: str, filename: str) -> None:
         """
         Main constructor of HUDEntry class.
         :param hudname: Value of InstallDir value from HUD database.
@@ -82,7 +82,7 @@ class HUDEntry:
         :param lastupdate: Value of LastUpdate value from HUD database.
         :param filename: Value of URI value from HUD database.
         """
-        self.__hudname = hudname
+        self.__installdir = installdir
         self.__upstreamuri = upstreamuri
         self.__repopath = repopath
         self.__lastupdate = int(lastupdate)
