@@ -34,6 +34,14 @@ class HUDEntry:
         return self.__hudname
 
     @property
+    def gamename(self) -> str:
+        """
+        Get HUD's game name.
+        :return: Game name.
+        """
+        return self.__gamename
+
+    @property
     def installdir(self) -> str:
         """
         Get install directory of HUD.
