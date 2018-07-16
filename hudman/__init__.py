@@ -140,11 +140,18 @@ class HUDMirror:
 
         huddb = minidom.parse(self.__gamedb)
         for hud in huddb.getElementsByTagName('HUD'):
-            self.__hudlist.append(HUDEntry(hud.getElementsByTagName('InstallDir')[0].firstChild.data,
+            self.__hudlist.append(HUDEntry(hud.getElementsByTagName('Name')[0].firstChild.data,
+                                           hud.getElementsByTagName('Game')[0].firstChild.data,
+                                           hud.getElementsByTagName('IsUpdated')[0].firstChild.data,
+                                           hud.getElementsByTagName('URI')[0].firstChild.data,
                                            hud.getElementsByTagName('UpURI')[0].firstChild.data,
+                                           hud.getElementsByTagName('Preview')[0].firstChild.data,
                                            hud.getElementsByTagName('RepoPath')[0].firstChild.data,
+                                           hud.getElementsByTagName('Hash')[0].firstChild.data,
                                            hud.getElementsByTagName('LastUpdate')[0].firstChild.data,
-                                           hud.getElementsByTagName('URI')[0].firstChild.data))
+                                           hud.getElementsByTagName('Site')[0].firstChild.data,
+                                           hud.getElementsByTagName('ArchiveDir')[0].firstChild.data,
+                                           hud.getElementsByTagName('InstallDir')[0].firstChild.data))
 
     def __usegh(self, hud: HUDEntry) -> None:
         """
