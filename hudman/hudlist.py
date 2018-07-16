@@ -63,7 +63,7 @@ class HUDEntry:
         Get final download filename for HUD.
         :return: Download filename for HUD.
         """
-        return self.__filename
+        return path.basename(self.__mirroruri)
 
     @property
     def ghhosted(self) -> bool:
@@ -75,15 +75,13 @@ class HUDEntry:
 
     def __init__(self, hudname: str, gamename: str, isupdated: str, mirroruri: str,
                  upstreamuri: str, screenshot: str, repopath: str, hashsum: str,
-                 lastupdate: str, homepage: str, archivedir: str, installdir: str,
-                 filename: str) -> None:
+                 lastupdate: str, homepage: str, archivedir: str, installdir: str) -> None:
         """
         Main constructor of HUDEntry class.
         :param hudname: Value of InstallDir value from HUD database.
         :param upstreamuri: Value of UpURI value from HUD database.
         :param repopath: Value of RepoPath value from HUD database.
         :param lastupdate: Value of LastUpdate value from HUD database.
-        :param filename: Value of URI value from HUD database.
         """
         self.__hudname = hudname
         self.__gamename = gamename
@@ -97,4 +95,3 @@ class HUDEntry:
         self.__homepage = homepage
         self.__archivedir = archivedir
         self.__installdir = installdir
-        self.__filename = path.basename(filename)
