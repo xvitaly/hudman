@@ -58,20 +58,20 @@ class HUDEntry:
         return self.__mirroruri
 
     @property
-    def installdir(self) -> str:
-        """
-        Get install directory of HUD.
-        :return: HUD install directory.
-        """
-        return self.__installdir
-
-    @property
     def upstreamuri(self) -> str:
         """
         Get upstream URI.
         :return: Upstream URI.
         """
         return self.__upstreamuri
+
+    @property
+    def screenshoturi(self) -> str:
+        """
+        Get screenshot URI.
+        :return: Screenshot URI.
+        """
+        return self.__screenshot
 
     @property
     def repopath(self) -> str:
@@ -88,6 +88,14 @@ class HUDEntry:
         :return: Last update time.
         """
         return int(self.__lastupdate)
+
+    @property
+    def installdir(self) -> str:
+        """
+        Get install directory of HUD.
+        :return: HUD install directory.
+        """
+        return self.__installdir
 
     @property
     def filename(self) -> str:
