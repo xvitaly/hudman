@@ -42,6 +42,14 @@ class HUDEntry:
         return self.__gamename
 
     @property
+    def isupdated(self) -> bool:
+        """
+        Checks if current HUD is up to date.
+        :return: Update result.
+        """
+        return self.__isupdated == '1'
+
+    @property
     def installdir(self) -> str:
         """
         Get install directory of HUD.
