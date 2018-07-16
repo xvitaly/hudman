@@ -26,6 +26,14 @@ from os import path
 
 class HUDEntry:
     @property
+    def hudname(self) -> str:
+        """
+        Get user friendly HUD name.
+        :return: HUD name.
+        """
+        return self.__hudname
+
+    @property
     def installdir(self) -> str:
         """
         Get install directory of HUD.
