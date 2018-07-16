@@ -55,7 +55,7 @@ class HUDEntry:
         Get last update time in Unixtime format.
         :return: Last update time.
         """
-        return self.__lastupdate
+        return int(self.__lastupdate)
 
     @property
     def filename(self) -> str:
@@ -93,13 +93,13 @@ class HUDEntry:
         """
         self.__hudname = hudname
         self.__gamename = gamename
-        self.__isupdated = isupdated == 1
+        self.__isupdated = isupdated
         self.__mirroruri = mirroruri
         self.__upstreamuri = upstreamuri
         self.__screenshot = screenshot
         self.__repopath = repopath
         self.__hashsum = hashsum
-        self.__lastupdate = int(lastupdate)
+        self.__lastupdate = lastupdate
         self.__homepage = homepage
         self.__archivedir = archivedir
         self.__installdir = installdir
