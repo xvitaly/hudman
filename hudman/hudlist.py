@@ -50,6 +50,14 @@ class HUDEntry:
         return self.__isupdated == '1'
 
     @property
+    def mirroruri(self) -> str:
+        """
+        Get local mirror URI.
+        :return: Mirror URI.
+        """
+        return self.__mirroruri
+
+    @property
     def installdir(self) -> str:
         """
         Get install directory of HUD.
