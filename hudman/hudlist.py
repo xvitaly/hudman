@@ -78,10 +78,18 @@ class HUDEntry:
                  lastupdate: str, homepage: str, archivedir: str, installdir: str) -> None:
         """
         Main constructor of HUDEntry class.
-        :param hudname: Value of InstallDir value from HUD database.
+        :param hudname: Value of Name value from HUD database.
+        :param gamename: Value of Game value from HUD database.
+        :param isupdated: Value of IsUpdated value from HUD database.
+        :param mirroruri: Value of URI value from HUD database.
         :param upstreamuri: Value of UpURI value from HUD database.
+        :param screenshot: Value of Preview value from HUD database.
         :param repopath: Value of RepoPath value from HUD database.
+        :param hashsum: Value of Hash value from HUD database.
         :param lastupdate: Value of LastUpdate value from HUD database.
+        :param homepage: Value of Site value from HUD database.
+        :param archivedir: Value of ArchiveDir value from HUD database.
+        :param installdir: Value of InstallDir value from HUD database.
         """
         self.__hudname = hudname
         self.__gamename = gamename
