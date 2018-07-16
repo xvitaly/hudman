@@ -82,6 +82,14 @@ class HUDEntry:
         return self.__repopath
 
     @property
+    def hashsum(self) -> str:
+        """
+        Get hash sum of HUD.
+        :return: Hash sum of HUD.
+        """
+        return self.__hashsum
+
+    @property
     def lastupdate(self) -> int:
         """
         Get last update time in Unixtime format.
