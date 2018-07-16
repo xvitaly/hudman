@@ -106,6 +106,14 @@ class HUDEntry:
         return self.__homepage
 
     @property
+    def archivedir(self) -> str:
+        """
+        Get actual archive dir inside archive.
+        :return: Archive directory name.
+        """
+        return self.__archivedir
+
+    @property
     def installdir(self) -> str:
         """
         Get install directory of HUD.
