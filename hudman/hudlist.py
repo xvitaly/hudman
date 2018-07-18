@@ -93,6 +93,13 @@ class HUDEntry:
         """
         return self.__upstreamuri
 
+    @upstreamuri.setter
+    def upstreamuri(self, value: str) -> None:
+        """
+        Set upstream URI.
+        """
+        self.__upstreamuri = value
+
     @property
     def screenshoturi(self) -> str:
         """
