@@ -168,6 +168,13 @@ class HUDEntry:
         """
         return self.__homepage
 
+    @homepage.setter
+    def homepage(self, value: str) -> None:
+        """
+        Set homepage of HUD.
+        """
+        self.__homepage = value
+
     @property
     def archivedir(self) -> str:
         """
