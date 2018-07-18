@@ -183,6 +183,13 @@ class HUDEntry:
         """
         return self.__archivedir
 
+    @archivedir.setter
+    def archivedir(self, value: str) -> None:
+        """
+        Set actual archive dir inside archive.
+        """
+        self.__archivedir = value
+
     @property
     def installdir(self) -> str:
         """
