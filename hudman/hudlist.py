@@ -153,6 +153,13 @@ class HUDEntry:
         """
         return int(self.__lastupdate)
 
+    @lastupdate.setter
+    def lastupdate(self, value: int) -> None:
+        """
+        Set last update time in Unixtime format.
+        """
+        self.__lastupdate = str(value)
+
     @property
     def homepage(self) -> str:
         """
