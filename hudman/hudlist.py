@@ -111,7 +111,7 @@ class HUDEntry:
     @screenshoturi.setter
     def screenshoturi(self, value: str) -> None:
         """
-        Get screenshot URI.
+        Set screenshot URI.
         """
         self.__screenshot = value
 
@@ -122,6 +122,13 @@ class HUDEntry:
         :return: Upstream repository URL.
         """
         return self.__repopath
+
+    @repopath.setter
+    def repopath(self, value: str) -> None:
+        """
+        Set upstream repository URL.
+        """
+        self.__repopath = value
 
     @property
     def hashsum(self) -> str:
