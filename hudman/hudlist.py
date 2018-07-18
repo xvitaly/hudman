@@ -108,6 +108,13 @@ class HUDEntry:
         """
         return self.__screenshot
 
+    @screenshoturi.setter
+    def screenshoturi(self, value: str) -> None:
+        """
+        Get screenshot URI.
+        """
+        self.__screenshot = value
+
     @property
     def repopath(self) -> str:
         """
