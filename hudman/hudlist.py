@@ -33,6 +33,13 @@ class HUDEntry:
         """
         return self.__hudname
 
+    @hudname.setter
+    def hudname(self, value):
+        """
+        Set user friendly HUD name.
+        """
+        self.__hudname = value
+
     @property
     def gamename(self) -> str:
         """
