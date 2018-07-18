@@ -63,6 +63,13 @@ class HUDEntry:
         """
         return self.__isupdated == '1'
 
+    @isupdated.setter
+    def isupdated(self, value: bool) -> None:
+        """
+        Checks if current HUD is up to date.
+        """
+        self.__isupdated = '1' if value else '0'
+
     @property
     def mirroruri(self) -> str:
         """
