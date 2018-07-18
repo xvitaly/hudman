@@ -58,7 +58,7 @@ class HUDEntry:
     @property
     def isupdated(self) -> bool:
         """
-        Checks if current HUD is up to date.
+        Check if current HUD is up to date.
         :return: Update result.
         """
         return self.__isupdated == '1'
@@ -66,7 +66,7 @@ class HUDEntry:
     @isupdated.setter
     def isupdated(self, value: bool) -> None:
         """
-        Checks if current HUD is up to date.
+        Set if current HUD is up to date.
         """
         self.__isupdated = '1' if value else '0'
 
@@ -77,6 +77,13 @@ class HUDEntry:
         :return: Mirror URI.
         """
         return self.__mirroruri
+
+    @mirroruri.setter
+    def mirroruri(self, value: str) -> None:
+        """
+        Set local mirror URI.
+        """
+        self.__mirroruri = value
 
     @property
     def upstreamuri(self) -> str:
