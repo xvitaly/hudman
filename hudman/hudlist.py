@@ -198,6 +198,13 @@ class HUDEntry:
         """
         return self.__installdir
 
+    @installdir.setter
+    def installdir(self, value: str) -> None:
+        """
+        Set install directory of HUD.
+        """
+        self.__installdir = value
+
     @property
     def filename(self) -> str:
         """
