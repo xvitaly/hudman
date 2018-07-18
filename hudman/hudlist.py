@@ -138,6 +138,13 @@ class HUDEntry:
         """
         return self.__hashsum
 
+    @hashsum.setter
+    def hashsum(self, value: str) -> None:
+        """
+        Set hash sum of HUD.
+        """
+        self.__hashsum = value
+
     @property
     def lastupdate(self) -> int:
         """
