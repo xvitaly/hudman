@@ -34,7 +34,7 @@ class HUDEntry:
         return self.__hudname
 
     @hudname.setter
-    def hudname(self, value):
+    def hudname(self, value: str) -> None:
         """
         Set user friendly HUD name.
         """
@@ -47,6 +47,13 @@ class HUDEntry:
         :return: Game name.
         """
         return self.__gamename
+
+    @gamename.setter
+    def gamename(self, value: str) -> None:
+        """
+        Set HUD's game name.
+        """
+        self.__gamename = value
 
     @property
     def isupdated(self) -> bool:
