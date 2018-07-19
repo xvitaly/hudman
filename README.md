@@ -28,6 +28,6 @@ usage: hudman.py [-h] --gamedb GAMEDB --outdir OUTDIR
 ```
 
 Optional arguments:
- * `-h` or `--help` - Show help message and exit;
- * `-g` or `--gamedb` - Specify path path to HUDs database file;
- * `-o` or  `--outdir` - Specify path to save downloaded files.
+ * `-h` or `--help` - show help message and exit;
+ * `-g` or `--gamedb` - specify path path to HUDs database file;
+ * `-o` or  `--outdir` - specify path to save downloaded files.
