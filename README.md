@@ -5,7 +5,7 @@ Simple script to create a local HUD mirror, can be used with [SRC Repair](https:
 [GNU General Public License version 3](LICENSE). External libraries can use another compatible licenses.
 
 # Requirements
- * Python 3.4+ with full set of standard libraries;
+ * Python 3.5+ with full set of standard libraries;
  * python-requests.
 
 # Installation
