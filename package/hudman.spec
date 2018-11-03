@@ -53,5 +53,5 @@ doxygen
 * Sat Nov 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 1.0.0-2
 - Rebuilt for modern Fedora releases.
 
-* Fri Jun 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 1.0-1
+* Fri Jun 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 1.0.0-1
 - Initial SPEC release.
