@@ -14,9 +14,7 @@ Source0: %{url}/archive/v%{version}.tar.gz#/%{appname}-%{version}.tar.gz
 BuildArch: noarch
 
 BuildRequires: doxygen
-BuildRequires: python2-devel
 BuildRequires: python3-devel
-BuildRequires: python2dist(requests)
 BuildRequires: python3dist(requests)
 
 %description
