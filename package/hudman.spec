@@ -46,7 +46,8 @@ doxygen
 %doc README.md
 %doc docs/html
 %{_bindir}/%{appname}
-%{python3_sitelib}/*
+%{python3_sitelib}/%{appname}
+%{python3_sitelib}/%{appname}-*.egg-info
 
 %changelog
 * Fri Jun 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 1.0-1
