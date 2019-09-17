@@ -23,7 +23,7 @@
 
 from calendar import timegm
 from datetime import datetime
-from hashlib import md5, sha1
+from hashlib import md5, sha1, sha512
 from json import loads
 from os import path, makedirs, rename
 from shutil import rmtree
@@ -111,6 +111,16 @@ class HUDMirror:
         Calculate SHA1 hash sum of specified file.
         :param fname: Source file name.
         :return: SHA1 hash of source file.
+        :rtype: str
+        """
+        return sha1(open(fname, 'rb').read()).hexdigest()
+
+    @staticmethod
+    def sha512hash(fname: str) -> str:
+        """
+        Calculate SHA-512 hash sum of specified file.
+        :param fname: Source file name.
+        :return: SHA-512 hash of source file.
         :rtype: str
         """
         return sha1(open(fname, 'rb').read()).hexdigest()
