@@ -131,19 +131,19 @@ class HUDEntry:
         self.__repopath = value
 
     @property
-    def hashsum(self) -> str:
+    def md5hash(self) -> str:
         """
-        Get hash sum of HUD.
-        :return: Hash sum of HUD.
+        Get MD5 hash sum of HUD file.
+        :return: MD5 hash sum of HUD file.
         """
-        return self.__hashsum
+        return self.__md5hash
 
-    @hashsum.setter
-    def hashsum(self, value: str) -> None:
+    @md5hash.setter
+    def md5hash(self, value: str) -> None:
         """
-        Set hash sum of HUD.
+        Set MD5 hash sum of HUD file.
         """
-        self.__hashsum = value
+        self.__md5hash = value
 
     @property
     def lastupdate(self) -> int:
@@ -222,7 +222,7 @@ class HUDEntry:
         return self.__repopath.find('https://github.com/') != -1
 
     def __init__(self, hudname: str, gamename: str, isupdated: str, mirroruri: str,
-                 upstreamuri: str, screenshot: str, repopath: str, hashsum: str,
+                 upstreamuri: str, screenshot: str, repopath: str, md5hash: str,
                  lastupdate: str, homepage: str, archivedir: str, installdir: str) -> None:
         """
         Main constructor of HUDEntry class.
@@ -233,7 +233,7 @@ class HUDEntry:
         :param upstreamuri: Value of UpURI value from HUD database.
         :param screenshot: Value of Preview value from HUD database.
         :param repopath: Value of RepoPath value from HUD database.
-        :param hashsum: Value of Hash value from HUD database.
+        :param md5hash: Value of Hash value from HUD database.
         :param lastupdate: Value of LastUpdate value from HUD database.
         :param homepage: Value of Site value from HUD database.
         :param archivedir: Value of ArchiveDir value from HUD database.
@@ -246,7 +246,7 @@ class HUDEntry:
         self.__upstreamuri = upstreamuri
         self.__screenshot = screenshot
         self.__repopath = repopath
-        self.__hashsum = hashsum
+        self.__md5hash = md5hash
         self.__lastupdate = lastupdate
         self.__homepage = homepage
         self.__archivedir = archivedir
