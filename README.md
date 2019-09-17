@@ -1,4 +1,10 @@
 # HUD mirror script
+
+[![GitHub version](https://badge.fury.io/gh/xvitaly%2Fhudman.svg)](https://github.com/xvitaly/hudman/releases)
+[![Build status](https://travis-ci.org/xvitaly/hudman.svg?branch=master)](https://travis-ci.org/xvitaly/hudman)
+[![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues&maxAge=60)](https://github.com/xvitaly/hudman/issues)
+---
+
 Simple script to create a local HUD mirror, can be used with [SRC Repair](https://github.com/xvitaly/srcrepair) project.
 
 # License
