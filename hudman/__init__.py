@@ -158,6 +158,7 @@ class HUDMirror:
                                            hud.getElementsByTagName('Preview')[0].firstChild.data,
                                            hud.getElementsByTagName('RepoPath')[0].firstChild.data,
                                            hud.getElementsByTagName('Hash')[0].firstChild.data,
+                                           hud.getElementsByTagName('Hash2')[0].firstChild.data,
                                            hud.getElementsByTagName('LastUpdate')[0].firstChild.data,
                                            hud.getElementsByTagName('Site')[0].firstChild.data,
                                            hud.getElementsByTagName('ArchiveDir')[0].firstChild.data,

@@ -221,9 +221,9 @@ class HUDEntry:
         """
         return self.__repopath.find('https://github.com/') != -1
 
-    def __init__(self, hudname: str, gamename: str, isupdated: str, mirroruri: str,
-                 upstreamuri: str, screenshot: str, repopath: str, md5hash: str,
-                 lastupdate: str, homepage: str, archivedir: str, installdir: str) -> None:
+    def __init__(self, hudname: str, gamename: str, isupdated: str, mirroruri: str, upstreamuri: str, screenshot: str,
+                 repopath: str, md5hash: str, sha512hash: str, lastupdate: str, homepage: str, archivedir: str,
+                 installdir: str) -> None:
         """
         Main constructor of HUDEntry class.
         :param hudname: Value of Name value from HUD database.
@@ -234,6 +234,7 @@ class HUDEntry:
         :param screenshot: Value of Preview value from HUD database.
         :param repopath: Value of RepoPath value from HUD database.
         :param md5hash: Value of Hash value from HUD database.
+        :param sha512hash: Value of Hash2 value from HUD database.
         :param lastupdate: Value of LastUpdate value from HUD database.
         :param homepage: Value of Site value from HUD database.
         :param archivedir: Value of ArchiveDir value from HUD database.
@@ -247,6 +248,7 @@ class HUDEntry:
         self.__screenshot = screenshot
         self.__repopath = repopath
         self.__md5hash = md5hash
+        self.__sha512hash = sha512hash
         self.__lastupdate = lastupdate
         self.__homepage = homepage
         self.__archivedir = archivedir
