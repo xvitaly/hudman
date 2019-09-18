@@ -124,6 +124,9 @@ class HUDMirror:
         return sha512(open(fname, 'rb').read()).hexdigest()
 
     def __setlogger(self) -> None:
+        """
+        Add logging support and configure logger.
+        """
         self.__logger = getLogger(__name__)
         self.__logger.setLevel('INFO')
         e_handler = StreamHandler(stdout)
