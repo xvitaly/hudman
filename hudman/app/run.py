@@ -30,7 +30,7 @@ def main():
     cmdline = parser.parse_args()
 
     # Run mirror script...
-    hm = HUDMirror(cmdline.gamedb, cmdline.outdir)
+    hm = HUDMirror(cmdline.huddb, cmdline.outdir)
     hm.getall()
 
 
