@@ -22,9 +22,10 @@ from calendar import timegm
 from datetime import datetime
 from hashlib import md5, sha1, sha512
 from json import loads
+from logging import Formatter, StreamHandler, getLogger
 from os import path, makedirs, rename
 from shutil import rmtree
-from time import time
+from sys import stdout
 from urllib.request import Request, urlopen
 from xml.dom import minidom
 
@@ -122,13 +123,12 @@ class HUDMirror:
         """
         return sha512(open(fname, 'rb').read()).hexdigest()
 
-    @staticmethod
-    def logmessage(msg: str) -> None:
-        """
-        Print message to log including current timestamp.
-        :param msg: Message to print.
-        """
-        print('({}) {}'.format(datetime.fromtimestamp(time()).strftime(HUDSettings.log_dtfmt), msg))
+    def __setlogger(self) -> None:
+        self.__logger = getLogger(__name__)
+        self.__logger.setLevel('INFO')
+        e_handler = StreamHandler(stdout)
+        e_handler.setFormatter(Formatter(HUDSettings.log_stdfmt))
+        self.__logger.addHandler(e_handler)
 
     def __checkdb(self) -> bool:
         """
@@ -219,4 +219,5 @@ class HUDMirror:
         self.__gamedb = gamedb
         self.__outdir = outdir
         self.__hudlist = []
+        self.__setlogger()
         self.__readdb()
