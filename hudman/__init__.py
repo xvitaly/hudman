@@ -172,10 +172,11 @@ class HUDMirror:
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
-            self.logmessage(HUDMessages.hud_updated_gh.format(hud.installdir, self.md5hash(f), self.sha512hash(f), r[1],
-                                                              path.basename(f)))
+            self.__logger.info(
+                HUDMessages.hud_updated_gh.format(hud.installdir, self.md5hash(f), self.sha512hash(f), r[1],
+                                                  path.basename(f)))
         else:
-            self.logmessage(HUDMessages.hud_uptodate.format(hud.installdir))
+            self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
 
     def __useother(self, hud: HUDEntry) -> None:
         """
@@ -186,12 +187,12 @@ class HUDMirror:
         fullfile = self.renamefile(filednl, self.sha1hash(filednl))
         shortfile = path.basename(fullfile)
         if shortfile != hud.filename:
-            self.logmessage(
+            self.__logger.info(
                 HUDMessages.hud_updated_oth.format(hud.installdir, self.md5hash(fullfile), self.sha512hash(fullfile),
                                                    shortfile))
         else:
             rmtree(path.dirname(fullfile))
-            self.logmessage(HUDMessages.hud_uptodate.format(hud.installdir))
+            self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
 
     def __handlehud(self, hud: HUDEntry) -> None:
         """
@@ -210,8 +211,8 @@ class HUDMirror:
         for hud in self.__hudlist:
             try:
                 self.__handlehud(hud)
-            except Exception as ex:
-                self.logmessage(HUDMessages.hud_error.format(hud.hudname, ex))
+            except Exception:
+                self.__logger.exception(HUDMessages.hud_error.format(hud.hudname))
 
     def __init__(self, gamedb: str, outdir: str) -> None:
         """
