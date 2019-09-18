@@ -22,7 +22,7 @@
 class HUDSettings:
     ua_curl: str = 'Curl'
     ua_wget: str = 'Wget'
-    log_stdfmt = '%(levelname)s:%(name)s:%(message)s'
+    log_stdfmt = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
 
 
 class HUDMessages:
