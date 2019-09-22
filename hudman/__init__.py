@@ -216,6 +216,9 @@ class HUDMirror:
                 self.__logger.exception(HUDMessages.hud_error.format(hud.hudname))
 
     def save(self) -> None:
+        """
+        Save changes back to XML database file.
+        """
         with open(self.__gamedb, 'w') as writer:
             self.__huddb.writexml(writer, encoding='utf-8')
 
