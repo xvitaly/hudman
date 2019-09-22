@@ -23,7 +23,7 @@ from datetime import datetime
 from hashlib import md5, sha1, sha512
 from json import loads
 from logging import Formatter, StreamHandler, getLogger
-from os import path, makedirs, rename
+from os import path, makedirs, remove, rename
 from shutil import rmtree
 from sys import stdout
 from urllib.request import Request, urlopen
@@ -90,6 +90,8 @@ class HUDMirror:
         """
         fdir = path.dirname(fname)
         result = path.join(fdir, '{}_{}.zip'.format(path.splitext(path.basename(fname))[0], chash[:8]))
+        if path.isfile(result):
+            remove(result)
         rename(fname, result)
         return result
 
