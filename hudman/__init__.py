@@ -160,9 +160,19 @@ class HUDMirror:
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
+
+            update_md5 = self.md5hash(f)
+            update_sha512 = self.sha512hash(f)
+            update_file = path.basename(f)
+            update_url = '{}/{}'.format(path.dirname(hud.mirroruri), update_file)
+
+            hud.mirroruri = update_url
+            hud.md5hash = update_md5
+            hud.sha512hash = update_sha512
+            hud.lastupdate = r[1]
+
             self.__logger.info(
-                HUDMessages.hud_updated_gh.format(hud.installdir, self.md5hash(f), self.sha512hash(f), r[1],
-                                                  path.basename(f)))
+                HUDMessages.hud_updated_gh.format(hud.installdir, update_md5, update_sha512, r[1], update_file))
         else:
             self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
 
@@ -201,6 +211,9 @@ class HUDMirror:
                 self.__handlehud(hud)
             except Exception:
                 self.__logger.exception(HUDMessages.hud_error.format(hud.hudname))
+
+    def save(self) -> None:
+        self.__huddb.writexml(open(self.__gamedb, 'w'), encoding='utf-8')
 
     def __init__(self, gamedb: str, outdir: str) -> None:
         """
