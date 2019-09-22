@@ -28,14 +28,14 @@ class HUDEntry:
         Get user friendly HUD name.
         :return: HUD name.
         """
-        return self.__hudname
+        return self.__hudname.data
 
     @hudname.setter
     def hudname(self, value: str) -> None:
         """
         Set user friendly HUD name.
         """
-        self.__hudname = value
+        self.__hudname.data = value
 
     @property
     def gamename(self) -> str:
@@ -43,14 +43,14 @@ class HUDEntry:
         Get HUD's game name.
         :return: Game name.
         """
-        return self.__gamename
+        return self.__gamename.data
 
     @gamename.setter
     def gamename(self, value: str) -> None:
         """
         Set HUD's game name.
         """
-        self.__gamename = value
+        self.__gamename.data = value
 
     @property
     def isupdated(self) -> bool:
@@ -58,14 +58,14 @@ class HUDEntry:
         Check if current HUD is up to date.
         :return: Update result.
         """
-        return self.__isupdated == '1'
+        return self.__isupdated.data == '1'
 
     @isupdated.setter
     def isupdated(self, value: bool) -> None:
         """
         Set if current HUD is up to date.
         """
-        self.__isupdated = '1' if value else '0'
+        self.__isupdated.data = '1' if value else '0'
 
     @property
     def mirroruri(self) -> str:
@@ -73,14 +73,14 @@ class HUDEntry:
         Get local mirror URI.
         :return: Mirror URI.
         """
-        return self.__mirroruri
+        return self.__mirroruri.data
 
     @mirroruri.setter
     def mirroruri(self, value: str) -> None:
         """
         Set local mirror URI.
         """
-        self.__mirroruri = value
+        self.__mirroruri.data = value
 
     @property
     def upstreamuri(self) -> str:
@@ -88,14 +88,14 @@ class HUDEntry:
         Get upstream URI.
         :return: Upstream URI.
         """
-        return self.__upstreamuri
+        return self.__upstreamuri.data
 
     @upstreamuri.setter
     def upstreamuri(self, value: str) -> None:
         """
         Set upstream URI.
         """
-        self.__upstreamuri = value
+        self.__upstreamuri.data = value
 
     @property
     def screenshoturi(self) -> str:
@@ -103,14 +103,14 @@ class HUDEntry:
         Get screenshot URI.
         :return: Screenshot URI.
         """
-        return self.__screenshot
+        return self.__screenshot.data
 
     @screenshoturi.setter
     def screenshoturi(self, value: str) -> None:
         """
         Set screenshot URI.
         """
-        self.__screenshot = value
+        self.__screenshot.data = value
 
     @property
     def repopath(self) -> str:
@@ -118,14 +118,14 @@ class HUDEntry:
         Get upstream repository URL.
         :return: Upstream repository URL.
         """
-        return self.__repopath
+        return self.__repopath.data
 
     @repopath.setter
     def repopath(self, value: str) -> None:
         """
         Set upstream repository URL.
         """
-        self.__repopath = value
+        self.__repopath.data = value
 
     @property
     def md5hash(self) -> str:
@@ -133,14 +133,14 @@ class HUDEntry:
         Get MD5 hash sum of HUD file.
         :return: MD5 hash sum of HUD file.
         """
-        return self.__md5hash
+        return self.__md5hash.data
 
     @md5hash.setter
     def md5hash(self, value: str) -> None:
         """
         Set MD5 hash sum of HUD file.
         """
-        self.__md5hash = value
+        self.__md5hash.data = value
 
     @property
     def lastupdate(self) -> int:
@@ -148,14 +148,14 @@ class HUDEntry:
         Get last update time in Unixtime format.
         :return: Last update time.
         """
-        return int(self.__lastupdate)
+        return int(self.__lastupdate.data)
 
     @lastupdate.setter
     def lastupdate(self, value: int) -> None:
         """
         Set last update time in Unixtime format.
         """
-        self.__lastupdate = str(value)
+        self.__lastupdate.data = str(value)
 
     @property
     def homepage(self) -> str:
@@ -163,14 +163,14 @@ class HUDEntry:
         Get homepage of HUD.
         :return: Homepage of HUD.
         """
-        return self.__homepage
+        return self.__homepage.data
 
     @homepage.setter
     def homepage(self, value: str) -> None:
         """
         Set homepage of HUD.
         """
-        self.__homepage = value
+        self.__homepage.data = value
 
     @property
     def archivedir(self) -> str:
@@ -178,14 +178,14 @@ class HUDEntry:
         Get actual archive dir inside archive.
         :return: Archive directory name.
         """
-        return self.__archivedir
+        return self.__archivedir.data
 
     @archivedir.setter
     def archivedir(self, value: str) -> None:
         """
         Set actual archive dir inside archive.
         """
-        self.__archivedir = value
+        self.__archivedir.data = value
 
     @property
     def installdir(self) -> str:
@@ -193,14 +193,14 @@ class HUDEntry:
         Get install directory of HUD.
         :return: HUD install directory.
         """
-        return self.__installdir
+        return self.__installdir.data
 
     @installdir.setter
     def installdir(self, value: str) -> None:
         """
         Set install directory of HUD.
         """
-        self.__installdir = value
+        self.__installdir.data = value
 
     @property
     def filename(self) -> str:
@@ -208,7 +208,7 @@ class HUDEntry:
         Get final download filename for HUD.
         :return: Download filename for HUD.
         """
-        return path.basename(self.__mirroruri)
+        return path.basename(self.mirroruri)
 
     @property
     def ghhosted(self) -> bool:
@@ -216,37 +216,23 @@ class HUDEntry:
         Check if HUD hosted on GitHub.
         :return: Return True if HUD hosted on GitHub.
         """
-        return self.__repopath.find('https://github.com/') != -1
+        return self.repopath.find('https://github.com/') != -1
 
-    def __init__(self, hudname: str, gamename: str, isupdated: str, mirroruri: str, upstreamuri: str, screenshot: str,
-                 repopath: str, md5hash: str, sha512hash: str, lastupdate: str, homepage: str, archivedir: str,
-                 installdir: str) -> None:
+    def __init__(self, hud) -> None:
         """
         Main constructor of HUDEntry class.
-        :param hudname: Value of Name value from HUD database.
-        :param gamename: Value of Game value from HUD database.
-        :param isupdated: Value of IsUpdated value from HUD database.
-        :param mirroruri: Value of URI value from HUD database.
-        :param upstreamuri: Value of UpURI value from HUD database.
-        :param screenshot: Value of Preview value from HUD database.
-        :param repopath: Value of RepoPath value from HUD database.
-        :param md5hash: Value of Hash value from HUD database.
-        :param sha512hash: Value of Hash2 value from HUD database.
-        :param lastupdate: Value of LastUpdate value from HUD database.
-        :param homepage: Value of Site value from HUD database.
-        :param archivedir: Value of ArchiveDir value from HUD database.
-        :param installdir: Value of InstallDir value from HUD database.
+        :param hud: A single entry from HUD database.
         """
-        self.__hudname = hudname
-        self.__gamename = gamename
-        self.__isupdated = isupdated
-        self.__mirroruri = mirroruri
-        self.__upstreamuri = upstreamuri
-        self.__screenshot = screenshot
-        self.__repopath = repopath
-        self.__md5hash = md5hash
-        self.__sha512hash = sha512hash
-        self.__lastupdate = lastupdate
-        self.__homepage = homepage
-        self.__archivedir = archivedir
-        self.__installdir = installdir
+        self.__hudname = hud.getElementsByTagName('Name')[0].firstChild
+        self.__gamename = hud.getElementsByTagName('Game')[0].firstChild
+        self.__isupdated = hud.getElementsByTagName('IsUpdated')[0].firstChild
+        self.__mirroruri = hud.getElementsByTagName('URI')[0].firstChild
+        self.__upstreamuri = hud.getElementsByTagName('UpURI')[0].firstChild
+        self.__screenshot = hud.getElementsByTagName('Preview')[0].firstChild
+        self.__repopath = hud.getElementsByTagName('RepoPath')[0].firstChild
+        self.__md5hash = hud.getElementsByTagName('Hash')[0].firstChild
+        self.__sha512hash = hud.getElementsByTagName('Hash2')[0].firstChild
+        self.__lastupdate = hud.getElementsByTagName('LastUpdate')[0].firstChild
+        self.__homepage = hud.getElementsByTagName('Site')[0].firstChild
+        self.__archivedir = hud.getElementsByTagName('ArchiveDir')[0].firstChild
+        self.__installdir = hud.getElementsByTagName('InstallDir')[0].firstChild
