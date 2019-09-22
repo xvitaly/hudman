@@ -30,10 +30,11 @@ Simple script to create a local HUD mirror, can be used with [SRC Repair](https:
 
 # Available options
 ```
-usage: hudman.py [-h] --huddb HUDDB --outdir OUTDIR
+usage: hudman [-h] --huddb HUDDB --outdir OUTDIR [--save]
 ```
 
 Optional arguments:
  * `-h` or `--help` - show help message and exit;
  * `-d` or `--huddb` - specify path path to HUDs database file;
- * `-o` or  `--outdir` - specify path to save downloaded files.
+ * `-o` or  `--outdir` - specify path to save downloaded files;
+ * `-s` or `--save` - save HUD database automatically.
