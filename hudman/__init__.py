@@ -162,19 +162,15 @@ class HUDMirror:
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
+            updatefile = path.basename(f)
 
-            update_md5 = self.md5hash(f)
-            update_sha512 = self.sha512hash(f)
-            update_file = path.basename(f)
-            update_url = '{}/{}'.format(path.dirname(hud.mirroruri), update_file)
-
-            hud.mirroruri = update_url
-            hud.md5hash = update_md5
-            hud.sha512hash = update_sha512
+            hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
+            hud.md5hash = self.md5hash(f)
+            hud.sha512hash = self.sha512hash(f)
             hud.lastupdate = r[1]
 
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.installdir, update_md5, update_sha512, r[1], update_file))
+                HUDMessages.hud_updated.format(hud.installdir, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
         else:
             self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
 
@@ -185,21 +181,16 @@ class HUDMirror:
         """
         filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
         fullfile = self.renamefile(filednl, self.sha1hash(filednl))
-        shortfile = path.basename(fullfile)
+        updatefile = path.basename(fullfile)
 
-        if shortfile != hud.filename:
-            update_md5 = self.md5hash(fullfile)
-            update_sha512 = self.sha512hash(fullfile)
-            update_url = '{}/{}'.format(path.dirname(hud.mirroruri), shortfile)
-            update_time = int(path.getmtime(fullfile))
-
-            hud.mirroruri = update_url
-            hud.md5hash = update_md5
-            hud.sha512hash = update_sha512
-            hud.lastupdate = update_time
+        if updatefile != hud.filename:
+            hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
+            hud.md5hash = self.md5hash(fullfile)
+            hud.sha512hash = self.sha512hash(fullfile)
+            hud.lastupdate = int(path.getmtime(fullfile))
 
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.installdir, update_md5, update_sha512, update_time, shortfile))
+                HUDMessages.hud_updated.format(hud.installdir, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
         else:
             rmtree(path.dirname(fullfile))
             self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
