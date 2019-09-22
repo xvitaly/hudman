@@ -143,6 +143,21 @@ class HUDEntry:
         self.__md5hash.data = value
 
     @property
+    def sha512hash(self) -> str:
+        """
+        Get SHA-512 hash sum of HUD file.
+        :return: SHA-512 hash sum of HUD file.
+        """
+        return self.__sha512hash.data
+
+    @sha512hash.setter
+    def sha512hash(self, value: str) -> None:
+        """
+        Set SHA-512 hash sum of HUD file.
+        """
+        self.__sha512hash.data = value
+
+    @property
     def lastupdate(self) -> int:
         """
         Get last update time in Unixtime format.
