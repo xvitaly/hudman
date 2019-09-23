@@ -25,7 +25,7 @@ Simple script to create a local HUD mirror, can be used with [SRC Repair](https:
  ```
  3. Run application:
  ```bash
- hudman --gamedb /path/to/hud/database.xml --outdir /tmp/hudman
+ hudman --huddb /path/to/hud/database.xml --outdir /tmp/hudman
  ```
 
 # Available options
