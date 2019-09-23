@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='hudman',
-    version='1.0.0',
+    version='2.0.0',
     packages=find_packages(),
     url='https://github.com/xvitaly/hudman',
     license='GPLv3',
