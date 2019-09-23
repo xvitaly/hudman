@@ -4,8 +4,8 @@
 %global appdesc Simple script to create a local HUD mirror by EasyCoding Team
 
 Name: python-%{appname}
-Version: 1.0.0
-Release: 2%{?dist}
+Version: 2.0.0
+Release: 1%{?dist}
 Summary: %{appsum}
 
 License: GPLv3+
@@ -50,6 +50,9 @@ doxygen
 %{python3_sitelib}/%{appname}-*.egg-info
 
 %changelog
+* Mon Sep 23 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 2.0.0-1
+- Updated to version 2.0.0.
+
 * Sat Nov 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 1.0.0-2
 - Rebuilt for modern Fedora releases.
 
