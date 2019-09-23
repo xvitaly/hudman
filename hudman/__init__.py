@@ -170,9 +170,9 @@ class HUDMirror:
             hud.lastupdate = r[1]
 
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.installdir, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
+                HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
         else:
-            self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
+            self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __useother(self, hud: HUDEntry) -> None:
         """
@@ -190,10 +190,10 @@ class HUDMirror:
             hud.lastupdate = int(path.getmtime(fullfile))
 
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.installdir, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
+                HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
         else:
             rmtree(path.dirname(fullfile))
-            self.__logger.info(HUDMessages.hud_uptodate.format(hud.installdir))
+            self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __handlehud(self, hud: HUDEntry) -> None:
         """
