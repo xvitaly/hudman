@@ -26,6 +26,7 @@ from logging import Formatter, StreamHandler, getLogger
 from os import path, makedirs, remove, rename
 from shutil import rmtree
 from sys import stdout
+from time import time
 from urllib.request import Request, urlopen
 from xml.dom import minidom
 
@@ -172,7 +173,10 @@ class HUDMirror:
             self.__logger.info(
                 HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
         else:
-            self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
+            if (not hud.isupdated) and (int(time()) - hud.lastupdate >= 31536000):
+                self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
+            else:
+                self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __useother(self, hud: HUDEntry) -> None:
         """
