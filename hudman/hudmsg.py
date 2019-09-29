@@ -30,4 +30,5 @@ class HUDMessages:
     db_notfound: str = 'Game database file not found: {}.'
     hud_updated: str = '{} has been updated. MD5: {}, SHA512: {}, time: {}, filename: {}.'
     hud_uptodate: str = '{} is up to date.'
+    hud_outdated: str = '{} is too outdated and no updates were found.'
     hud_error: str = 'Error while checking {} updates.'
