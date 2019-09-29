@@ -169,6 +169,7 @@ class HUDMirror:
             hud.md5hash = self.md5hash(f)
             hud.sha512hash = self.sha512hash(f)
             hud.lastupdate = r[1]
+            hud.isupdated = True
 
             self.__logger.info(
                 HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
@@ -192,6 +193,7 @@ class HUDMirror:
             hud.md5hash = self.md5hash(fullfile)
             hud.sha512hash = self.sha512hash(fullfile)
             hud.lastupdate = int(path.getmtime(fullfile))
+            hud.isupdated = True
 
             self.__logger.info(
                 HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
