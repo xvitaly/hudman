@@ -38,3 +38,11 @@ Optional arguments:
  * `-d` or `--huddb` - specify path path to HUDs database file;
  * `-o` or  `--outdir` - specify path to save downloaded files;
  * `-s` or `--save` - save HUD database automatically.
+
+# Documentation
+
+ 1. Install Doxygen.
+ 2. Build documentation in HTML format:
+ ```bash
+ doxygen
+ ```
