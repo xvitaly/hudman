@@ -204,21 +204,21 @@ class HUDMirror:
         Download specified HUD from unknown location.
         :param hud: HUD entry to process and download.
         """
-        filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
-        fullfile = self.renamefile(filednl, self.sha1hash(filednl))
-        updatefile = path.basename(fullfile)
+        mdate = self.hth2unix(self.getlhmurl(hud.upstreamuri))
+        if mdate > hud.lastupdate:
+            filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
+            fullfile = self.renamefile(filednl, self.sha1hash(filednl))
+            updatefile = path.basename(fullfile)
 
-        if updatefile != hud.filename:
             hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
             hud.md5hash = self.md5hash(fullfile)
             hud.sha512hash = self.sha512hash(fullfile)
-            hud.lastupdate = int(path.getmtime(fullfile))
+            hud.lastupdate = mdate
             hud.isupdated = True
 
             self.__logger.info(
                 HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
         else:
-            rmtree(path.dirname(fullfile))
             self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def __handlehud(self, hud: HUDEntry) -> None:
