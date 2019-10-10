@@ -62,6 +62,13 @@ class HUDMirror:
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
     @staticmethod
+    def getmtimeurl(url):
+        request = Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
+        response = urlopen(request)
+        r = response.info()
+        return r['Last-Modified']
+
+    @staticmethod
     def downloadfile(url: str, name: str, outdir: str) -> str:
         """
         Download file from Internet and save it to specified directory.
