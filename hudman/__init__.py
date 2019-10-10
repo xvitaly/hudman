@@ -20,6 +20,7 @@
 
 from calendar import timegm
 from datetime import datetime
+from email.utils import parsedate
 from hashlib import md5, sha1, sha512
 from json import loads
 from logging import Formatter, StreamHandler, getLogger
@@ -45,6 +46,10 @@ class HUDMirror:
         """
         do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
         return int(timegm(do.timetuple()))
+
+    @staticmethod
+    def hth2unix(gtime):
+        return timegm(parsedate(gtime))
 
     @staticmethod
     def callgithubapi(repourl: str) -> list:
