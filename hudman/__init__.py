@@ -73,7 +73,14 @@ class HUDMirror:
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
     @staticmethod
-    def getlhmurl(url):
+    def getlhmurl(url: str) -> str:
+        """
+        Call HTTP HEAD method to retrieve last modification time
+        of specified URL.
+        :param url: URL of remote file.
+        :return: Last modification time.
+        :rtype: str
+        """
         request = Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
         response = urlopen(request)
         if response.status != 200:
