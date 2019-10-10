@@ -48,8 +48,14 @@ class HUDMirror:
         return int(timegm(do.timetuple()))
 
     @staticmethod
-    def hth2unix(gtime):
-        return timegm(parsedate(gtime))
+    def hth2unix(gtime: str) -> int:
+        """
+        Convert datetime string in HTTP-header format to unixtime.
+        :param gtime: Datetime string in HTTP-header format.
+        :return: UnixTime integer.
+        :rtype: int
+        """
+        return int(timegm(parsedate(gtime)))
 
     @staticmethod
     def callgithubapi(repourl: str) -> list:
