@@ -73,11 +73,13 @@ class HUDMirror:
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
     @staticmethod
-    def getmtimeurl(url):
+    def getlhmurl(url):
         request = Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
         response = urlopen(request)
-        r = response.info()
-        return r['Last-Modified']
+        if response.status != 200:
+            raise Exception(HUDMessages.oth_errcode.format(response.status))
+        headers = response.info()
+        return headers['Last-Modified']
 
     @staticmethod
     def downloadfile(url: str, name: str, outdir: str) -> str:

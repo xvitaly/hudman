@@ -27,6 +27,7 @@ class HUDSettings:
 
 class HUDMessages:
     gh_errcode: str = 'GitHub API returned {:d} error code.'
+    oth_errcode: str = 'Server returned {:d} error code.'
     db_notfound: str = 'Game database file not found: {}.'
     hud_updated: str = '{} has been updated. MD5: {}, SHA512: {}, time: {}, filename: {}.'
     hud_uptodate: str = '{} is up to date.'
