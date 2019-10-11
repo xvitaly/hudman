@@ -4,7 +4,7 @@
 %global appdesc Simple script to create a local HUD mirror by EasyCoding Team
 
 Name: python-%{appname}
-Version: 2.1.0
+Version: 2.2.0
 Release: 1%{?dist}
 Summary: %{appsum}
 
@@ -50,6 +50,9 @@ doxygen
 %{python3_sitelib}/%{appname}-*.egg-info
 
 %changelog
+* Fri Oct 11 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 2.2.0-1
+- Updated to version 2.2.0.
+
 * Mon Sep 30 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 2.1.0-1
 - Updated to version 2.1.0.
 
