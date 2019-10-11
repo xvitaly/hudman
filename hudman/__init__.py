@@ -25,7 +25,6 @@ from hashlib import md5, sha1, sha512
 from json import loads
 from logging import Formatter, StreamHandler, getLogger
 from os import path, makedirs, remove, rename
-from shutil import rmtree
 from sys import stdout
 from time import time
 from urllib.request import Request, urlopen
