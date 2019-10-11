@@ -1,6 +1,6 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = "hudman"
-PROJECT_NUMBER         = 2.1.0
+PROJECT_NUMBER         = 2.2.0
 PROJECT_BRIEF          = "Simple script to create a local HUD mirror"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = docs
