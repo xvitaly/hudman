@@ -68,19 +68,19 @@ class HUDEntry:
         self.__isupdated.data = '1' if value else '0'
 
     @property
-    def mirroruri(self) -> str:
+    def mainuri(self) -> str:
         """
         Get local mirror URI.
         :return: Mirror URI.
         """
-        return self.__mirroruri.data
+        return self.__mainuri.data
 
-    @mirroruri.setter
-    def mirroruri(self, value: str) -> None:
+    @mainuri.setter
+    def mainuri(self, value: str) -> None:
         """
         Set local mirror URI.
         """
-        self.__mirroruri.data = value
+        self.__mainuri.data = value
 
     @property
     def upstreamuri(self) -> str:
@@ -223,7 +223,7 @@ class HUDEntry:
         Get final download filename for HUD.
         :return: Download filename for HUD.
         """
-        return path.basename(self.mirroruri)
+        return path.basename(self.mainuri)
 
     @property
     def ghhosted(self) -> bool:
@@ -241,7 +241,7 @@ class HUDEntry:
         self.__hudname = hud.getElementsByTagName('Name')[0].firstChild
         self.__gamename = hud.getElementsByTagName('Game')[0].firstChild
         self.__isupdated = hud.getElementsByTagName('IsUpdated')[0].firstChild
-        self.__mirroruri = hud.getElementsByTagName('URI')[0].firstChild
+        self.__mainuri = hud.getElementsByTagName('URI')[0].firstChild
         self.__upstreamuri = hud.getElementsByTagName('UpURI')[0].firstChild
         self.__screenshot = hud.getElementsByTagName('Preview')[0].firstChild
         self.__repopath = hud.getElementsByTagName('RepoPath')[0].firstChild
