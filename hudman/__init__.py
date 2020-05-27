@@ -192,6 +192,7 @@ class HUDMirror:
             updatefile = path.basename(f)
 
             hud.mainuri = '{}/{}'.format(path.dirname(hud.mainuri), updatefile)
+            hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
             hud.md5hash = self.md5hash(f)
             hud.sha512hash = self.sha512hash(f)
             hud.lastupdate = r[1]
@@ -217,6 +218,7 @@ class HUDMirror:
             updatefile = path.basename(fullfile)
 
             hud.mainuri = '{}/{}'.format(path.dirname(hud.mainuri), updatefile)
+            hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
             hud.md5hash = self.md5hash(fullfile)
             hud.sha512hash = self.sha512hash(fullfile)
             hud.lastupdate = mdate
