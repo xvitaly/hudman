@@ -83,6 +83,21 @@ class HUDEntry:
         self.__mainuri.data = value
 
     @property
+    def mirroruri(self) -> str:
+        """
+        Get local secondary server URI.
+        :return: Mirror URI.
+        """
+        return self.__mirroruri.data
+
+    @mirroruri.setter
+    def mirroruri(self, value: str) -> None:
+        """
+        Set local secondary server URI.
+        """
+        self.__mirroruri.data = value
+
+    @property
     def upstreamuri(self) -> str:
         """
         Get upstream URI.
@@ -242,6 +257,7 @@ class HUDEntry:
         self.__gamename = hud.getElementsByTagName('Game')[0].firstChild
         self.__isupdated = hud.getElementsByTagName('IsUpdated')[0].firstChild
         self.__mainuri = hud.getElementsByTagName('URI')[0].firstChild
+        self.__mirroruri = hud.getElementsByTagName('Mirror')[0].firstChild
         self.__upstreamuri = hud.getElementsByTagName('UpURI')[0].firstChild
         self.__screenshot = hud.getElementsByTagName('Preview')[0].firstChild
         self.__repopath = hud.getElementsByTagName('RepoPath')[0].firstChild
