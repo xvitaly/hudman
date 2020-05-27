@@ -4,13 +4,13 @@
 %global appdesc Simple script to create a local HUD mirror by EasyCoding Team
 
 Name: python-%{appname}
-Version: 2.2.0
+Version: 2.3.0
 Release: 1%{?dist}
 Summary: %{appsum}
 
 License: GPLv3+
 URL: https://github.com/xvitaly/%{appname}
-Source0: %{url}/archive/v%{version}.tar.gz#/%{appname}-%{version}.tar.gz
+Source0: %{url}/archive/v%{version}/%{appname}-%{version}.tar.gz
 BuildArch: noarch
 
 BuildRequires: doxygen
@@ -22,7 +22,6 @@ BuildRequires: python3dist(requests)
 
 %package -n python3-%{appname}
 Summary: %{appsum}
-Requires: python3dist(requests)
 %{?python_provide:%python_provide python3-%{appname}}
 
 %description -n python3-%{appname}
@@ -43,13 +42,15 @@ doxygen
 
 %files -n python3-%{appname}
 %license LICENSE
-%doc README.md
-%doc docs/html
+%doc README.md docs/html
 %{_bindir}/%{appname}
 %{python3_sitelib}/%{appname}
 %{python3_sitelib}/%{appname}-*.egg-info
 
 %changelog
+* Wed May 27 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 2.3.0-1
+- Updated to version 2.3.0.
+
 * Fri Oct 11 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 2.2.0-1
 - Updated to version 2.2.0.
 

@@ -20,10 +20,16 @@
 
 from setuptools import setup, find_packages
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='hudman',
-    version='2.2.0',
+    version='2.3.0',
     packages=find_packages(),
+    package_dir={
+        'hudman': 'hudman',
+    },
     url='https://github.com/xvitaly/hudman',
     license='GPLv3',
     entry_points={
@@ -34,5 +40,13 @@ setup(
     install_requires=['requests'],
     author='Vitaly Zaitsev',
     author_email='vitaly@easycoding.org',
-    description='Simple script to create a local HUD mirror'
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    description='Simple script to create a local HUD mirror',
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6'
 )
