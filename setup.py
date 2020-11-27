@@ -1,6 +1,6 @@
 # coding=utf-8
 
-# This file is a part of HUD mirror script. For more information
+# This file is a part of HUD mirror manager. For more information
 # visit official site: https://www.easycoding.org/projects/hudman
 #
 # Copyright (c) 2016 - 2019 EasyCoding Team.

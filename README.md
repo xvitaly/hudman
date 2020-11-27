@@ -1,14 +1,16 @@
-# HUD mirror script
+# HUD Manager
 
 [![GitHub version](https://badge.fury.io/gh/xvitaly%2Fhudman.svg)](https://github.com/xvitaly/hudman/releases)
 [![Copr build status](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/)
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues&maxAge=60)](https://github.com/xvitaly/hudman/issues)
 ---
 
-Simple script to create a local HUD mirror, can be used with [SRC Repair](https://github.com/xvitaly/srcrepair) project.
+Local HUD mirror manager. Can be used with the [SRC Repair](https://github.com/xvitaly/srcrepair) project.
 
 # License
-[GNU General Public License version 3](LICENSE). External libraries can use another compatible licenses.
+GNU General Public License version 3. You can find it here: [LICENSE](LICENSE). External libraries can use another licenses, compatible with GNU GPLv3.
+
+Icon for the Windows executable and installer by [Asher](https://www.deviantart.com/kyo-tux), licensed under the terms of the [CC Attribution Share-Alike](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
 
 # Requirements
 
