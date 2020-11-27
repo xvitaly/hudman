@@ -1,6 +1,5 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
 *$py.class
 
 # C extensions
@@ -8,6 +7,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -19,11 +19,9 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -42,9 +40,8 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*.cover
+*,cover
 .hypothesis/
-.pytest_cache/
 
 # Translations
 *.mo
@@ -52,15 +49,6 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
-db.sqlite3
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
 
 # Sphinx documentation
 docs/_build/
@@ -68,39 +56,57 @@ docs/_build/
 # PyBuilder
 target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+## Directory-based project format:
+.idea/
+# if you remove the above rule, at least ignore the following:
 
-# pyenv
-.python-version
+# User-specific stuff:
+# .idea/workspace.xml
+# .idea/tasks.xml
+# .idea/dictionaries
+# .idea/shelf
 
-# celery beat schedule file
-celerybeat-schedule
+# Sensitive or high-churn files:
+# .idea/dataSources.ids
+# .idea/dataSources.xml
+# .idea/sqlDataSources.xml
+# .idea/dynamic.xml
+# .idea/uiDesigner.xml
 
-# SageMath parsed files
-*.sage.py
+# Gradle:
+# .idea/gradle.xml
+# .idea/libraries
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# Mongo Explorer plugin:
+# .idea/mongoSettings.xml
 
-# Spyder project settings
-.spyderproject
-.spyproject
+## File-based project format:
+*.ipr
+*.iws
 
-# Rope project settings
-.ropeproject
+## Plugin-specific files:
 
-# mkdocs documentation
-/site
+# IntelliJ
+/out/
 
-# mypy
-.mypy_cache/
+# mpeltonen/sbt-idea plugin
+.idea_modules/
 
-# IDEA
-.idea
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Local database files
+*.db
+
+# Doxygen output files
+/doxyout/
+
+# PyInstaller auto-generated files
+/packaging/windows/*.spec
+/packaging/windows/results/
