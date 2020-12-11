@@ -67,12 +67,14 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl,locale\ru\cm.isl"
 [Types]
 Name: standard; Description: "{cm:TypeStandardDescription}"
 Name: system; Description: "{cm:TypeSystemDescription}"
+Name: nokeys; Description: "{cm:TypeNoKeysDescription}"
 
 [Components]
 Name: "core"; Description: "{cm:ComponentCoreDescription}"; Types: standard system; Flags: fixed
 Name: "apikey"; Description: "{cm:ComponentAPIKeySubDescription}"; Types: standard system; Flags: exclusive
 Name: "apikey\sysenv"; Description: "{cm:ComponentAPIKeySysEnvDescription}"; Types: system; Flags: exclusive restart
 Name: "apikey\launcher"; Description: "{cm:ComponentAPIKeyLauncherDescription}"; Types: standard; Flags: exclusive
+Name: "apikey\nokeys"; Description: "{cm:ComponentAPIKeyNoKeyDescription}"; Types: nokeys; Flags: exclusive
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
@@ -80,19 +82,19 @@ Name: "autorun"; Description: "{cm:TaskAutorun}"; GroupDescription: "{cm:TaskCat
 
 [Files]
 Source: "{#BASEDIR}\hudman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: core
-Source: "{tmp}\launcher.cmd"; DestDir: "{app}"; Flags: external; Components: apikey\launcher
+Source: "{tmp}\hudmanc.cmd"; DestDir: "{app}"; Flags: external; Components: apikey\launcher
 
 #ifdef _RELEASE
 Source: "{#BASEDIR}\hudman.exe.sig"; DestDir: "{app}"; Flags: ignoreversion; Components: core
 #endif
 
 [Icons]
-Name: "{group}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv"
-Name: "{group}\HUD Manager"; Filename: "{app}\launcher.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"
+Name: "{group}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv or apikey\nokeys"
+Name: "{group}\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"
 Name: "{group}\{cm:ProgramOnTheWeb,HUD Manager}"; Filename: "https://github.com/xvitaly/hudman"; Components: core
-Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv"; Tasks: desktopicon
-Name: "{userdesktop}\HUD Manager"; Filename: "{app}\launcher.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\HUD Manager"; Filename: "{app}\launcher.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: autorun
+Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv or apikey\nokeys"; Tasks: desktopicon
+Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: autorun
 
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_LOGIN"; ValueData: "{code:GetAPILogin}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
@@ -166,7 +168,7 @@ begin
                 end
             else
                 begin
-                    Result := GenerateBotLauncher(ExpandConstant('{tmp}\launcher.cmd'));
+                    Result := GenerateBotLauncher(ExpandConstant('{tmp}\hudmanc.cmd'));
                 end
         end
     else
