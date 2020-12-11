@@ -1,8 +1,14 @@
 # HUD Manager
 
-[![GitHub version](https://badge.fury.io/gh/xvitaly%2Fhudman.svg)](https://github.com/xvitaly/hudman/releases)
+[![GitHub version](https://img.shields.io/github/v/release/xvitaly/hudman?sort=semver&color=brightgreen&logo=git&logoColor=white)](https://github.com/xvitaly/hudman/releases)
+[![PyPi Version](https://img.shields.io/pypi/v/hudman.svg?logo=pypi&logoColor=white)](https://pypi.org/project/hudman/)
+[![GitHub CI status](https://github.com/xvitaly/hudman/workflows/Python%20CI/badge.svg?branch=master)](https://github.com/xvitaly/hudman/actions)
+[![LGTM grade](https://img.shields.io/lgtm/grade/python/g/xvitaly/hudman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/hudman/context:python)
+[![LGTM alerts](https://img.shields.io/lgtm/alerts/g/xvitaly/hudman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/hudman/alerts/)
+[![CodeFactor](https://www.codefactor.io/repository/github/xvitaly/hudman/badge/master)](https://www.codefactor.io/repository/github/xvitaly/hudman/overview/master)
 [![Copr build status](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/)
-[![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues&maxAge=60)](https://github.com/xvitaly/hudman/issues)
+[![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues)](https://github.com/xvitaly/hudman/issues)
+
 ---
 
 Local HUD mirror manager. Can be used with the [SRC Repair](https://github.com/xvitaly/srcrepair) project.
@@ -10,7 +16,7 @@ Local HUD mirror manager. Can be used with the [SRC Repair](https://github.com/x
 # License
 GNU General Public License version 3. You can find it here: [LICENSE](LICENSE). External libraries can use another licenses, compatible with GNU GPLv3.
 
-Icon for the Windows executable and installer by [Asher](https://www.deviantart.com/kyo-tux), licensed under the terms of the [CC Attribution Share-Alike](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+Icon for the Windows executable and installer by [Asher](https://www.masteriantart.com/kyo-tux), licensed under the terms of the [CC Attribution Share-Alike](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
 
 # Requirements
 
