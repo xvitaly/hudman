@@ -155,7 +155,7 @@ begin
     Contents[3] := 'set HUDMAN_LOGIN=' + GetAPILoginInternal();
     Contents[4] := 'set HUDMAN_APIKEY=' + GetAPIKeyInternal();
     Contents[5] := '';
-    Contents[6] := '.\hudman.exe';
+    Contents[6] := '.\hudman.exe %*';
     Result := SaveStringsToFile(FileName, Contents, False)
 end;
 
