@@ -78,7 +78,6 @@ Name: "apikey\nokeys"; Description: "{cm:ComponentAPIKeyNoKeyDescription}"; Type
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "autorun"; Description: "{cm:TaskAutorun}"; GroupDescription: "{cm:TaskCategoryAutorun}"; Flags: unchecked
 
 [Files]
 Source: "{#BASEDIR}\hudman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: core
@@ -94,12 +93,10 @@ Name: "{group}\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}
 Name: "{group}\{cm:ProgramOnTheWeb,HUD Manager}"; Filename: "https://github.com/xvitaly/hudman"; Components: core
 Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv or apikey\nokeys"; Tasks: desktopicon
 Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: autorun
 
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_LOGIN"; ValueData: "{code:GetAPILogin}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_APIKEY"; ValueData: "{code:GetAPIKey}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
-Root: HKCU; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "hudman"; ValueData: "{app}\hudman.exe"; Flags: uninsdeletevalue; Components: "apikey\sysenv"; Tasks: autorun
 
 [Code]
 var
