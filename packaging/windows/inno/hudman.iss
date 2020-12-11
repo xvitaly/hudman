@@ -139,6 +139,11 @@ begin
     Result := (Length(GetAPILoginInternal()) < 4) and (Length(GetAPIKeyInternal()) < 10)
 end;
 
+function IsKeylessInstallation(): Boolean;
+begin
+    Result := WizardIsComponentSelected('apikey\nokeys')
+end;
+
 function GenerateBotLauncher(FileName: String): Boolean;
 var
     Contents: TArrayOfString;
@@ -152,6 +157,18 @@ begin
     Contents[5] := '';
     Contents[6] := '.\hudman.exe';
     Result := SaveStringsToFile(FileName, Contents, False)
+end;
+
+function ShouldSkipPage(CurPageID: Integer): Boolean;
+begin
+    if CurPageID = APIKeyPage.ID then
+        begin
+            Result := IsKeylessInstallation()
+        end
+    else
+        begin
+            Result := False
+        end
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
