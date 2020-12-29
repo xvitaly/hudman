@@ -21,7 +21,7 @@
 from calendar import timegm
 from datetime import datetime
 from email.utils import parsedate
-from hashlib import md5, sha1, sha512
+from hashlib import sha1, sha512
 from json import loads
 from logging import Formatter, StreamHandler, getLogger
 from os import path, makedirs, remove, rename
@@ -123,16 +123,6 @@ class HUDMirror:
         return result
 
     @staticmethod
-    def md5hash(fname: str) -> str:
-        """
-        Calculate MD5 hash sum of specified file.
-        :param fname: Source file name.
-        :return: MD5 hash of source file.
-        :rtype: str
-        """
-        return md5(open(fname, 'rb').read()).hexdigest()
-
-    @staticmethod
     def sha1hash(fname: str) -> str:
         """
         Calculate SHA1 hash sum of specified file.
@@ -193,13 +183,12 @@ class HUDMirror:
 
             hud.mainuri = '{}/{}'.format(path.dirname(hud.mainuri), updatefile)
             hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
-            hud.md5hash = self.md5hash(f)
             hud.sha512hash = self.sha512hash(f)
             hud.lastupdate = r[1]
             hud.isupdated = True
 
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
+                HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, updatefile))
         else:
             if (not hud.isupdated) and (int(time()) - hud.lastupdate >= 31536000):
                 self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
@@ -219,13 +208,12 @@ class HUDMirror:
 
             hud.mainuri = '{}/{}'.format(path.dirname(hud.mainuri), updatefile)
             hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
-            hud.md5hash = self.md5hash(fullfile)
             hud.sha512hash = self.sha512hash(fullfile)
             hud.lastupdate = mdate
             hud.isupdated = True
 
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.hudname, hud.md5hash, hud.sha512hash, hud.lastupdate, updatefile))
+                HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, updatefile))
         else:
             if (not hud.isupdated) and (int(time()) - hud.lastupdate >= 31536000):
                 self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))

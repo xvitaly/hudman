@@ -143,21 +143,6 @@ class HUDEntry:
         self.__repopath.data = value
 
     @property
-    def md5hash(self) -> str:
-        """
-        Get MD5 hash sum of HUD file.
-        :return: MD5 hash sum of HUD file.
-        """
-        return self.__md5hash.data
-
-    @md5hash.setter
-    def md5hash(self, value: str) -> None:
-        """
-        Set MD5 hash sum of HUD file.
-        """
-        self.__md5hash.data = value
-
-    @property
     def sha512hash(self) -> str:
         """
         Get SHA-512 hash sum of HUD file.
@@ -261,7 +246,6 @@ class HUDEntry:
         self.__upstreamuri = hud.getElementsByTagName('UpURI')[0].firstChild
         self.__screenshot = hud.getElementsByTagName('Preview')[0].firstChild
         self.__repopath = hud.getElementsByTagName('RepoPath')[0].firstChild
-        self.__md5hash = hud.getElementsByTagName('Hash')[0].firstChild
         self.__sha512hash = hud.getElementsByTagName('Hash2')[0].firstChild
         self.__lastupdate = hud.getElementsByTagName('LastUpdate')[0].firstChild
         self.__homepage = hud.getElementsByTagName('Site')[0].firstChild
