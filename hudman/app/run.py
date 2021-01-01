@@ -18,13 +18,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from argparse import ArgumentParser
-from hudman import HUDMirror
+import argparse
+
+from .. import HUDMirror
 
 
 def main():
     # Parse command-line arguments...
-    parser = ArgumentParser()
+    parser = argparse.ArgumentParser()
     parser.add_argument('--huddb', '-d', help='Specify path to HUDs database file.', required=True)
     parser.add_argument('--outdir', '-o', help='Specify path to save downloaded files.', required=True)
     parser.add_argument('--save', '-s', help='Automatically save changes in HUD database file.', action='store_true', required=False)
