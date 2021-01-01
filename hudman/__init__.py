@@ -65,7 +65,8 @@ class HUDMirror:
         :rtype: list
         """
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
-        response = urllib.request.urlopen(urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
+        response = urllib.request.urlopen(
+            urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
         if response.status != 200:
             raise Exception(HUDMessages.gh_errcode.format(response.status))
         data = json.loads(response.read().decode('utf-8'))
