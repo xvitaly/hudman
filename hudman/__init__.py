@@ -18,17 +18,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from calendar import timegm
-from datetime import datetime
-from email.utils import parsedate
-from hashlib import sha1, sha512
-from json import loads
-from logging import Formatter, StreamHandler, getLogger
-from os import path, makedirs, remove, rename
-from sys import stdout
-from time import time
-from urllib.request import Request, urlopen
-from xml.dom import minidom
+import calendar
+import datetime
+import email.utils
+import hashlib
+import json
+import logging
+import os
+import sys
+import time
+import urllib.request
+import xml.dom.minidom
 
 from .hudlist import HUDEntry
 from .hudmsg import HUDMessages, HUDSettings
@@ -43,8 +43,8 @@ class HUDMirror:
         :return: UnixTime integer.
         :rtype: int
         """
-        do = datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
-        return int(timegm(do.timetuple()))
+        do = datetime.datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
+        return int(calendar.timegm(do.timetuple()))
 
     @staticmethod
     def hth2unix(gtime: str) -> int:
@@ -54,7 +54,7 @@ class HUDMirror:
         :return: UnixTime integer.
         :rtype: int
         """
-        return int(timegm(parsedate(gtime)))
+        return int(calendar.timegm(email.utils.parsedate(gtime)))
 
     @staticmethod
     def callgithubapi(repourl: str) -> list:
@@ -65,10 +65,10 @@ class HUDMirror:
         :rtype: list
         """
         url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
-        response = urlopen(Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
+        response = urllib.request.urlopen(urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
         if response.status != 200:
             raise Exception(HUDMessages.gh_errcode.format(response.status))
-        data = loads(response.read().decode('utf-8'))
+        data = json.loads(response.read().decode('utf-8'))
         return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
 
     @staticmethod
@@ -80,8 +80,8 @@ class HUDMirror:
         :return: Last modification time.
         :rtype: str
         """
-        request = Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
-        response = urlopen(request)
+        request = urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
+        response = urllib.request.urlopen(request)
         if response.status != 200:
             raise Exception(HUDMessages.oth_errcode.format(response.status))
         headers = response.info()
@@ -97,12 +97,12 @@ class HUDMirror:
         :return: Full local path of downloaded file.
         :rtype: str
         """
-        fdir = path.join(outdir, name)
-        if not path.exists(fdir):
-            makedirs(fdir)
-        filepath = path.join(fdir, '{}.zip'.format(name))
-        request = Request(url, data=None, headers={'User-Agent': HUDSettings.ua_wget})
-        with urlopen(request) as response, open(filepath, 'wb') as result:
+        fdir = os.path.join(outdir, name)
+        if not os.path.exists(fdir):
+            os.makedirs(fdir)
+        filepath = os.path.join(fdir, '{}.zip'.format(name))
+        request = urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_wget})
+        with urllib.request.urlopen(request) as response, open(filepath, 'wb') as result:
             result.write(response.read())
         return filepath
 
@@ -115,11 +115,11 @@ class HUDMirror:
         :return: Full local path of renamed file.
         :rtype: str
         """
-        fdir = path.dirname(fname)
-        result = path.join(fdir, '{}_{}.zip'.format(path.splitext(path.basename(fname))[0], chash[:8]))
-        if path.isfile(result):
-            remove(result)
-        rename(fname, result)
+        fdir = os.path.dirname(fname)
+        result = os.path.join(fdir, '{}_{}.zip'.format(os.path.splitext(os.path.basename(fname))[0], chash[:8]))
+        if os.path.isfile(result):
+            os.remove(result)
+        os.rename(fname, result)
         return result
 
     @staticmethod
@@ -130,7 +130,7 @@ class HUDMirror:
         :return: SHA1 hash of source file.
         :rtype: str
         """
-        return sha1(open(fname, 'rb').read()).hexdigest()
+        return hashlib.sha1(open(fname, 'rb').read()).hexdigest()
 
     @staticmethod
     def sha512hash(fname: str) -> str:
@@ -140,16 +140,16 @@ class HUDMirror:
         :return: SHA-512 hash of source file.
         :rtype: str
         """
-        return sha512(open(fname, 'rb').read()).hexdigest()
+        return hashlib.sha512(open(fname, 'rb').read()).hexdigest()
 
     def __setlogger(self) -> None:
         """
         Add logging support and configure logger.
         """
-        self.__logger = getLogger(__name__)
+        self.__logger = logging.getLogger(__name__)
         self.__logger.setLevel('INFO')
-        e_handler = StreamHandler(stdout)
-        e_handler.setFormatter(Formatter(HUDSettings.log_stdfmt))
+        e_handler = logging.StreamHandler(sys.stdout)
+        e_handler.setFormatter(logging.Formatter(HUDSettings.log_stdfmt))
         self.__logger.addHandler(e_handler)
 
     def __checkdb(self) -> bool:
@@ -158,7 +158,7 @@ class HUDMirror:
         :return: Return True if HUD database file exists.
         :rtype: bool
         """
-        return path.isfile(self.__gamedb)
+        return os.path.isfile(self.__gamedb)
 
     def __readdb(self) -> None:
         """
@@ -167,7 +167,7 @@ class HUDMirror:
         if not self.__checkdb():
             raise FileNotFoundError(HUDMessages.db_notfound.format(self.__gamedb))
 
-        self.__huddb = minidom.parse(self.__gamedb)
+        self.__huddb = xml.dom.minidom.parse(self.__gamedb)
         for hud in self.__huddb.getElementsByTagName('HUD'):
             self.__hudlist.append(HUDEntry(hud))
 
@@ -179,10 +179,10 @@ class HUDMirror:
         r = self.callgithubapi(hud.repopath)
         if r[1] > hud.lastupdate:
             f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
-            updatefile = path.basename(f)
+            updatefile = os.path.basename(f)
 
-            hud.mainuri = '{}/{}'.format(path.dirname(hud.mainuri), updatefile)
-            hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
+            hud.mainuri = '{}/{}'.format(os.path.dirname(hud.mainuri), updatefile)
+            hud.mirroruri = '{}/{}'.format(os.path.dirname(hud.mirroruri), updatefile)
             hud.sha512hash = self.sha512hash(f)
             hud.lastupdate = r[1]
             hud.isupdated = True
@@ -190,7 +190,7 @@ class HUDMirror:
             self.__logger.info(
                 HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, updatefile))
         else:
-            if (not hud.isupdated) and (int(time()) - hud.lastupdate >= 31536000):
+            if (not hud.isupdated) and (int(time.time()) - hud.lastupdate >= 31536000):
                 self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
             else:
                 self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
@@ -204,10 +204,10 @@ class HUDMirror:
         if mdate > hud.lastupdate:
             filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
             fullfile = self.renamefile(filednl, self.sha1hash(filednl))
-            updatefile = path.basename(fullfile)
+            updatefile = os.path.basename(fullfile)
 
-            hud.mainuri = '{}/{}'.format(path.dirname(hud.mainuri), updatefile)
-            hud.mirroruri = '{}/{}'.format(path.dirname(hud.mirroruri), updatefile)
+            hud.mainuri = '{}/{}'.format(os.path.dirname(hud.mainuri), updatefile)
+            hud.mirroruri = '{}/{}'.format(os.path.dirname(hud.mirroruri), updatefile)
             hud.sha512hash = self.sha512hash(fullfile)
             hud.lastupdate = mdate
             hud.isupdated = True
@@ -215,7 +215,7 @@ class HUDMirror:
             self.__logger.info(
                 HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, updatefile))
         else:
-            if (not hud.isupdated) and (int(time()) - hud.lastupdate >= 31536000):
+            if (not hud.isupdated) and (int(time.time()) - hud.lastupdate >= 31536000):
                 self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
             else:
                 self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
