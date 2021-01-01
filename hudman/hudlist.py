@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from os import path
+import os
 
 
 class HUDEntry:
@@ -223,7 +223,7 @@ class HUDEntry:
         Get final download filename for HUD.
         :return: Download filename for HUD.
         """
-        return path.basename(self.mainuri)
+        return os.path.basename(self.mainuri)
 
     @property
     def ghhosted(self) -> bool:
