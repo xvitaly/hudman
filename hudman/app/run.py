@@ -6,7 +6,7 @@
 
 import argparse
 
-from .. import HUDMirror
+from hudman import HUDMirror
 
 
 def main():
