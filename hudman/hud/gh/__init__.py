@@ -7,16 +7,15 @@
 import json
 import urllib.request
 
-from ...hudmsg import HUDMessages, HUDSettings
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
+from ...hudmsg import HUDMessages, HUDSettings
 
 
 class HUDGh(HUDCommon):
     def __callapi(self) -> int:
         """
         Call GitHub API and fetch useful information about project.
-        :param repourl: GitHub repository URL.
         :return: List with SHA1 hash and datetime of latest commit.
         :rtype: int
         """

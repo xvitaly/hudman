@@ -6,9 +6,9 @@
 
 import urllib.request
 
-from ...hudmsg import HUDMessages, HUDSettings
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
+from ...hudmsg import HUDMessages, HUDSettings
 
 
 class HUDOther(HUDCommon):
@@ -16,11 +16,11 @@ class HUDOther(HUDCommon):
         """
         Call HTTP HEAD method to retrieve last modification time
         of specified URL.
-        :param url: URL of remote file.
         :return: Last modification time.
         :rtype: int
         """
-        request = urllib.request.Request(self.upstreamuri, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
+        request = urllib.request.Request(self.upstreamuri, data=None, headers={'User-Agent': HUDSettings.ua_curl},
+                                         method='HEAD')
         response = urllib.request.urlopen(request)
         if response.status != 200:
             raise Exception(HUDMessages.oth_errcode.format(response.status))
