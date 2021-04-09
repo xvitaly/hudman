@@ -8,7 +8,7 @@ import hashlib
 import os
 import urllib.request
 
-from .hudmsg import HUDSettings
+from ..hudmsg import HUDSettings
 
 
 class DnManager:
