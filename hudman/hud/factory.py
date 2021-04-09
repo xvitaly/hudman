@@ -11,5 +11,11 @@ from .other import HUDOther
 class HUDFactory:
     @staticmethod
     def create(hud):
+        """
+        Get the correct instance of the HUD manager. Factory method.
+        :param hud: Specified HUD entry.
+        :return: An instance of the desired class.
+        :rtype: Any
+        """
         repopath = hud.getElementsByTagName('RepoPath')[0].firstChild.data
         return HUDGh(hud) if repopath.find('https://github.com/') != -1 else HUDOther(hud)

@@ -27,6 +27,11 @@ class HUDGh(HUDCommon):
         data = json.loads(response.read().decode('utf-8'))
         return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
 
-    def check(self):
+    def check(self) -> bool:
+        """
+        Check for the HUD updates.
+        :return: Return True if the new version is available.
+        :rtype: bool
+        """
         self._updatecheck = self.__callapi()
         return self._updatecheck > self.lastupdate

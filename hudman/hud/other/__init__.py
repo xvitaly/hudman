@@ -27,6 +27,11 @@ class HUDOther(HUDCommon):
         headers = response.info()
         return HeaderTime.hth2unix(headers['Last-Modified'])
 
-    def check(self):
+    def check(self) -> bool:
+        """
+        Check for the HUD updates.
+        :return: Return True if the new version is available.
+        :rtype: bool
+        """
         self._updatecheck = self.__checkhead()
         return self._updatecheck > self.lastupdate

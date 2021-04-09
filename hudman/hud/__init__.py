@@ -215,7 +215,7 @@ class HUDCommon:
 
     def download(self, outdir: str) -> None:
         """
-        Call GitHub and download the latest revision of the specified HUD.
+        Download the latest version of the specified HUD.
         :param outdir: Output directory.
         """
         df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
