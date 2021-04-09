@@ -48,14 +48,14 @@ class DnManager:
         return result
 
     @staticmethod
-    def sha1hash(fname: str) -> str:
+    def sha256hash(fname: str) -> str:
         """
-        Calculate SHA1 hash sum of specified file.
+        Calculate SHA-256 hash sum of specified file.
         :param fname: Source file name.
         :return: SHA1 hash of source file.
         :rtype: str
         """
-        return hashlib.sha1(open(fname, 'rb').read()).hexdigest()
+        return hashlib.sha256(open(fname, 'rb').read()).hexdigest()
 
     @staticmethod
     def sha512hash(fname: str) -> str:

@@ -219,7 +219,7 @@ class HUDCommon:
         :param outdir: Output directory.
         """
         df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
-        f = DnManager.renamefile(df, DnManager.sha1hash(df))
+        f = DnManager.renamefile(df, DnManager.sha256hash(df))
         updatefile = os.path.basename(f)
 
         self.mainuri = '{}/{}'.format(os.path.dirname(self.mainuri), updatefile)
