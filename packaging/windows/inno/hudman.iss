@@ -2,7 +2,7 @@
 ;
 ; SPDX-License-Identifier: GPL-3.0-or-later
 
-#define VERSION GetFileVersion("..\results\dist\hudman.exe")
+#define VERSION GetVersionNumbersString("..\results\dist\hudman.exe")
 #define BASEDIR "..\results\dist"
 #define CI_COMMIT GetEnv('CI_HASH')
 #if CI_COMMIT == ''
@@ -37,7 +37,7 @@ PrivilegesRequiredOverridesAllowed=commandline
 ShowLanguageDialog=auto
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
-MinVersion=6.1.7601
+MinVersion=6.1sp1
 VersionInfoVersion={#VERSION}
 VersionInfoDescription=HUD Manager
 VersionInfoCopyright=(c) 2005-2020 EasyCoding Team. All rights reserved.
