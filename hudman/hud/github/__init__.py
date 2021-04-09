@@ -12,7 +12,7 @@ from ...hud import HUDCommon
 from ...hudmsg import HUDMessages, HUDSettings
 
 
-class HUDGh(HUDCommon):
+class HUDGitHub(HUDCommon):
     def __callapi(self) -> int:
         """
         Call GitHub API and fetch useful information about project.

@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from .gh import HUDGh
+from .github import HUDGitHub
 from .other import HUDOther
 
 
@@ -18,4 +18,4 @@ class HUDFactory:
         :rtype: Any
         """
         repopath = hud.getElementsByTagName('RepoPath')[0].firstChild.data
-        return HUDGh(hud) if repopath.find('https://github.com/') != -1 else HUDOther(hud)
+        return HUDGitHub(hud) if repopath.find('https://github.com/') != -1 else HUDOther(hud)
