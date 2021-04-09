@@ -4,131 +4,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import calendar
-import datetime
-import email.utils
-import hashlib
-import json
 import logging
 import os
 import sys
 import time
-import urllib.request
 import xml.dom.minidom
 
-from .hudlist import HUDEntry
+from .hud.factory import HUDFactory
 from .hudmsg import HUDMessages, HUDSettings
 
 
 class HUDMirror:
-    @staticmethod
-    def gmt2unix(gtime: str) -> int:
-        """
-        Convert datetime string to unixtime.
-        :param gtime: Datetime string.
-        :return: UnixTime integer.
-        :rtype: int
-        """
-        do = datetime.datetime.strptime(gtime, '%Y-%m-%dT%H:%M:%SZ')
-        return int(calendar.timegm(do.timetuple()))
-
-    @staticmethod
-    def hth2unix(gtime: str) -> int:
-        """
-        Convert datetime string in HTTP-header format to unixtime.
-        :param gtime: Datetime string in HTTP-header format.
-        :return: UnixTime integer.
-        :rtype: int
-        """
-        return int(calendar.timegm(email.utils.parsedate(gtime)))
-
-    @staticmethod
-    def callgithubapi(repourl: str) -> list:
-        """
-        Call GitHub API and fetch useful information about project.
-        :param repourl: GitHub repository URL.
-        :return: List with SHA1 hash and datetime of latest commit.
-        :rtype: list
-        """
-        url = repourl.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
-        response = urllib.request.urlopen(
-            urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
-        if response.status != 200:
-            raise Exception(HUDMessages.gh_errcode.format(response.status))
-        data = json.loads(response.read().decode('utf-8'))
-        return [data[0]['sha'], HUDMirror.gmt2unix(data[0]['commit']['committer']['date'])]
-
-    @staticmethod
-    def getlhmurl(url: str) -> str:
-        """
-        Call HTTP HEAD method to retrieve last modification time
-        of specified URL.
-        :param url: URL of remote file.
-        :return: Last modification time.
-        :rtype: str
-        """
-        request = urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}, method='HEAD')
-        response = urllib.request.urlopen(request)
-        if response.status != 200:
-            raise Exception(HUDMessages.oth_errcode.format(response.status))
-        headers = response.info()
-        return headers['Last-Modified']
-
-    @staticmethod
-    def downloadfile(url: str, name: str, outdir: str) -> str:
-        """
-        Download file from Internet and save it to specified directory.
-        :param url: URL of remote file.
-        :param name: Name of result file.
-        :param outdir: Output directory.
-        :return: Full local path of downloaded file.
-        :rtype: str
-        """
-        fdir = os.path.join(outdir, name)
-        if not os.path.exists(fdir):
-            os.makedirs(fdir)
-        filepath = os.path.join(fdir, '{}.zip'.format(name))
-        request = urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_wget})
-        with urllib.request.urlopen(request) as response, open(filepath, 'wb') as result:
-            result.write(response.read())
-        return filepath
-
-    @staticmethod
-    def renamefile(fname: str, chash: str) -> str:
-        """
-        Rename file using it's hash.
-        :param fname: Source file name.
-        :param chash: Source file hash sum.
-        :return: Full local path of renamed file.
-        :rtype: str
-        """
-        fdir = os.path.dirname(fname)
-        result = os.path.join(fdir, '{}_{}.zip'.format(os.path.splitext(os.path.basename(fname))[0], chash[:8]))
-        if os.path.isfile(result):
-            os.remove(result)
-        os.rename(fname, result)
-        return result
-
-    @staticmethod
-    def sha1hash(fname: str) -> str:
-        """
-        Calculate SHA1 hash sum of specified file.
-        :param fname: Source file name.
-        :return: SHA1 hash of source file.
-        :rtype: str
-        """
-        return hashlib.sha1(open(fname, 'rb').read()).hexdigest()
-
-    @staticmethod
-    def sha512hash(fname: str) -> str:
-        """
-        Calculate SHA-512 hash sum of specified file.
-        :param fname: Source file name.
-        :return: SHA-512 hash of source file.
-        :rtype: str
-        """
-        return hashlib.sha512(open(fname, 'rb').read()).hexdigest()
-
     def __setlogger(self) -> None:
         """
         Add logging support and configure logger.
@@ -156,66 +42,22 @@ class HUDMirror:
 
         self.__huddb = xml.dom.minidom.parse(self.__gamedb)
         for hud in self.__huddb.getElementsByTagName('HUD'):
-            self.__hudlist.append(HUDEntry(hud))
+            self.__hudlist.append(HUDFactory.create(hud))
 
-    def __usegh(self, hud: HUDEntry) -> None:
-        """
-        Call GitHub and download latest revision of specified HUD.
-        :param hud: HUD entry to process and download.
-        """
-        r = self.callgithubapi(hud.repopath)
-        if r[1] > hud.lastupdate:
-            f = self.renamefile(self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir), r[0])
-            updatefile = os.path.basename(f)
-
-            hud.mainuri = '{}/{}'.format(os.path.dirname(hud.mainuri), updatefile)
-            hud.mirroruri = '{}/{}'.format(os.path.dirname(hud.mirroruri), updatefile)
-            hud.sha512hash = self.sha512hash(f)
-            hud.lastupdate = r[1]
-            hud.isupdated = True
-
-            self.__logger.info(
-                HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, updatefile))
-        else:
-            if (not hud.isupdated) and (int(time.time()) - hud.lastupdate >= 31536000):
-                self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
-            else:
-                self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
-
-    def __useother(self, hud: HUDEntry) -> None:
-        """
-        Download specified HUD from unknown location.
-        :param hud: HUD entry to process and download.
-        """
-        mdate = self.hth2unix(self.getlhmurl(hud.upstreamuri))
-        if mdate > hud.lastupdate:
-            filednl = self.downloadfile(hud.upstreamuri, hud.installdir, self.__outdir)
-            fullfile = self.renamefile(filednl, self.sha1hash(filednl))
-            updatefile = os.path.basename(fullfile)
-
-            hud.mainuri = '{}/{}'.format(os.path.dirname(hud.mainuri), updatefile)
-            hud.mirroruri = '{}/{}'.format(os.path.dirname(hud.mirroruri), updatefile)
-            hud.sha512hash = self.sha512hash(fullfile)
-            hud.lastupdate = mdate
-            hud.isupdated = True
-
-            self.__logger.info(
-                HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, updatefile))
-        else:
-            if (not hud.isupdated) and (int(time.time()) - hud.lastupdate >= 31536000):
-                self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
-            else:
-                self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
-
-    def __handlehud(self, hud: HUDEntry) -> None:
+    def __handlehud(self, hud) -> None:
         """
         Process and download specified HUD using different backends.
         :param hud: HUD entry to process and download.
         """
-        if hud.ghhosted:
-            self.__usegh(hud)
+        if hud.check():
+            hud.download(self.__outdir)
+            self.__logger.info(
+                HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
         else:
-            self.__useother(hud)
+            if (not hud.isupdated) and (int(time.time()) - hud.lastupdate >= 31536000):
+                self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
+            else:
+                self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
 
     def getall(self) -> None:
         """
