@@ -6,8 +6,10 @@
 
 import os
 
+from hudman.dnmanager import DnManager
 
-class HUDEntry:
+
+class HUDCommon:
     @property
     def hudname(self) -> str:
         """
@@ -211,13 +213,20 @@ class HUDEntry:
         """
         return os.path.basename(self.mainuri)
 
-    @property
-    def ghhosted(self) -> bool:
+    def download(self, outdir: str) -> None:
         """
-        Check if HUD hosted on GitHub.
-        :return: Return True if HUD hosted on GitHub.
+        Call GitHub and download the latest revision of the specified HUD.
+        :param outdir: Output directory.
         """
-        return self.repopath.find('https://github.com/') != -1
+        df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
+        f = DnManager.renamefile(df, DnManager.sha1hash(df))
+        updatefile = os.path.basename(f)
+
+        self.mainuri = '{}/{}'.format(os.path.dirname(self.mainuri), updatefile)
+        self.mirroruri = '{}/{}'.format(os.path.dirname(self.mirroruri), updatefile)
+        self.sha512hash = DnManager.sha512hash(f)
+        self.lastupdate = self._updatecheck
+        self.isupdated = True
 
     def __init__(self, hud) -> None:
         """
@@ -237,3 +246,4 @@ class HUDEntry:
         self.__homepage = hud.getElementsByTagName('Site')[0].firstChild
         self.__archivedir = hud.getElementsByTagName('ArchiveDir')[0].firstChild
         self.__installdir = hud.getElementsByTagName('InstallDir')[0].firstChild
+        self._updatecheck = 0
