@@ -6,7 +6,7 @@
 
 import os
 
-from hudman.dnmanager import DnManager
+from ..dnmanager import DnManager
 
 
 class HUDCommon:
