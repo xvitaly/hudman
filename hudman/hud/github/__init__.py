@@ -15,8 +15,9 @@ from ...hudmsg import HUDMessages, HUDSettings
 class HUDGitHub(HUDCommon):
     def _updatecheck(self) -> int:
         """
-        Call GitHub API and fetch useful information about project.
-        :return: List with SHA1 hash and datetime of latest commit.
+        Call GitHub API and fetch last modification time of the
+        specified HUD.
+        :return: Last modification time in unixtime format.
         :rtype: int
         """
         url = self.repopath.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
