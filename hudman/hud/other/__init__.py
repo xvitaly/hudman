@@ -16,7 +16,7 @@ class HUDOther(HUDCommon):
         """
         Call HTTP HEAD method to retrieve last modification time
         of specified URL.
-        :return: Last modification time.
+        :return: Last modification time in unixtime format.
         :rtype: int
         """
         request = urllib.request.Request(self.upstreamuri, data=None, headers={'User-Agent': HUDSettings.ua_curl},

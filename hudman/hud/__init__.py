@@ -14,7 +14,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def _updatecheck(self) -> int:
         """
-        Fetch external source and get last modification time of
+        Fetch an external source and get last modification time of
         the selected HUD. Abstract method.
         :return: Last modification time in unixtime format.
         :rtype: int
