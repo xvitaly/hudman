@@ -6,7 +6,7 @@
 
 import argparse
 
-from hudman import HUDMirror
+from hudman import HUDManager
 
 
 def main():
@@ -18,7 +18,7 @@ def main():
     cmdline = parser.parse_args()
 
     # Run mirror script...
-    hm = HUDMirror(cmdline.huddb, cmdline.outdir)
+    hm = HUDManager(cmdline.huddb, cmdline.outdir)
     hm.getall()
 
     # Saving changes if enabled...

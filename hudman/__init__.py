@@ -14,7 +14,7 @@ from .hud.factory import HUDFactory
 from .hudmsg import HUDMessages, HUDSettings
 
 
-class HUDMirror:
+class HUDManager:
     def __setlogger(self) -> None:
         """
         Add logging support and configure logger.
@@ -78,7 +78,7 @@ class HUDMirror:
 
     def __init__(self, gamedb: str, outdir: str) -> None:
         """
-        Main constructor of HUDMirror class.
+        Main constructor of HUDManager class.
         :param gamedb: Full path to game database file.
         :param outdir: Full path to output directory.
         """
