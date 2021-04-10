@@ -13,7 +13,7 @@ from ...hudmsg import HUDMessages, HUDSettings
 
 
 class HUDGitHub(HUDCommon):
-    def __callapi(self) -> int:
+    def _updatecheck(self) -> int:
         """
         Call GitHub API and fetch useful information about project.
         :return: List with SHA1 hash and datetime of latest commit.
@@ -26,12 +26,3 @@ class HUDGitHub(HUDCommon):
             raise Exception(HUDMessages.gh_errcode.format(response.status))
         data = json.loads(response.read().decode('utf-8'))
         return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
-
-    def check(self) -> bool:
-        """
-        Check for the HUD updates.
-        :return: Return True if the new version is available.
-        :rtype: bool
-        """
-        self._updatecheck = self.__callapi()
-        return self._updatecheck > self.lastupdate

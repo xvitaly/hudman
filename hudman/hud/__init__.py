@@ -4,12 +4,22 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import abc
 import os
 
 from ..dnmanager import DnManager
 
 
-class HUDCommon:
+class HUDCommon(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def _updatecheck(self) -> int:
+        """
+        Fetch external source and get last modification time of
+        the selected HUD. Abstract method.
+        :return: Last modification time in unixtime format.
+        :rtype: int
+        """
+
     @property
     def hudname(self) -> str:
         """
@@ -213,6 +223,15 @@ class HUDCommon:
         """
         return os.path.basename(self.mainuri)
 
+    def check(self) -> bool:
+        """
+        Check for the HUD updates.
+        :return: Return True if the new version is available.
+        :rtype: bool
+        """
+        self.__checkresult = self._updatecheck()
+        return self.__checkresult > self.lastupdate
+
     def download(self, outdir: str) -> None:
         """
         Download the latest version of the specified HUD.
@@ -225,7 +244,7 @@ class HUDCommon:
         self.mainuri = '{}/{}'.format(os.path.dirname(self.mainuri), updatefile)
         self.mirroruri = '{}/{}'.format(os.path.dirname(self.mirroruri), updatefile)
         self.sha512hash = DnManager.sha512hash(f)
-        self.lastupdate = self._updatecheck
+        self.lastupdate = self.__checkresult
         self.isupdated = True
 
     def __init__(self, hud) -> None:
@@ -246,4 +265,4 @@ class HUDCommon:
         self.__homepage = hud.getElementsByTagName('Site')[0].firstChild
         self.__archivedir = hud.getElementsByTagName('ArchiveDir')[0].firstChild
         self.__installdir = hud.getElementsByTagName('InstallDir')[0].firstChild
-        self._updatecheck = 0
+        self.__checkresult = 0
