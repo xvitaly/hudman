@@ -24,8 +24,8 @@ class HUDGitHub(HUDCommon):
         """
         request = urllib.request.Request(self.__apiurl, data=None, headers={'User-Agent': HUDSettings.ua_curl})
         if self.__ghuser and self.__ghtoken:
-            auth = base64.b64encode(('%s:%s' % (self.__ghuser, self.__ghtoken)).encode('ascii'))
-            request.add_header('Authorization', 'Basic %s' % auth.decode('ascii'))
+            auth = base64.b64encode(f'{self.__ghuser}:{self.__ghtoken}'.encode('ascii'))
+            request.add_header('Authorization', f'Basic {auth.decode("ascii")}')
         response = urllib.request.urlopen(request)
         if response.status != 200:
             raise Exception(HUDMessages.gh_errcode.format(response.status))
