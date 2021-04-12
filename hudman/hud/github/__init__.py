@@ -4,7 +4,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import base64
 import json
+import os
 import urllib.request
 
 from ...headertime import HeaderTime
@@ -20,9 +22,11 @@ class HUDGitHub(HUDCommon):
         :return: Last modification time in unixtime format.
         :rtype: int
         """
-        url = self.repopath.replace('https://github.com/', 'https://api.github.com/repos/') + '/commits?per_page=1'
-        response = urllib.request.urlopen(
-            urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_curl}))
+        request = urllib.request.Request(self.__apiurl, data=None, headers={'User-Agent': HUDSettings.ua_curl})
+        if self.__ghuser and self.__ghtoken:
+            auth = base64.b64encode(('%s:%s' % (self.__ghuser, self.__ghtoken)).encode('ascii'))
+            request.add_header('Authorization', 'Basic %s' % auth.decode('ascii'))
+        response = urllib.request.urlopen(request)
         if response.status != 200:
             raise Exception(HUDMessages.gh_errcode.format(response.status))
         data = json.loads(response.read().decode('utf-8'))
@@ -34,5 +38,7 @@ class HUDGitHub(HUDCommon):
         :param hud: A single entry from HUD database.
         """
         super().__init__(hud)
-        self.__ghuser = ''
-        self.__ghtoken = ''
+        self.__apiurl = self.repopath.replace('https://github.com/',
+                                              'https://api.github.com/repos/') + '/commits?per_page=1'
+        self.__ghuser = os.getenv('HUDMAN_LOGIN')
+        self.__ghtoken = os.getenv('HUDMAN_APIKEY')
