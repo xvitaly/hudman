@@ -27,3 +27,12 @@ class HUDGitHub(HUDCommon):
             raise Exception(HUDMessages.gh_errcode.format(response.status))
         data = json.loads(response.read().decode('utf-8'))
         return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
+
+    def __init__(self, hud):
+        """
+        Main constructor of the HUDGitHub class.
+        :param hud: A single entry from HUD database.
+        """
+        super().__init__(hud)
+        self.__ghuser = ''
+        self.__ghtoken = ''
