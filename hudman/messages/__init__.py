@@ -5,7 +5,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-class HUDMessages:
+class Messages:
+    """
+    Class for working with project message strings.
+    """
     gh_errcode: str = 'GitHub API returned {:d} error code.'
     oth_errcode: str = 'Server returned {:d} error code.'
     db_notfound: str = 'Game database file not found: {}.'
