@@ -8,7 +8,7 @@ import urllib.request
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
-from ...hudmsg import HUDMessages
+from ...messages import Messages
 from ...settings import Settings
 
 
@@ -24,6 +24,6 @@ class HUDOther(HUDCommon):
                                          headers={'User-Agent': Settings.apifetch_user_agent}, method='HEAD')
         response = urllib.request.urlopen(request)
         if response.status != 200:
-            raise Exception(HUDMessages.oth_errcode.format(response.status))
+            raise Exception(Messages.oth_errcode.format(response.status))
         headers = response.info()
         return HeaderTime.hth2unix(headers['Last-Modified'])

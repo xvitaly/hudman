@@ -11,7 +11,7 @@ import time
 import xml.dom.minidom
 
 from .hud.factory import HUDFactory
-from .hudmsg import HUDMessages
+from .messages import Messages
 from .settings import Settings
 
 
@@ -39,7 +39,7 @@ class HUDManager:
         Read and parse HUD XML database file.
         """
         if not self.__checkdb():
-            raise FileNotFoundError(HUDMessages.db_notfound.format(self.__gamedb))
+            raise FileNotFoundError(Messages.db_notfound.format(self.__gamedb))
 
         self.__huddb = xml.dom.minidom.parse(self.__gamedb)
         for hud in self.__huddb.getElementsByTagName('HUD'):
@@ -53,12 +53,12 @@ class HUDManager:
         if hud.check():
             hud.download(self.__outdir)
             self.__logger.info(
-                HUDMessages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
+                Messages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
         else:
             if (not hud.isupdated) and (int(time.time()) - hud.lastupdate >= 31536000):
-                self.__logger.warning(HUDMessages.hud_outdated.format(hud.hudname))
+                self.__logger.warning(Messages.hud_outdated.format(hud.hudname))
             else:
-                self.__logger.info(HUDMessages.hud_uptodate.format(hud.hudname))
+                self.__logger.info(Messages.hud_uptodate.format(hud.hudname))
 
     def getall(self) -> None:
         """
@@ -68,7 +68,7 @@ class HUDManager:
             try:
                 self.__handlehud(hud)
             except Exception:
-                self.__logger.exception(HUDMessages.hud_error.format(hud.hudname))
+                self.__logger.exception(Messages.hud_error.format(hud.hudname))
 
     def save(self) -> None:
         """

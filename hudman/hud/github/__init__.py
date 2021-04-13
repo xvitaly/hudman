@@ -10,7 +10,7 @@ import urllib.request
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
-from ...hudmsg import HUDMessages
+from ...messages import Messages
 from ...settings import Settings
 
 
@@ -28,7 +28,7 @@ class HUDGitHub(HUDCommon):
             request.add_header('Authorization', f'Basic {auth.decode("ascii")}')
         response = urllib.request.urlopen(request)
         if response.status != 200:
-            raise Exception(HUDMessages.gh_errcode.format(response.status))
+            raise Exception(Messages.gh_errcode.format(response.status))
         data = json.loads(response.read().decode('utf-8'))
         return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
 
