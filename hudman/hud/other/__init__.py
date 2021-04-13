@@ -8,7 +8,8 @@ import urllib.request
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
-from ...hudmsg import HUDMessages, HUDSettings
+from ...hudmsg import HUDMessages
+from ...settings import Settings
 
 
 class HUDOther(HUDCommon):
@@ -19,8 +20,8 @@ class HUDOther(HUDCommon):
         :return: Last modification time in unixtime format.
         :rtype: int
         """
-        request = urllib.request.Request(self.upstreamuri, data=None, headers={'User-Agent': HUDSettings.ua_curl},
-                                         method='HEAD')
+        request = urllib.request.Request(self.upstreamuri, data=None,
+                                         headers={'User-Agent': Settings.apifetch_user_agent}, method='HEAD')
         response = urllib.request.urlopen(request)
         if response.status != 200:
             raise Exception(HUDMessages.oth_errcode.format(response.status))

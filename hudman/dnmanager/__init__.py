@@ -8,7 +8,7 @@ import hashlib
 import os
 import urllib.request
 
-from ..hudmsg import HUDSettings
+from ..settings import Settings
 
 
 class DnManager:
@@ -26,7 +26,7 @@ class DnManager:
         if not os.path.exists(fdir):
             os.makedirs(fdir)
         filepath = os.path.join(fdir, '{}.zip'.format(name))
-        request = urllib.request.Request(url, data=None, headers={'User-Agent': HUDSettings.ua_wget})
+        request = urllib.request.Request(url, data=None, headers={'User-Agent': Settings.download_user_agent})
         with urllib.request.urlopen(request) as response, open(filepath, 'wb') as result:
             result.write(response.read())
         return filepath

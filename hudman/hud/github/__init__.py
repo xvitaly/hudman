@@ -6,12 +6,12 @@
 
 import base64
 import json
-import os
 import urllib.request
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
-from ...hudmsg import HUDMessages, HUDSettings
+from ...hudmsg import HUDMessages
+from ...settings import Settings
 
 
 class HUDGitHub(HUDCommon):
@@ -22,7 +22,7 @@ class HUDGitHub(HUDCommon):
         :return: Last modification time in unixtime format.
         :rtype: int
         """
-        request = urllib.request.Request(self.__apiurl, data=None, headers={'User-Agent': HUDSettings.ua_curl})
+        request = urllib.request.Request(self.__apiurl, data=None, headers={'User-Agent': Settings.apifetch_user_agent})
         if self.__ghuser and self.__ghtoken:
             auth = base64.b64encode(f'{self.__ghuser}:{self.__ghtoken}'.encode('ascii'))
             request.add_header('Authorization', f'Basic {auth.decode("ascii")}')
@@ -40,5 +40,5 @@ class HUDGitHub(HUDCommon):
         super().__init__(hud)
         self.__apiurl = self.repopath.replace('https://github.com/',
                                               'https://api.github.com/repos/') + '/commits?per_page=1'
-        self.__ghuser = os.getenv('HUDMAN_LOGIN')
-        self.__ghtoken = os.getenv('HUDMAN_APIKEY')
+        self.__ghuser = Settings.github_user
+        self.__ghtoken = Settings.github_token

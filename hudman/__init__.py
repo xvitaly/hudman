@@ -11,7 +11,8 @@ import time
 import xml.dom.minidom
 
 from .hud.factory import HUDFactory
-from .hudmsg import HUDMessages, HUDSettings
+from .hudmsg import HUDMessages
+from .settings import Settings
 
 
 class HUDManager:
@@ -22,7 +23,7 @@ class HUDManager:
         self.__logger = logging.getLogger(__name__)
         self.__logger.setLevel('INFO')
         e_handler = logging.StreamHandler(sys.stdout)
-        e_handler.setFormatter(logging.Formatter(HUDSettings.log_stdfmt))
+        e_handler.setFormatter(logging.Formatter(Settings.logger_format))
         self.__logger.addHandler(e_handler)
 
     def __checkdb(self) -> bool:
