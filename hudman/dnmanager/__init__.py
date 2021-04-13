@@ -8,6 +8,7 @@ import hashlib
 import os
 import requests
 
+from ..messages import Messages
 from ..settings import Settings
 
 
@@ -28,6 +29,8 @@ class DnManager:
         filepath = os.path.join(fdir, '{}.zip'.format(name))
         headers = {'User-Agent': Settings.download_user_agent}
         with requests.get(url, headers=headers) as response, open(filepath, 'wb') as result:
+            if response.status_code != 200:
+                raise Exception(Messages.dnl_errcode.format(response.status_code))
             result.write(response.content)
         return filepath
 
