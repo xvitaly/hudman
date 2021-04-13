@@ -6,7 +6,8 @@
 
 import base64
 import json
-import urllib.request
+
+import requests
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
@@ -22,14 +23,14 @@ class HUDGitHub(HUDCommon):
         :return: Last modification time in unixtime format.
         :rtype: int
         """
-        request = urllib.request.Request(self.__apiurl, data=None, headers={'User-Agent': Settings.apifetch_user_agent})
+        headers = {'User-Agent': Settings.apifetch_user_agent}
         if self.__ghuser and self.__ghtoken:
             auth = base64.b64encode(f'{self.__ghuser}:{self.__ghtoken}'.encode('ascii'))
-            request.add_header('Authorization', f'Basic {auth.decode("ascii")}')
-        response = urllib.request.urlopen(request)
-        if response.status != 200:
-            raise Exception(Messages.gh_errcode.format(response.status))
-        data = json.loads(response.read().decode('utf-8'))
+            headers['Authorization'] = f'Basic {auth.decode("ascii")}'
+        response = requests.get(self.__apiurl, headers=headers)
+        if response.status_code != 200:
+            raise Exception(Messages.gh_errcode.format(response.status_code))
+        data = json.loads(response.content)
         return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
 
     def __init__(self, hud):
