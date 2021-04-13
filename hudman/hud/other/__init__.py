@@ -24,3 +24,11 @@ class HUDOther(HUDCommon):
         if response.status_code != 200:
             raise Exception(Messages.oth_errcode.format(response.status_code))
         return HeaderTime.hth2unix(response.headers['Last-Modified'])
+
+    def download(self, outdir: str) -> None:
+        """
+        Download the latest version of the specified HUD.
+        :param outdir: Output directory.
+        """
+        super().download(outdir)
+        self.mainuri = self.upstreamuri
