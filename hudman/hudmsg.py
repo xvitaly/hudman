@@ -5,12 +5,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-class HUDSettings:
-    ua_curl: str = 'Curl'
-    ua_wget: str = 'Wget'
-    log_stdfmt = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
-
-
 class HUDMessages:
     gh_errcode: str = 'GitHub API returned {:d} error code.'
     oth_errcode: str = 'Server returned {:d} error code.'
