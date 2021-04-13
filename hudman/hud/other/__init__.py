@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import urllib.request
+import requests
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
@@ -20,10 +20,7 @@ class HUDOther(HUDCommon):
         :return: Last modification time in unixtime format.
         :rtype: int
         """
-        request = urllib.request.Request(self.upstreamuri, data=None,
-                                         headers={'User-Agent': Settings.apifetch_user_agent}, method='HEAD')
-        response = urllib.request.urlopen(request)
-        if response.status != 200:
-            raise Exception(Messages.oth_errcode.format(response.status))
-        headers = response.info()
-        return HeaderTime.hth2unix(headers['Last-Modified'])
+        response = requests.head(self.upstreamuri, headers={'User-Agent': Settings.apifetch_user_agent})
+        if response.status_code != 200:
+            raise Exception(Messages.oth_errcode.format(response.status_code))
+        return HeaderTime.hth2unix(response.headers['Last-Modified'])
