@@ -6,7 +6,7 @@
 
 import hashlib
 import os
-import urllib.request
+import requests
 
 from ..settings import Settings
 
@@ -26,9 +26,9 @@ class DnManager:
         if not os.path.exists(fdir):
             os.makedirs(fdir)
         filepath = os.path.join(fdir, '{}.zip'.format(name))
-        request = urllib.request.Request(url, data=None, headers={'User-Agent': Settings.download_user_agent})
-        with urllib.request.urlopen(request) as response, open(filepath, 'wb') as result:
-            result.write(response.read())
+        headers = {'User-Agent': Settings.download_user_agent}
+        with requests.get(url, headers=headers) as response, open(filepath, 'wb') as result:
+            result.write(response.content)
         return filepath
 
     @staticmethod
