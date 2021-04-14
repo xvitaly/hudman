@@ -9,6 +9,6 @@
   sudo dnf install hudman
   ```
   3. Run the installed application:
-  ```bash
+  ```
   hudman --huddb /path/to/hud/database.xml --outdir /tmp/hudman
   ```
