@@ -7,7 +7,7 @@
 [![LGTM grade](https://img.shields.io/lgtm/grade/python/g/xvitaly/hudman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/hudman/context:python)
 [![LGTM alerts](https://img.shields.io/lgtm/alerts/g/xvitaly/hudman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/hudman/alerts/)
 [![CodeFactor](https://www.codefactor.io/repository/github/xvitaly/hudman/badge/master)](https://www.codefactor.io/repository/github/xvitaly/hudman/overview/master)
-[![Copr build status](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/)
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/hudman/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/hudman/)
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues)](https://github.com/xvitaly/hudman/issues)
 
 ---
