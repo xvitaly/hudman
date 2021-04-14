@@ -22,7 +22,7 @@ Icon for the Windows executable and installer by [Asher](https://www.masterianta
 # Requirements
 
   * Python 3.6+ with full set of standard libraries;
-  * [python-requests](https://github.com/requests/requests);
+  * [python-requests](https://github.com/psf/requests);
 
 # Documentation
 
