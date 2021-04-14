@@ -10,6 +10,9 @@ from hudman import HUDManager
 
 
 def main():
+    """
+    The main entry point of the application.
+    """
     # Parse command-line arguments...
     parser = argparse.ArgumentParser()
     parser.add_argument('--huddb', '-d', help='Specify path to HUDs database file.', required=True)

@@ -15,11 +15,14 @@ from ...settings import Settings
 
 
 class HUDGitHub(HUDCommon):
+    """
+    Class for working with HUDs hosted on GitHub.
+    """
     def _updatecheck(self) -> int:
         """
         Call GitHub API and fetch last modification time of the
         specified HUD.
-        :return: Last modification time in unixtime format.
+        :return: Last modification time in the unixtime format.
         :rtype: int
         """
         headers = {'User-Agent': Settings.apifetch_user_agent}
@@ -35,7 +38,7 @@ class HUDGitHub(HUDCommon):
     def __init__(self, hud):
         """
         Main constructor of the HUDGitHub class.
-        :param hud: A single entry from HUD database.
+        :param hud: A single entry from the HUD database.
         """
         super().__init__(hud)
         self.__apiurl = self.repopath.replace('https://github.com/',

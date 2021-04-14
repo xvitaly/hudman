@@ -9,6 +9,9 @@ from .other import HUDOther
 
 
 class HUDFactory:
+    """
+    Static class with factory methods.
+    """
     @staticmethod
     def create(hud):
         """

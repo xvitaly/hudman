@@ -11,6 +11,9 @@ from ..dnmanager import DnManager
 
 
 class HUDCommon(metaclass=abc.ABCMeta):
+    """
+    Abstract class for working with HUDs.
+    """
     @abc.abstractmethod
     def _updatecheck(self) -> int:
         """

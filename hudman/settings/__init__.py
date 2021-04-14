@@ -11,7 +11,6 @@ class Settings:
     """
     Class for working with project settings.
     """
-
     apifetch_user_agent: str = 'Curl'
     """
     Return HTTP_USER_AGENT field used for the external API requests.

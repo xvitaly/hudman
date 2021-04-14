@@ -10,10 +10,14 @@ import email.utils
 
 
 class HeaderTime:
+    """
+    Static class with methods for working timestamps in
+    different formats.
+    """
     @staticmethod
     def gmt2unix(gtime: str) -> int:
         """
-        Convert datetime string to unixtime.
+        Convert datetime string to the unixtime format.
         :param gtime: Datetime string.
         :return: UnixTime integer.
         :rtype: int
@@ -24,7 +28,8 @@ class HeaderTime:
     @staticmethod
     def hth2unix(gtime: str) -> int:
         """
-        Convert datetime string in HTTP-header format to unixtime.
+        Convert datetime string from the HTTP-header format to the
+        unixtime.
         :param gtime: Datetime string in HTTP-header format.
         :return: UnixTime integer.
         :rtype: int

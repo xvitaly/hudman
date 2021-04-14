@@ -16,6 +16,9 @@ from .settings import Settings
 
 
 class HUDManager:
+    """
+    Main class for working with the HUD database.
+    """
     def __setlogger(self) -> None:
         """
         Add logging support and configure logger.

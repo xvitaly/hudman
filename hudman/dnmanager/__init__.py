@@ -13,14 +13,17 @@ from ..settings import Settings
 
 
 class DnManager:
+    """
+    Static class with methods for working with HUD downloads.
+    """
     @staticmethod
     def downloadfile(url: str, name: str, outdir: str) -> str:
         """
-        Download file from Internet and save it to specified directory.
-        :param url: URL of remote file.
-        :param name: Name of result file.
+        Download file from the Internet and save it to the specified directory.
+        :param url: URL of the remote file.
+        :param name: Name of the result file.
         :param outdir: Output directory.
-        :return: Full local path of downloaded file.
+        :return: Full local path of the downloaded file.
         :rtype: str
         """
         fdir = os.path.join(outdir, name)
@@ -37,10 +40,10 @@ class DnManager:
     @staticmethod
     def renamefile(fname: str, chash: str) -> str:
         """
-        Rename file using it's hash.
+        Rename file using its hash.
         :param fname: Source file name.
         :param chash: Source file hash sum.
-        :return: Full local path of renamed file.
+        :return: Full local path of the renamed file.
         :rtype: str
         """
         fdir = os.path.dirname(fname)
@@ -53,9 +56,9 @@ class DnManager:
     @staticmethod
     def sha256hash(fname: str) -> str:
         """
-        Calculate SHA-256 hash sum of specified file.
+        Calculate SHA-256 hash sum of the specified file.
         :param fname: Source file name.
-        :return: SHA1 hash of source file.
+        :return: SHA1 hash of the source file.
         :rtype: str
         """
         return hashlib.sha256(open(fname, 'rb').read()).hexdigest()
@@ -63,9 +66,9 @@ class DnManager:
     @staticmethod
     def sha512hash(fname: str) -> str:
         """
-        Calculate SHA-512 hash sum of specified file.
+        Calculate SHA-512 hash sum of the specified file.
         :param fname: Source file name.
-        :return: SHA-512 hash of source file.
+        :return: SHA-512 hash of the source file.
         :rtype: str
         """
         return hashlib.sha512(open(fname, 'rb').read()).hexdigest()

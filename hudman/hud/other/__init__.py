@@ -13,11 +13,15 @@ from ...settings import Settings
 
 
 class HUDOther(HUDCommon):
+    """
+    Class for working with HUDs stored on any other file
+    hostings.
+    """
     def _updatecheck(self) -> int:
         """
         Call HTTP HEAD method to retrieve last modification time
         of specified URL.
-        :return: Last modification time in unixtime format.
+        :return: Last modification time in the unixtime format.
         :rtype: int
         """
         response = requests.head(self.upstreamuri, headers={'User-Agent': Settings.apifetch_user_agent})
