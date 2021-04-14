@@ -12,7 +12,7 @@
 
 ---
 
-Local HUD mirror manager. Can be used with the [SRC Repair](https://github.com/xvitaly/srcrepair) project.
+HUD Manager is a simple tool for creating a local HUD mirror. Can be used with the [SRC Repair](https://github.com/xvitaly/srcrepair) project.
 
 # License
 GNU General Public License version 3. You can find it here: [LICENSE](LICENSE). External libraries can use another licenses, compatible with GNU GPLv3.
@@ -22,7 +22,7 @@ Icon for the Windows executable and installer by [Asher](https://www.masterianta
 # Requirements
 
   * Python 3.6+ with full set of standard libraries;
-  * python-requests.
+  * [python-requests](https://github.com/requests/requests);
 
 # Installation
 
