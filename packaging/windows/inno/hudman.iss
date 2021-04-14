@@ -18,7 +18,7 @@ AppPublisherURL=https://www.easycoding.org/
 AppVersion={#VERSION}
 AppSupportURL=https://github.com/xvitaly/hudman/issues
 AppUpdatesURL=https://github.com/xvitaly/hudman/releases
-DefaultDirName={localappdata}\hudman
+DefaultDirName={localappdata}\HUD Manager
 DefaultGroupName=HUD Manager
 AllowNoIcons=yes
 LicenseFile=..\..\..\LICENSE
@@ -40,7 +40,7 @@ ArchitecturesInstallIn64BitMode=x64
 MinVersion=6.1sp1
 VersionInfoVersion={#VERSION}
 VersionInfoDescription=HUD Manager
-VersionInfoCopyright=(c) 2005-2020 EasyCoding Team. All rights reserved.
+VersionInfoCopyright=(c) 2005-2021 EasyCoding Team. All rights reserved.
 VersionInfoCompany=EasyCoding Team
 
 [Messages]
@@ -62,9 +62,6 @@ Name: "apikey\sysenv"; Description: "{cm:ComponentAPIKeySysEnvDescription}"; Typ
 Name: "apikey\launcher"; Description: "{cm:ComponentAPIKeyLauncherDescription}"; Types: standard; Flags: exclusive
 Name: "apikey\nokeys"; Description: "{cm:ComponentAPIKeyNoKeyDescription}"; Types: nokeys; Flags: exclusive
 
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
-
 [Files]
 Source: "{#BASEDIR}\hudman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: core
 Source: "{tmp}\hudmanc.cmd"; DestDir: "{app}"; Flags: external; Components: apikey\launcher
@@ -72,13 +69,6 @@ Source: "{tmp}\hudmanc.cmd"; DestDir: "{app}"; Flags: external; Components: apik
 #ifdef _RELEASE
 Source: "{#BASEDIR}\hudman.exe.sig"; DestDir: "{app}"; Flags: ignoreversion; Components: core
 #endif
-
-[Icons]
-Name: "{group}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv or apikey\nokeys"
-Name: "{group}\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"
-Name: "{group}\{cm:ProgramOnTheWeb,HUD Manager}"; Filename: "https://github.com/xvitaly/hudman"; Components: core
-Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudman.exe"; Components: "apikey\sysenv or apikey\nokeys"; Tasks: desktopicon
-Name: "{userdesktop}\HUD Manager"; Filename: "{app}\hudmanc.cmd"; IconFilename: "{app}\hudman.exe"; Components: "apikey\launcher"; Tasks: desktopicon
 
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_LOGIN"; ValueData: "{code:GetAPILogin}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
