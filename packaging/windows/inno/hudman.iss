@@ -112,7 +112,7 @@ end;
 
 function VerifyAPICredentials(): Boolean;
 begin
-    Result := (Length(GetAPILoginInternal()) < 4) and (Length(GetAPIKeyInternal()) < 10)
+    Result := (Length(GetAPILoginInternal()) < 4) or (Length(GetAPIKeyInternal()) < 10)
 end;
 
 function IsKeylessInstallation(): Boolean;
