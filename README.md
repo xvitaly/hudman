@@ -24,37 +24,14 @@ Icon for the Windows executable and installer by [Asher](https://www.masterianta
   * Python 3.6+ with full set of standard libraries;
   * [python-requests](https://github.com/requests/requests);
 
-# Installation
-
-  1. Clone this repository:
-  ```bash
-  git clone https://github.com/xvitaly/hudman.git hudman
-  ```
-  2. Install (in Python virtual environment):
-  ```bash
-  python setup.py install
-  ```
-  3. Run application:
-  ```bash
-  hudman --huddb /path/to/hud/database.xml --outdir /tmp/hudman
-  ```
-
-# Available options
-
-```text
-usage: hudman [-h] --huddb HUDDB --outdir OUTDIR [--save]
-```
-
-Optional arguments:
- * `-h` or `--help` - show this help message and exit;
- * `-d` or `--huddb` - specify full path to the HUD database file;
- * `-o` or  `--outdir` - specify full path to the main directory for storing downloaded files;
- * `-s` or `--save` - save HUD database automatically.
-
 # Documentation
 
-  1. Install Doxygen.
-  2. Build documentation in HTML format:
-  ```bash
-  doxygen
-  ```
+## Basic usage
+  * [Command-line arguments](docs/command-line-arguments.md).
+  * [Environment options](docs/environment-options.md).
+
+## Installation
+  * [PyPI installation](docs/pypi-installation.md).
+  * [Windows installation](docs/windows-installation.md).
+  * [Fedora installation](docs/fedora-installation.md).
+  * [VirtualEnv installation](docs/virtualenv-installation.md).
