@@ -33,7 +33,7 @@ doxygen
 
 %files
 %license LICENSE
-%doc README.md docs/html
+%doc README.md doxyout/html
 %{_bindir}/%{name}
 %{python3_sitelib}/%{name}
 %{python3_sitelib}/%{name}-*.egg-info
