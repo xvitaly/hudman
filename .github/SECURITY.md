@@ -6,8 +6,8 @@ Only specified versions supported:
 
 | Version | Support status     |
 | ------- | ------------------ |
-| 2.3.0    | :white_check_mark: |
-| < 2.3.0  | :x:                |
+| 3.x     | :white_check_mark: |
+| < 3.x   | :x:                |
 
 ## Reporting a Vulnerability
 
