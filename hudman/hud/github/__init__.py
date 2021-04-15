@@ -31,8 +31,7 @@ class HUDGitHub(HUDCommon):
             headers['Authorization'] = f'Basic {auth.decode("ascii")}'
         response = requests.get(self.__apiurl, allow_redirects=True, headers=headers)
         response.raise_for_status()
-        data = json.loads(response.content)
-        return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
+        return HeaderTime.gmt2unix(json.loads(response.content)[0]['commit']['committer']['date'])
 
     def __init__(self, hud):
         """
