@@ -16,6 +16,7 @@ class DnManager:
     """
     Static class with methods for working with HUD downloads.
     """
+
     @staticmethod
     def downloadfile(url: str, name: str, outdir: str) -> str:
         """
@@ -31,7 +32,7 @@ class DnManager:
             os.makedirs(fdir)
         filepath = os.path.join(fdir, '{}.zip'.format(name))
         headers = {'User-Agent': Settings.download_user_agent}
-        with requests.get(url, headers=headers) as response, open(filepath, 'wb') as result:
+        with requests.get(url, allow_redirects=True, headers=headers) as response, open(filepath, 'wb') as result:
             if response.status_code != 200:
                 raise Exception(Messages.dnl_errcode.format(response.status_code))
             result.write(response.content)

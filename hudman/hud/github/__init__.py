@@ -18,6 +18,7 @@ class HUDGitHub(HUDCommon):
     """
     Class for working with HUDs hosted on GitHub.
     """
+
     def _updatecheck(self) -> int:
         """
         Call GitHub API and fetch last modification time of the
@@ -29,7 +30,7 @@ class HUDGitHub(HUDCommon):
         if self.__ghuser and self.__ghtoken:
             auth = base64.b64encode(f'{self.__ghuser}:{self.__ghtoken}'.encode('ascii'))
             headers['Authorization'] = f'Basic {auth.decode("ascii")}'
-        response = requests.get(self.__apiurl, headers=headers)
+        response = requests.get(self.__apiurl, allow_redirects=True, headers=headers)
         if response.status_code != 200:
             raise Exception(Messages.gh_errcode.format(response.status_code))
         data = json.loads(response.content)

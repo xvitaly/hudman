@@ -14,6 +14,7 @@ class HeaderTime:
     Static class with methods for working timestamps in
     different formats.
     """
+
     @staticmethod
     def gmt2unix(gtime: str) -> int:
         """

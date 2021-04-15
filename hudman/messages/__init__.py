@@ -9,6 +9,7 @@ class Messages:
     """
     Class for working with project message strings.
     """
+
     gh_errcode: str = 'GitHub API returned {:d} error code.'
     oth_errcode: str = 'Server returned {:d} error code.'
     dnl_errcode: str = 'Cannot download file due to the {:d} error code.'

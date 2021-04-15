@@ -17,6 +17,7 @@ class HUDOther(HUDCommon):
     Class for working with HUDs stored on any other file
     hostings.
     """
+
     def _updatecheck(self) -> int:
         """
         Call HTTP HEAD method to retrieve last modification time
@@ -24,7 +25,8 @@ class HUDOther(HUDCommon):
         :return: Last modification time in the unixtime format.
         :rtype: int
         """
-        response = requests.head(self.upstreamuri, headers={'User-Agent': Settings.apifetch_user_agent})
+        response = requests.head(self.upstreamuri, allow_redirects=True,
+                                 headers={'User-Agent': Settings.apifetch_user_agent})
         if response.status_code != 200:
             raise Exception(Messages.oth_errcode.format(response.status_code))
         return HeaderTime.hth2unix(response.headers['Last-Modified'])
