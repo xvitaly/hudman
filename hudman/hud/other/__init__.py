@@ -8,7 +8,6 @@ import requests
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
-from ...messages import Messages
 from ...settings import Settings
 
 
@@ -27,8 +26,7 @@ class HUDOther(HUDCommon):
         """
         response = requests.head(self.upstreamuri, allow_redirects=True,
                                  headers={'User-Agent': Settings.apifetch_user_agent})
-        if response.status_code != 200:
-            raise Exception(Messages.oth_errcode.format(response.status_code))
+        response.raise_for_status()
         return HeaderTime.hth2unix(response.headers['Last-Modified'])
 
     def download(self, outdir: str) -> None:

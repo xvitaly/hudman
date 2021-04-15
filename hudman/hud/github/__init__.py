@@ -10,7 +10,6 @@ import requests
 
 from ...headertime import HeaderTime
 from ...hud import HUDCommon
-from ...messages import Messages
 from ...settings import Settings
 
 
@@ -31,8 +30,7 @@ class HUDGitHub(HUDCommon):
             auth = base64.b64encode(f'{self.__ghuser}:{self.__ghtoken}'.encode('ascii'))
             headers['Authorization'] = f'Basic {auth.decode("ascii")}'
         response = requests.get(self.__apiurl, allow_redirects=True, headers=headers)
-        if response.status_code != 200:
-            raise Exception(Messages.gh_errcode.format(response.status_code))
+        response.raise_for_status()
         data = json.loads(response.content)
         return HeaderTime.gmt2unix(data[0]['commit']['committer']['date'])
 
