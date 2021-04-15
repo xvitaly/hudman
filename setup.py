@@ -11,7 +11,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='hudman',
-    version='3.0.0',
+    version='3.1.0',
     packages=find_packages(),
     package_dir={
         'hudman': 'hudman',

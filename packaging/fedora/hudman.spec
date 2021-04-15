@@ -1,5 +1,5 @@
 Name: hudman
-Version: 3.0.0
+Version: 3.1.0
 Release: 1%{?dist}
 
 Summary: HUD Manager
@@ -39,5 +39,5 @@ doxygen
 %{python3_sitelib}/%{name}-*.egg-info
 
 %changelog
-* Wed Apr 14 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.0-1
-- Updated to version 3.0.0.
+* Thu Apr 15 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3.1.0-1
+- Updated to version 3.1.0.
