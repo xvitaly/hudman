@@ -4,8 +4,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from .github import HUDGitHub
-from .other import HUDOther
+from ..github import HUDGitHub
+from ..other import HUDOther
 
 
 class HUDFactory:
