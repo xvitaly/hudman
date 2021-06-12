@@ -9,6 +9,9 @@ from setuptools import setup, find_packages
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open('requirements.txt', 'r') as fr:
+    requirements = fr.read().splitlines()
+
 setup(
     name='hudman',
     version='3.1.0',
@@ -23,7 +26,7 @@ setup(
             'hudman = hudman.app.run:main',
         ],
     },
-    install_requires=['requests'],
+    install_requires=requirements,
     author='Vitaly Zaitsev',
     author_email='vitaly@easycoding.org',
     long_description=long_description,
