@@ -6,7 +6,6 @@
 
 import logging
 import os
-import sys
 import time
 import xml.dom.minidom
 
@@ -25,10 +24,7 @@ class HUDManager:
         Add logging support and configure logger.
         """
         self.__logger = logging.getLogger(__name__)
-        self.__logger.setLevel('INFO')
-        e_handler = logging.StreamHandler(sys.stdout)
-        e_handler.setFormatter(logging.Formatter(Settings.logger_format))
-        self.__logger.addHandler(e_handler)
+        self.__logger.setLevel(logging.INFO)
 
     def __checkdb(self) -> bool:
         """

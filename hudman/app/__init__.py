@@ -5,21 +5,29 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
+import logging
 
 from hudman import HUDManager
 
 
 class App:
+    def __setlogger(self) -> None:
+        """
+        Configure logger for the internal use.
+        """
+        self.__logger = logging.getLogger(__name__)
+        self.__logger.setLevel(logging.INFO)
+
     def __parser_create(self) -> None:
         """
-        Creates an instance of the command-line arguments parser.
+        Create an instance of the command-line arguments parser.
         """
         self.__parser = argparse.ArgumentParser()
         self.__parser_add_arguments()
 
     def __parser_add_arguments(self) -> None:
         """
-        Adds new options to the command-line arguments parser.
+        Add new options to the command-line arguments parser.
         """
         self.__parser.add_argument('--huddb', '-d', help='Specify path to HUDs database file.', required=True)
         self.__parser.add_argument('--outdir', '-o', help='Specify path to save downloaded files.', required=True)
@@ -28,7 +36,7 @@ class App:
 
     def __parse_arguments(self) -> None:
         """
-        Parses command-line arguments and provides a special object
+        Parse the command-line arguments and provides a special object
         to work with.
         """
         self.__arguments = self.__parser.parse_args()
@@ -37,15 +45,19 @@ class App:
         """
         Run the application.
         """
-        manager = HUDManager(self.__arguments.huddb, self.__arguments.outdir)
-        manager.getall()
-
-        if self.__arguments.save:
-            manager.save()
+        try:
+            manager = HUDManager(self.__arguments.huddb, self.__arguments.outdir)
+            manager.getall()
+            if self.__arguments.save:
+                manager.save()
+        except Exception:
+            self.__logger.exception('An error occurred while working with the %s database file!',
+                                    self.__arguments.huddb)
 
     def __init__(self) -> None:
         """
         Main constructor of the App class.
         """
+        self.__setlogger()
         self.__parser_create()
         self.__parse_arguments()

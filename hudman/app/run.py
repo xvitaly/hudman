@@ -4,14 +4,30 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
+import sys
+
 from hudman.app import App
+from hudman.settings import Settings
 
 
-def main():
+def setup_log() -> None:
+    """
+    Setup root logger of the application.
+    """
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    e_handler = logging.StreamHandler(sys.stdout)
+    e_handler.setFormatter(logging.Formatter(Settings.logger_format))
+    root.addHandler(e_handler)
+
+
+def main() -> None:
     """
     The main entry point of the application.
     """
     try:
+        setup_log()
         App().run()
     except Exception as ex:
         print(f'An error occurred while running application: {ex}')
