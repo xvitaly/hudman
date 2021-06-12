@@ -12,8 +12,7 @@ def main():
     The main entry point of the application.
     """
     try:
-        app = App()
-        app.run()
+        App().run()
     except Exception as ex:
         print(f'An error occurred while running application: {ex}')
 
