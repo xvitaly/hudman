@@ -4,30 +4,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import argparse
-
-from hudman import HUDManager
+from hudman.app import App
 
 
 def main():
     """
     The main entry point of the application.
     """
-    # Parse command-line arguments...
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--huddb', '-d', help='Specify path to HUDs database file.', required=True)
-    parser.add_argument('--outdir', '-o', help='Specify path to save downloaded files.', required=True)
-    parser.add_argument('--save', '-s', help='Automatically save changes in HUD database file.', action='store_true',
-                        required=False)
-    cmdline = parser.parse_args()
-
-    # Run mirror script...
-    hm = HUDManager(cmdline.huddb, cmdline.outdir)
-    hm.getall()
-
-    # Saving changes if enabled...
-    if cmdline.save:
-        hm.save()
+    try:
+        app = App()
+        app.run()
+    except Exception as ex:
+        print(f'An error occurred while running application: {ex}')
 
 
 if __name__ == '__main__':
