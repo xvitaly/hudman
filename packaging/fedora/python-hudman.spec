@@ -53,7 +53,7 @@ doxygen
 %py3_install
 
 %files -n python3-%{srcname}
-%license LICENSE
+%license LICENSE licenses/*
 %doc README.md
 %{_bindir}/%{srcname}
 %{python3_sitelib}/%{srcname}/
