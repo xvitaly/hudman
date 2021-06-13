@@ -31,7 +31,7 @@ setup(
     author_email='vitaly@easycoding.org',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    description='Simple script to create a local HUD mirror',
+    description='HUD Manager is a simple tool for creating a local HUD mirror',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
