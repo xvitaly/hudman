@@ -58,7 +58,7 @@ doxygen
 %{python3_sitelib}/%{srcname}-*.egg-info/
 
 %files doc
-%doc doxyout/html docs/*
+%doc docs/*
 
 %changelog
 * Sat Jun 12 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3.2.0-1
