@@ -14,7 +14,7 @@ with open('requirements.txt', 'r') as fr:
 
 setup(
     name='hudman',
-    version='3.2.0',
+    version='3.3.0',
     packages=find_packages(),
     package_dir={
         'hudman': 'hudman',

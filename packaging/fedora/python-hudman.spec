@@ -10,7 +10,7 @@ This product can operate in two modes: anonymous and authorized.
 Please read manpage for additional information.}
 
 Name: python-%{srcname}
-Version: 3.2.0
+Version: 3.3.0
 Release: 1%{?dist}
 
 # Main code - GPLv3+.
@@ -74,5 +74,5 @@ install -m 0644 -p packaging/assets/%{srcname}.1 %{buildroot}%{_mandir}/man1/
 %doc docs/*
 
 %changelog
-* Sat Jun 12 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3.2.0-1
-- Updated to version 3.2.0.
+* Mon Jun 14 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3.3.0-1
+- Updated to version 3.3.0.
