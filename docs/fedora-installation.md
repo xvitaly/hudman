@@ -4,9 +4,9 @@
   ```
   sudo dnf copr enable xvitaly/ecrepo
   ```
-  2. Install the `hudman` package:
+  2. Install the `python3-hudman` package:
   ```
-  sudo dnf install hudman
+  sudo dnf install python3-hudman
   ```
   3. Run the installed application:
   ```
