@@ -28,6 +28,8 @@ Automatically save changes to the HUD database file.
 
 # SUPPORTED CONFIGURATIONS
 
+HUD Manager can operate in two modes: anonymous and authorized.
+
 This product supports of getting API credentials for the supported backends with environment variables.
 
 # SUPPORTED BACKENDS
@@ -48,8 +50,6 @@ You can obtain API tokens from these sources:
 # ENVIRONMENT OPTIONS
 
 ## GitHub backend
-
-HUD Manager can operate in two modes: anonymous and authorized.
 
 To bypass API limits for the anonymous users, you will need to forward your API username and token:
 
