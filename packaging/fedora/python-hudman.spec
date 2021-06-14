@@ -21,6 +21,7 @@ URL: https://github.com/xvitaly/%{srcname}
 Source0: %{url}/archive/v%{version}/%{srcname}-%{version}.tar.gz
 
 BuildRequires: doxygen
+BuildRequires: pandoc
 BuildRequires: python3-devel
 BuildRequires: %{py3_dist requests}
 BuildRequires: %{py3_dist setuptools}
@@ -47,10 +48,19 @@ the %{name} package.
 
 %build
 %py3_build
+
+# Building documentation...
 doxygen
+
+# Building manpage...
+pandoc packaging/assets/manpage.md -s -t man > packaging/assets/%{srcname}.1
 
 %install
 %py3_install
+
+# Installing manpage...
+install -d %{buildroot}%{_mandir}/man1/
+install -m 0644 -p packaging/assets/%{srcname}.1 %{buildroot}%{_mandir}/man1/
 
 %files -n python3-%{srcname}
 %license LICENSE licenses/*
@@ -58,6 +68,7 @@ doxygen
 %{_bindir}/%{srcname}
 %{python3_sitelib}/%{srcname}/
 %{python3_sitelib}/%{srcname}-*.egg-info/
+%{_mandir}/man1/%{srcname}.1*
 
 %files doc
 %doc docs/*
