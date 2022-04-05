@@ -10,7 +10,7 @@
 #endif
 
 [Setup]
-AppId={{67B50FB5-DEAE-4933-A1DE-4946879B879F}
+AppId={{BE200E8E-42D0-493E-9BAA-97A7DC741E56}
 AppName=HUD Manager
 AppVerName=HUD Manager
 AppPublisher=EasyCoding Team
