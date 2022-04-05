@@ -4,8 +4,8 @@
 
 #define VERSION GetVersionNumbersString("..\results\dist\hudman.exe")
 #define BASEDIR "..\results\dist"
-#define CI_COMMIT GetEnv('CI_HASH')
-#if CI_COMMIT == ''
+
+#if GetEnv('CI_HASH') == ''
 #define _RELEASE 1
 #endif
 
@@ -23,11 +23,7 @@ DefaultGroupName=HUD Manager
 AllowNoIcons=yes
 LicenseFile=..\..\..\LICENSE
 OutputDir=..\results
-#ifdef _RELEASE
-OutputBaseFilename=hudman_{#GetEnv('RELVER')}
-#else
-OutputBaseFilename=snapshot_{#CI_COMMIT}
-#endif
+OutputBaseFilename={#GetEnv('PREFIX')}_setup
 SetupIconFile=..\assets\hudman.ico
 UninstallDisplayIcon={app}\hudman.exe
 Compression=lzma2
