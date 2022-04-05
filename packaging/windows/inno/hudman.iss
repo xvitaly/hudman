@@ -116,7 +116,7 @@ begin
     Result := WizardIsComponentSelected('apikey\nokeys')
 end;
 
-function GenerateBotLauncher(FileName: String): Boolean;
+function GenerateLauncher(FileName: String): Boolean;
 var
     Contents: TArrayOfString;
 begin
@@ -154,7 +154,7 @@ begin
                 end
             else
                 begin
-                    Result := GenerateBotLauncher(ExpandConstant('{tmp}\hudmanc.cmd'));
+                    Result := GenerateLauncher(ExpandConstant('{tmp}\hudmanc.cmd'));
                 end
         end
     else
