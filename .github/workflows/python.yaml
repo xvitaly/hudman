@@ -1,17 +1,28 @@
+# SPDX-FileCopyrightText: 2016-2022 EasyCoding Team
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 name: Python CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
 
 jobs:
   build:
-
+    name: Build project
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: ['3.9', '3.10']
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Fetching sources
+      uses: actions/checkout@v3
     - name: Setting up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
