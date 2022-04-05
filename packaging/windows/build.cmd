@@ -10,6 +10,12 @@ set RELVER=330
 set GPGKEY=A989AAAA
 set PYTHONOPTIMIZE=1
 
+if [%CI_HASH%] == [] (
+    set PREFIX=hudman_%RELVER%
+) else (
+    set PREFIX=snapshot_%CI_HASH%
+)
+
 echo Removing previous build results...
 if exist results rd /S /Q results
 
@@ -29,15 +35,20 @@ pyinstaller ^
     ..\..\hudman\app\run.py
 
 echo Signing binaries...
-"%ProgramFiles(x86)%\GnuPG\bin\gpg.exe" --sign --detach-sign --default-key %GPGKEY% results\dist\hudman.exe
+if [%CI_HASH%] == [] (
+    "%ProgramFiles(x86)%\GnuPG\bin\gpg.exe" --sign --detach-sign --default-key %GPGKEY% results\dist\hudman.exe
+)
 
 echo Compiling Installer...
 "%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe" inno\hudman.iss
 
 echo Signing built artifacts...
-"%ProgramFiles(x86)%\GnuPG\bin\gpg.exe" --sign --detach-sign --default-key %GPGKEY% results\hudman_%RELVER%.exe
+if [%CI_HASH%] == [] (
+    "%ProgramFiles(x86)%\GnuPG\bin\gpg.exe" --sign --detach-sign --default-key %GPGKEY% results\%PREFIX%_setup.exe
+)
 
 echo Removing temporary files and directories...
 del hudman.spec
+rd /S /Q "%LOCALAPPDATA%\pyinstaller"
 rd /S /Q "results\build"
 rd /S /Q "results\dist"
