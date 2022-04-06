@@ -69,7 +69,7 @@ install -m 0644 -p packaging/assets/%{pypi_name}.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/%{pypi_name}.1*
 
 %files doc
-%doc docs/*
+%doc docs/html/*
 
 %changelog
 * Mon Jun 14 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3.3.0-1
