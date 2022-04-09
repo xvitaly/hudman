@@ -36,7 +36,7 @@ ArchitecturesInstallIn64BitMode=x64
 MinVersion=6.1sp1
 VersionInfoVersion={#VERSION}
 VersionInfoDescription=HUD Manager
-VersionInfoCopyright=(c) 2005-2021 EasyCoding Team. All rights reserved.
+VersionInfoCopyright=(c) 2016-2022 EasyCoding Team. All rights reserved.
 VersionInfoCompany=EasyCoding Team
 
 [Messages]
