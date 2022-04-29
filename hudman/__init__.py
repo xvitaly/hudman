@@ -7,7 +7,8 @@
 import logging
 import os
 import time
-import xml.dom.minidom
+
+import defusedxml.minidom
 
 from .hud.factory import HUDFactory
 from .messages import Messages
@@ -40,7 +41,7 @@ class HUDManager:
         if not self.__checkdb():
             raise FileNotFoundError(Messages.db_notfound.format(self.__gamedb))
 
-        self.__huddb = xml.dom.minidom.parse(self.__gamedb)
+        self.__huddb = defusedxml.minidom.parse(self.__gamedb)
         for hud in self.__huddb.getElementsByTagName('HUD'):
             self.__hudlist.append(HUDFactory.create(hud))
 
