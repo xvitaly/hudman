@@ -11,7 +11,6 @@ import xml.dom.minidom
 
 from .hud.factory import HUDFactory
 from .messages import Messages
-from .settings import Settings
 
 
 class HUDManager:
