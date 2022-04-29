@@ -47,20 +47,13 @@ the %{name} package.
 
 %build
 %pyproject_wheel
-
-# Building documentation...
 doxygen
-
-# Building manpage...
 pandoc packaging/assets/manpage.md -s -t man > packaging/assets/%{pypi_name}.1
 
 %install
 %pyproject_install
 %pyproject_save_files %{pypi_name}
-
-# Installing manpage...
-install -d %{buildroot}%{_mandir}/man1/
-install -m 0644 -p packaging/assets/%{pypi_name}.1 %{buildroot}%{_mandir}/man1/
+install -D -p -m 0644 packaging/assets/%{pypi_name}.1 %{buildroot}%{_mandir}/man1/%{pypi_name}.1
 
 %files -n python3-%{pypi_name} -f %{pyproject_files}
 %license LICENSE licenses/*
