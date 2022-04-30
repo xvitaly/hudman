@@ -17,6 +17,7 @@
 HUD Manager is a simple tool for creating a local HUD mirror. Can be used with the [SRC Repair](https://github.com/xvitaly/srcrepair) project.
 
 ## License
+
 GNU General Public License version 3. You can find it here: [LICENSE](LICENSE). External libraries can use another licenses, compatible with GNU GPLv3.
 
 Icon for the Windows executable and installer by [Asher](https://www.masteriantart.com/kyo-tux), licensed under the terms of the [CC Attribution Share-Alike](licenses/icon.LICENSE.txt).
