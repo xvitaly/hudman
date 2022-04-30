@@ -8,7 +8,6 @@
 [![LGTM alerts](https://img.shields.io/lgtm/alerts/g/xvitaly/hudman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/hudman/alerts/)
 [![Codacy](https://app.codacy.com/project/badge/Grade/7cd1055493b44164b38dd70c02d05870)](https://www.codacy.com/gh/xvitaly/hudman/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/xvitaly/hudman/badge/master)](https://www.codefactor.io/repository/github/xvitaly/hudman/overview/master)
-[![Copr build status](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xvitaly/ecrepo/package/python-hudman/)
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues)](https://github.com/xvitaly/hudman/issues)
 
 ---
