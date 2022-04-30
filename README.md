@@ -23,7 +23,8 @@ Icon for the Windows executable and installer by [Asher](https://www.masterianta
 # Requirements
 
   * Python 3.6+ with full set of standard libraries;
-  * [python-requests](https://github.com/psf/requests);
+  * [python-defusedxml](https://github.com/tiran/defusedxml);
+  * [python-requests](https://github.com/psf/requests).
 
 # Documentation
 
