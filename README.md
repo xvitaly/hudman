@@ -9,7 +9,6 @@
 [![Codacy](https://app.codacy.com/project/badge/Grade/7cd1055493b44164b38dd70c02d05870)](https://www.codacy.com/gh/xvitaly/hudman/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/xvitaly/hudman/badge/master)](https://www.codefactor.io/repository/github/xvitaly/hudman/overview/master)
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/hudman.svg?label=issues)](https://github.com/xvitaly/hudman/issues)
-
 ---
 
 ## About
