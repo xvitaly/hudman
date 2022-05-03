@@ -11,6 +11,7 @@ class Messages:
     """
 
     db_notfound: str = 'Game database file not found: {}.'
+    hud_downloaded: str = '{} was downloaded. SHA512: {}, time: {}, filename: {}.'
     hud_updated: str = '{} has been updated. SHA512: {}, time: {}, filename: {}.'
     hud_uptodate: str = '{} is up to date.'
     hud_outdated: str = '{} is too outdated and no updates were found.'
