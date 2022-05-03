@@ -6,6 +6,7 @@
 
 import hashlib
 import os
+import uuid
 import requests
 
 from ..settings import Settings
@@ -19,9 +20,10 @@ class DnManager:
     @staticmethod
     def downloadfile(url: str, name: str, outdir: str) -> str:
         """
-        Download file from the Internet and save it to the specified directory.
+        Download HUD archive file from the Internet and save it to the specified
+        directory.
         :param url: URL of the remote file.
-        :param name: Name of the result file.
+        :param name: HUD directory name.
         :param outdir: Output directory.
         :return: Full local path of the downloaded file.
         :rtype: str
@@ -29,7 +31,7 @@ class DnManager:
         fdir = os.path.join(outdir, name)
         if not os.path.exists(fdir):
             os.makedirs(fdir)
-        filepath = os.path.join(fdir, '{}.zip'.format(name))
+        filepath = os.path.join(fdir, '{}.zip'.format(uuid.uuid4()))
         headers = {'User-Agent': Settings.download_user_agent}
         with requests.get(url, allow_redirects=True, headers=headers) as response, open(filepath, 'wb') as result:
             response.raise_for_status()
