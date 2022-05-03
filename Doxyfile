@@ -10,7 +10,7 @@
 
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = hudman
-PROJECT_NUMBER         = 3.3.0
+PROJECT_NUMBER         = 4.0.0
 PROJECT_BRIEF          = "Local HUD mirror manager"
 PROJECT_LOGO           = packaging/windows/assets/hudman.png
 OUTPUT_DIRECTORY       = docs
