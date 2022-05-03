@@ -11,6 +11,10 @@ from hudman import HUDManager
 
 
 class App:
+    """
+    Class with command-line tool implementation.
+    """
+
     def __setlogger(self) -> None:
         """
         Configure logger for the internal use.
