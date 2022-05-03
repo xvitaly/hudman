@@ -240,6 +240,8 @@ class HUDCommon(metaclass=abc.ABCMeta):
         """
         Download current version of the specified HUD.
         :param outdir: Output directory.
+        :return: Return True if the specified HUD was downloaded successfully.
+        :rtype: bool
         """
         df = DnManager.downloadfile(self.mainuri, self.installdir, outdir)
         f = DnManager.renamefile(df, self.filename)
