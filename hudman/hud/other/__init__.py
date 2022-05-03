@@ -29,10 +29,10 @@ class HUDOther(HUDCommon):
         response.raise_for_status()
         return HeaderTime.hth2unix(response.headers['Last-Modified'])
 
-    def download(self, outdir: str) -> None:
+    def update(self, outdir: str) -> None:
         """
         Download the latest version of the specified HUD.
         :param outdir: Output directory.
         """
-        super().download(outdir)
+        super().update(outdir)
         self.mainuri = self.upstreamuri

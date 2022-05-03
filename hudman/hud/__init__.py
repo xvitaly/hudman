@@ -236,7 +236,16 @@ class HUDCommon(metaclass=abc.ABCMeta):
         self.__checkresult = self._updatecheck()
         return self.__checkresult > self.lastupdate
 
-    def download(self, outdir: str) -> None:
+    def download(self, outdir: str) -> bool:
+        """
+        Download current version of the specified HUD.
+        :param outdir: Output directory.
+        """
+        df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
+        f = DnManager.renamefile(df, DnManager.sha256hash(df))
+        return DnManager.sha512hash(f) == self.sha512hash
+
+    def update(self, outdir: str) -> None:
         """
         Download the latest version of the specified HUD.
         :param outdir: Output directory.
