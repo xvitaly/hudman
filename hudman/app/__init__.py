@@ -31,15 +31,15 @@ class App:
         Add a new mutally excludive group to the command-line arguments parser.
         """
         action = self.__parser.add_mutually_exclusive_group(required=True)
-        action.add_argument('--download', help='Download all HUDs without updating them.', action='store_true')
-        action.add_argument('--update', help='Update all HUDs and download only new files.', action='store_true')
+        action.add_argument('--download', '-d', help='Download all HUDs without updating them.', action='store_true')
+        action.add_argument('--update', '-u', help='Update all HUDs and download only new files.', action='store_true')
 
     def __parser_add_arguments(self) -> None:
         """
         Add new options to the command-line arguments parser.
         """
-        self.__parser.add_argument('--huddb', '-d', help='Specify path to HUDs database file.', required=True)
-        self.__parser.add_argument('--outdir', '-o', help='Specify path to save downloaded files.', required=True)
+        self.__parser.add_argument('--huddb', '-a', help='Path to the HUDs database file.', required=True)
+        self.__parser.add_argument('--outdir', '-o', help='Path to the output directory.', required=True)
 
     def __parse_arguments(self) -> None:
         """
