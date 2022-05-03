@@ -62,7 +62,7 @@ class HUDManager:
         :param hud: HUD entry to process and download.
         """
         if hud.check():
-            hud.download(self.__outdir)
+            hud.update(self.__outdir)
             self.__logger.info(
                 Messages.hud_updated.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
         else:
