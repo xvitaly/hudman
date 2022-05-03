@@ -23,7 +23,16 @@ class App:
         Create an instance of the command-line arguments parser.
         """
         self.__parser = argparse.ArgumentParser()
+        self.__parser_add_groups()
         self.__parser_add_arguments()
+
+    def __parser_add_groups(self) -> None:
+        """
+        Add a new mutally excludive group to the command-line arguments parser.
+        """
+        action = self.__parser.add_mutually_exclusive_group(required=True)
+        action.add_argument('--download', help='Download all HUDs without updating them.', action='store_true')
+        action.add_argument('--update', help='Update all HUDs and download only new files.', action='store_true')
 
     def __parser_add_arguments(self) -> None:
         """
@@ -31,8 +40,6 @@ class App:
         """
         self.__parser.add_argument('--huddb', '-d', help='Specify path to HUDs database file.', required=True)
         self.__parser.add_argument('--outdir', '-o', help='Specify path to save downloaded files.', required=True)
-        self.__parser.add_argument('--save', '-s', help='Automatically save changes in HUD database file.',
-                                   action='store_true', required=False)
 
     def __parse_arguments(self) -> None:
         """
@@ -47,8 +54,10 @@ class App:
         """
         try:
             manager = HUDManager(self.__arguments.huddb, self.__arguments.outdir)
-            manager.getall()
-            if self.__arguments.save:
+            if self.__arguments.download:
+                manager.getall()
+            else:
+                manager.updateall()
                 manager.save()
         except Exception:
             self.__logger.exception('An error occurred while working with the %s database file!',
