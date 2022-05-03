@@ -45,7 +45,16 @@ class HUDManager:
         for hud in self.__huddb.getElementsByTagName('HUD'):
             self.__hudlist.append(HUDFactory.create(hud))
 
-    def __handlehud(self, hud) -> None:
+    def __downloadhud(self, hud) -> None:
+        """
+        Download specified HUD using different backends without doing
+        update.
+        :param hud: HUD entry to process and download.
+        """
+        hud.download(self.__outdir)
+        self.__logger.info(Messages.hud_downloaded.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
+
+    def __updatehud(self, hud) -> None:
         """
         Process and download specified HUD using different backends.
         :param hud: HUD entry to process and download.
@@ -62,11 +71,21 @@ class HUDManager:
 
     def getall(self) -> None:
         """
-        Process and download updates for all HUDs from database.
+        Downloads all HUDs from the database.
         """
         for hud in self.__hudlist:
             try:
-                self.__handlehud(hud)
+                self.__downloadhud(hud)
+            except Exception:
+                self.__logger.exception(Messages.hud_error.format(hud.hudname))
+
+    def updateall(self) -> None:
+        """
+        Process and download updates for all HUDs from the database.
+        """
+        for hud in self.__hudlist:
+            try:
+                self.__updatehud(hud)
             except Exception:
                 self.__logger.exception(Messages.hud_error.format(hud.hudname))
 
