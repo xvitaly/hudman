@@ -37,7 +37,23 @@ class DnManager:
         return filepath
 
     @staticmethod
-    def renamefile(fname: str, chash: str) -> str:
+    def renamefile(fname: str, nfname: str) -> str:
+        """
+        Rename file with specified name.
+        :param fname: Full path to the source file.
+        :param nfname: New file name.
+        :return: Full local path of the renamed file.
+        :rtype: str
+        """
+        fdir = os.path.dirname(fname)
+        result = os.path.join(fdir, nfname)
+        if os.path.isfile(result):
+            os.remove(result)
+        os.rename(fname, result)
+        return result
+
+    @staticmethod
+    def renamefilehash(fname: str, chash: str) -> str:
         """
         Rename file using its hash.
         :param fname: Source file name.
@@ -45,12 +61,7 @@ class DnManager:
         :return: Full local path of the renamed file.
         :rtype: str
         """
-        fdir = os.path.dirname(fname)
-        result = os.path.join(fdir, '{}_{}.zip'.format(os.path.splitext(os.path.basename(fname))[0], chash[:8]))
-        if os.path.isfile(result):
-            os.remove(result)
-        os.rename(fname, result)
-        return result
+        return DnManager.renamefile(fname, '{}_{}.zip'.format(os.path.splitext(os.path.basename(fname))[0], chash[:8]))
 
     @staticmethod
     def sha256hash(fname: str) -> str:

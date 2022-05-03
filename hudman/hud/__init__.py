@@ -241,8 +241,8 @@ class HUDCommon(metaclass=abc.ABCMeta):
         Download current version of the specified HUD.
         :param outdir: Output directory.
         """
-        df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
-        f = DnManager.renamefile(df, DnManager.sha256hash(df))
+        df = DnManager.downloadfile(self.mainuri, self.installdir, outdir)
+        f = DnManager.renamefile(df, self.filename)
         return DnManager.sha512hash(f) == self.sha512hash
 
     def update(self, outdir: str) -> None:
@@ -251,7 +251,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :param outdir: Output directory.
         """
         df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
-        f = DnManager.renamefile(df, DnManager.sha256hash(df))
+        f = DnManager.renamefilehash(df, DnManager.sha256hash(df))
         updatefile = os.path.basename(f)
 
         self.mainuri = '{}/{}'.format(os.path.dirname(self.mainuri), updatefile)
