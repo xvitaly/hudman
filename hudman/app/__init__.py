@@ -38,8 +38,9 @@ class App:
         """
         Add new options to the command-line arguments parser.
         """
-        self.__parser.add_argument('--huddb', '-a', help='Path to the HUDs database file.', required=True)
-        self.__parser.add_argument('--outdir', '-o', help='Path to the output directory.', required=True)
+        self.__parser.add_argument('--huddb', '-a', help='Path to the local HUDs database file.', required=True)
+        self.__parser.add_argument('--outdir', '-o', help='Path to the output directory for storing downloaded files.',
+                                   required=True)
 
     def __parse_arguments(self) -> None:
         """

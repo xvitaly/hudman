@@ -6,7 +6,7 @@ hudman - simple tool for creating a local HUD mirror
 
 # SYNOPSIS
 
-**hudman** \[-h\] --huddb HUDDB --outdir OUTDIR \[--save\]
+**hudman** \[-h\] (--download | --update) --huddb HUDDB --outdir OUTDIR
 
 # DESCRIPTION
 
@@ -17,14 +17,17 @@ HUD Manager is a simple tool for creating a local HUD mirror. Can be used togeth
 #### -h, \-\-help
 Show a simple help message and exit.
 
-#### -d, \-\-huddb
-Specify full path to the HUD database file. Required.
+#### -d, \-\-download
+Download all HUDs without updating them.
+
+#### -u, \-\-update
+Update all HUDs and download only new files.
+
+#### -a, \-\-huddb
+Specify full path to the HUD database file.
 
 #### -o, \-\-outdir
-Specify full path to the main directory for storing downloaded files. Required.
-
-#### -s, \-\-save
-Automatically save changes to the HUD database file.
+Specify full path to the main directory for storing downloaded files.
 
 # SUPPORTED CONFIGURATIONS
 
@@ -68,9 +71,9 @@ export HUDMAN_APIKEY=ABCDEFG123
 Start the application in authorized mode:
 
 ```
-hudman --huddb /path/to/hud/database.xml --outdir /tmp/hudman
+hudman --update --huddb /path/to/hud/database.xml --outdir /tmp/hudman
 ```
 
 # AUTHORS
 
-Copyright (c) 2021 EasyCoding Team.
+Copyright (c) 2016-2022 EasyCoding Team.
