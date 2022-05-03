@@ -51,8 +51,10 @@ class HUDManager:
         update.
         :param hud: HUD entry to process and download.
         """
-        hud.download(self.__outdir)
-        self.__logger.info(Messages.hud_downloaded.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
+        if hud.download(self.__outdir):
+            self.__logger.info(Messages.hud_downloaded.format(hud.hudname, hud.sha512hash, hud.lastupdate, hud.filename))
+        else:
+            self.__logger.warning(Messages.hud_hash_missmatch.format(hud.hudname))
 
     def __updatehud(self, hud) -> None:
         """
