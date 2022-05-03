@@ -26,10 +26,10 @@ class HUDGitHub(HUDCommon):
         :rtype: int
         """
         headers = {'User-Agent': Settings.apifetch_user_agent}
-        if self.__ghuser and self.__ghtoken:
-            auth = base64.b64encode(f'{self.__ghuser}:{self.__ghtoken}'.encode('ascii'))
+        if self._ghuser and self._ghtoken:
+            auth = base64.b64encode(f'{self._ghuser}:{self._ghtoken}'.encode('ascii'))
             headers['Authorization'] = f'Basic {auth.decode("ascii")}'
-        response = requests.get(self.__apiurl, allow_redirects=True, headers=headers)
+        response = requests.get(self._apiurl, allow_redirects=True, headers=headers)
         response.raise_for_status()
         return HeaderTime.gmt2unix(json.loads(response.content)[0]['commit']['committer']['date'])
 
@@ -39,7 +39,7 @@ class HUDGitHub(HUDCommon):
         :param hud: A single entry from the HUD database.
         """
         super().__init__(hud)
-        self.__apiurl = self.repopath.replace('https://github.com/',
-                                              'https://api.github.com/repos/') + '/commits?per_page=1'
-        self.__ghuser = Settings.github_user
-        self.__ghtoken = Settings.github_token
+        self._apiurl = self.repopath.replace('https://github.com/',
+                                             'https://api.github.com/repos/') + '/commits?per_page=1'
+        self._ghuser = Settings.github_user
+        self._ghtoken = Settings.github_token
