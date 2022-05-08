@@ -10,7 +10,7 @@ This product can operate in two modes: anonymous and authorized.
 Please read manpage for additional information.}
 
 Name: python-%{pypi_name}
-Version: 4.0.0
+Version: 4.1.0
 Release: 1%{?dist}
 
 # Main code - GPLv3+.
@@ -65,5 +65,5 @@ install -D -p -m 0644 packaging/assets/%{pypi_name}.1 %{buildroot}%{_mandir}/man
 %doc docs/html/*
 
 %changelog
-* Tue May 03 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 4.0.0-1
-- Updated to version 4.0.0.
+* Sun May 08 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 4.1.0-1
+- Updated to version 4.1.0.
