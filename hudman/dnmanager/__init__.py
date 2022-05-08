@@ -6,7 +6,6 @@
 
 import hashlib
 import os
-import uuid
 import requests
 
 from ..settings import Settings
@@ -31,7 +30,7 @@ class DnManager:
         fdir = os.path.join(outdir, name)
         if not os.path.exists(fdir):
             os.makedirs(fdir)
-        filepath = os.path.join(fdir, '{}.zip'.format(uuid.uuid4()))
+        filepath = os.path.join(fdir, '{}.zip'.format(name))
         headers = {'User-Agent': Settings.download_user_agent}
         with requests.get(url, allow_redirects=True, headers=headers) as response, open(filepath, 'wb') as result:
             response.raise_for_status()
