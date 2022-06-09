@@ -27,24 +27,20 @@ class App:
         Create an instance of the command-line arguments parser.
         """
         self.__parser = argparse.ArgumentParser()
-        self.__parser_add_groups()
         self.__parser_add_arguments()
-
-    def __parser_add_groups(self) -> None:
-        """
-        Add a new mutally excludive group to the command-line arguments parser.
-        """
-        action = self.__parser.add_mutually_exclusive_group(required=True)
-        action.add_argument('--download', '-d', help='Download all HUDs without updating them.', action='store_true')
-        action.add_argument('--update', '-u', help='Update all HUDs and download only new files.', action='store_true')
 
     def __parser_add_arguments(self) -> None:
         """
         Add new options to the command-line arguments parser.
         """
-        self.__parser.add_argument('--huddb', '-a', help='Path to the local HUDs database file.', required=True)
-        self.__parser.add_argument('--outdir', '-o', help='Path to the output directory for storing downloaded files.',
-                                   required=True)
+        common = argparse.ArgumentParser(add_help=False)
+        common.add_argument('--huddb', '-a', help='Path to the local HUDs database file.', required=True)
+        common.add_argument('--outdir', '-o', help='Path to the output directory for storing downloaded files.',
+                            required=True)
+
+        action = self.__parser.add_subparsers(help='Program action selection.', dest='action', required=True)
+        action.add_parser('download', parents=[common], help='Download all HUDs without updating them.')
+        action.add_parser('update', parents=[common], help='Update all HUDs and download only new files.')
 
     def __parse_arguments(self) -> None:
         """
@@ -59,7 +55,7 @@ class App:
         """
         try:
             manager = HUDManager(self.__arguments.huddb, self.__arguments.outdir)
-            if self.__arguments.download:
+            if self.__arguments.action == 'download':
                 manager.getall()
             else:
                 manager.updateall()
