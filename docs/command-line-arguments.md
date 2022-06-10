@@ -10,5 +10,5 @@ Actions (required, mutually exclusive):
 
 Options:
   * `-h` or `--help` - show help message and exit;
-  * `-a` or `--huddb` - path to the local HUDs database file;
+  * `-d` or `--huddb` - path to the local HUDs database file;
   * `-o` or  `--outdir` - path to the output directory for storing downloaded files.

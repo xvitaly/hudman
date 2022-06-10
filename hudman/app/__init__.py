@@ -34,7 +34,7 @@ class App:
         Add new options to the command-line arguments parser.
         """
         common = argparse.ArgumentParser(add_help=False)
-        common.add_argument('--huddb', '-a', help='Path to the local HUDs database file.', required=True)
+        common.add_argument('--huddb', '-d', help='Path to the local HUDs database file.', required=True)
         common.add_argument('--outdir', '-o', help='Path to the output directory for storing downloaded files.',
                             required=True)
 

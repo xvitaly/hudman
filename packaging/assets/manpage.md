@@ -25,7 +25,7 @@ Update all HUDs and download only new files.
 #### -h, \-\-help
 Show help message and exit.
 
-#### -a, \-\-huddb
+#### -d, \-\-huddb
 Path to the local HUD database file.
 
 #### -o, \-\-outdir
