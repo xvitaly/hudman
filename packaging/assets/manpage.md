@@ -73,7 +73,7 @@ export HUDMAN_APIKEY=ABCDEFG123
 Start the application in authorized mode:
 
 ```
-hudman --update --huddb /path/to/hud/database.xml --outdir /tmp/hudman
+hudman update --huddb /path/to/hud/database.xml --outdir /tmp/hudman
 ```
 
 # AUTHORS

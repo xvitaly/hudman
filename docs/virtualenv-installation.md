@@ -23,5 +23,5 @@ python3 setup.py install
 
 Run the installed application:
 ```
-/bin/hudman --update --huddb /path/to/hud/database.xml --outdir /tmp/hudman
+/bin/hudman update --huddb /path/to/hud/database.xml --outdir /tmp/hudman
 ```
