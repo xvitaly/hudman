@@ -6,7 +6,7 @@ hudman - simple tool for creating a local HUD mirror
 
 # SYNOPSIS
 
-**hudman** \[-h\] (download | update) --huddb HUDDB --outdir OUTDIR
+**hudman** \[-h\] (download | update) \-\-huddb HUDDB \-\-outdir OUTDIR
 
 # DESCRIPTION
 
