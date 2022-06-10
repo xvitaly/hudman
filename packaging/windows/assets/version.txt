@@ -6,8 +6,8 @@
 
 VSVersionInfo(
   ffi=FixedFileInfo(
-    filevers=(4, 1, 0, 0),
-    prodvers=(4, 1, 0, 0),
+    filevers=(5, 0, 0, 0),
+    prodvers=(5, 0, 0, 0),
     mask=0x3f,
     flags=0x0,
     OS=0x4,
@@ -24,14 +24,14 @@ VSVersionInfo(
         [StringStruct(u'Comments', u'HUD Manager'),
         StringStruct(u'CompanyName', u'EasyCoding Team'),
         StringStruct(u'FileDescription', u'HUD Manager'),
-        StringStruct(u'FileVersion', u'4.1.0.0'),
+        StringStruct(u'FileVersion', u'5.0.0.0'),
         StringStruct(u'InternalName', u'hudman.exe'),
         StringStruct(u'LegalCopyright', u'(c) 2016-2022 EasyCoding Team. All rights reserved.'),
         StringStruct(u'LegalTrademarks', u'EasyCoding, EasyCoding Software Group and EasyCoding Team are trademarks of EasyCoding Team.'),
         StringStruct(u'OriginalFilename', u'hudman.exe'),
         StringStruct(u'ProductName', u'HUD Manager'),
-        StringStruct(u'ProductVersion', u'4.1.0.0'),
-        StringStruct(u'Assembly Version', u'4.1.0.0')])
+        StringStruct(u'ProductVersion', u'5.0.0.0'),
+        StringStruct(u'Assembly Version', u'5.0.0.0')])
       ])
   ]
 )
