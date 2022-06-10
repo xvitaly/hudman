@@ -12,9 +12,7 @@ hudman - simple tool for creating a local HUD mirror
 
 HUD Manager is a simple tool for creating a local HUD mirror. Can be used together with the SRC Repair project.
 
-# COMMAND-LINE OPTIONS
-
-## Positional arguments
+# COMMAND-LINE ACTIONS
 
 #### download
 Download all HUDs without updating them.
@@ -22,7 +20,7 @@ Download all HUDs without updating them.
 #### update
 Update all HUDs and download only new files.
 
-## Optional arguments
+# COMMAND-LINE OPTIONS
 
 #### -h, \-\-help
 Show help message and exit.
