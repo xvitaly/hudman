@@ -73,7 +73,7 @@ Source: "{#BASEDIR}\hudman.exe.sig"; DestDir: "{app}"; Flags: ignoreversion; Com
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_LOGIN"; ValueData: "{code:GetAPILogin}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_APIKEY"; ValueData: "{code:GetAPIKey}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
-Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Tasks: addtopath
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Tasks: addtopath; Check: PathIsClean(ExpandConstant('{app}'))
 
 [Code]
 var
@@ -134,6 +134,20 @@ begin
     Contents[5] := '';
     Contents[6] := '.\hudman.exe %*';
     Result := SaveStringsToFile(FileName, Contents, False)
+end;
+
+function PathIsClean(InstallPath: String): Boolean;
+var
+    CurrentPath: String;
+begin
+    if RegQueryStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', CurrentPath) then
+        begin
+            Result := Pos(InstallPath, CurrentPath) = 0
+        end
+    else
+        begin
+            Result := True
+        end
 end;
 
 function ShouldSkipPage(CurPageID: Integer): Boolean;
