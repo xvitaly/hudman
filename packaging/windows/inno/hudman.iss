@@ -59,6 +59,9 @@ Name: "apikey\sysenv"; Description: "{cm:ComponentAPIKeySysEnvDescription}"; Typ
 Name: "apikey\launcher"; Description: "{cm:ComponentAPIKeyLauncherDescription}"; Types: standard; Flags: exclusive
 Name: "apikey\nokeys"; Description: "{cm:ComponentAPIKeyNoKeyDescription}"; Types: nokeys; Flags: exclusive
 
+[Tasks]
+Name: "addtopath"; Description: "{cm:TaskAddToPath}"; GroupDescription: "{cm:TaskCategoryAddToPath}"; Flags: unchecked
+
 [Files]
 Source: "{#BASEDIR}\hudman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: core
 Source: "{tmp}\hudmanc.cmd"; DestDir: "{app}"; Flags: external; Components: apikey\launcher
@@ -70,6 +73,7 @@ Source: "{#BASEDIR}\hudman.exe.sig"; DestDir: "{app}"; Flags: ignoreversion; Com
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_LOGIN"; ValueData: "{code:GetAPILogin}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_APIKEY"; ValueData: "{code:GetAPIKey}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Tasks: addtopath
 
 [Code]
 var
