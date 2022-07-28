@@ -175,6 +175,25 @@ begin
         end
 end;
 
+procedure PathRemoveEntry(InstallPath: String);
+var
+    Path: String;
+    Position: Integer;
+    LI, RI: Integer;
+begin
+    if RegQueryStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', Path) then
+        begin
+            Position := Pos(InstallPath, Path);
+            if Position > 0 then
+                begin
+                    if CompareStr(Copy(Path, Position, 1), ';') = 0 then LI := 1 else LI := 0;
+                    if (CompareStr(Copy(Path, Length(Path), 1), ';') = 0) and (LI = 1) then RI := 0 else RI := 1;
+                    Delete(Path, Position - LI, Length(Path) + RI);
+                    RegWriteStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', Path)
+                end
+        end
+end;
+
 function ShouldSkipPage(CurPageID: Integer): Boolean;
 begin
     if CurPageID = APIKeyPage.ID then
@@ -204,5 +223,13 @@ begin
     else
         begin
             Result := True
+        end
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+    if CurUninstallStep = usPostUninstall then
+        begin
+            PathRemoveEntry(ExpandConstant('{app}'))
         end
 end;
