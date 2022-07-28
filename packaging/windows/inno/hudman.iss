@@ -73,7 +73,7 @@ Source: "{#BASEDIR}\hudman.exe.sig"; DestDir: "{app}"; Flags: ignoreversion; Com
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_LOGIN"; ValueData: "{code:GetAPILogin}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "HUDMAN_APIKEY"; ValueData: "{code:GetAPIKey}"; Flags: uninsdeletevalue; Components: "apikey\sysenv"
-Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Tasks: addtopath; Check: PathIsClean(ExpandConstant('{app}'))
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{code:PathNewEntry|{app}}"; Tasks: addtopath; Check: PathIsClean(ExpandConstant('{app}'))
 
 [Code]
 var
@@ -147,6 +147,31 @@ begin
     else
         begin
             Result := True
+        end
+end;
+
+function PathNewEntry(InstallPath: String): String;
+var
+    CurrentPath: String;
+begin
+    if not RegQueryStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', CurrentPath) then
+        begin
+            CurrentPath := ''
+        end;
+    if Length(CurrentPath) > 0 then
+        begin
+            if CompareStr(Copy(CurrentPath, Length(CurrentPath), 1), ';') = 0 then
+                begin
+                    Result := CurrentPath + InstallPath + ';'
+                end
+            else
+                begin
+                    Result := CurrentPath + ';' + InstallPath + ';'
+                end
+        end
+    else
+        begin
+            Result := InstallPath + ';'
         end
 end;
 
