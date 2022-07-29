@@ -177,19 +177,19 @@ end;
 
 procedure PathRemoveEntry(InstallPath: String);
 var
-    Path: String;
+    CurrentPath: String;
     Position: Integer;
     LI, RI: Integer;
 begin
-    if RegQueryStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', Path) then
+    if RegQueryStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', CurrentPath) then
         begin
-            Position := Pos(InstallPath, Path);
+            Position := Pos(InstallPath, CurrentPath);
             if Position > 0 then
                 begin
-                    if CompareStr(Copy(Path, Position, 1), ';') = 0 then LI := 1 else LI := 0;
-                    if (CompareStr(Copy(Path, Length(Path), 1), ';') = 0) and (LI = 1) then RI := 0 else RI := 1;
-                    Delete(Path, Position - LI, Length(Path) + RI);
-                    RegWriteStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', Path)
+                    if CompareStr(Copy(CurrentPath, Position, 1), ';') = 0 then LI := 1 else LI := 0;
+                    if (CompareStr(Copy(CurrentPath, Length(CurrentPath), 1), ';') = 0) and (LI = 1) then RI := 0 else RI := 1;
+                    Delete(CurrentPath, Position - LI, Length(CurrentPath) + RI);
+                    RegWriteStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', CurrentPath)
                 end
         end
 end;
