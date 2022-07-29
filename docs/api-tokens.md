@@ -2,7 +2,7 @@
 
 ## About API tokens
 
-This library uses API tokens from following third-party services:
+This application uses API tokens from the following third-party services:
 
   * GitHub.
 
