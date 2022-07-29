@@ -14,8 +14,8 @@ Version: 5.0.0
 Release: 1%{?dist}
 
 # Main code - GPLv3+.
-# Icon - CC-BY-SA.
-License: GPLv3+ and CC-BY-SA
+# Icon - Apache 2.0.
+License: GPLv3+ and ASL 2.0
 Summary: HUD Manager
 URL: https://github.com/xvitaly/%{pypi_name}
 Source0: %{url}/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
