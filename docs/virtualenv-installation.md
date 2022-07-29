@@ -20,8 +20,3 @@ Install bot using Python 3 in VENV:
 cd hudman
 python3 setup.py install
 ```
-
-Run the installed application:
-```
-/bin/hudman update --huddb /path/to/hud/database.xml --outdir /tmp/hudman
-```
