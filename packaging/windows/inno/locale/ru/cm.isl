@@ -1,4 +1,8 @@
-﻿[CustomMessages]
+﻿; SPDX-FileCopyrightText: 2016-2022 EasyCoding Team
+;
+; SPDX-License-Identifier: GPL-3.0-or-later
+
+[CustomMessages]
 APIKeyPageCaption=Токен API
 APIKeyPageDescription=Ввод токена GitHub API.
 APIKeyPageAdditionalText=Пожалуйста, введите на этой странице свой токен GitHub API. Если у вас его нет, получить новый можно в настройках GitHub-аккаунта.
