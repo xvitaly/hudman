@@ -1,3 +1,7 @@
+; SPDX-FileCopyrightText: 2016-2022 EasyCoding Team
+;
+; SPDX-License-Identifier: GPL-3.0-or-later
+
 [CustomMessages]
 APIKeyPageCaption=API token
 APIKeyPageDescription=Telegram Bot API token page.
