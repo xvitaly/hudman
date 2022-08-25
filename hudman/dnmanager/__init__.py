@@ -30,7 +30,7 @@ class DnManager:
         fdir = os.path.join(outdir, name)
         if not os.path.exists(fdir):
             os.makedirs(fdir)
-        filepath = os.path.join(fdir, '{}.zip'.format(name))
+        filepath = os.path.join(fdir, f'{name}.zip')
         headers = {'User-Agent': Settings.download_user_agent}
         with requests.get(url, allow_redirects=True, headers=headers) as response, open(filepath, 'wb') as result:
             response.raise_for_status()
@@ -62,7 +62,7 @@ class DnManager:
         :return: Full local path of the renamed file.
         :rtype: str
         """
-        return DnManager.renamefile(fname, '{}_{}.zip'.format(os.path.splitext(os.path.basename(fname))[0], chash[:8]))
+        return DnManager.renamefile(fname, f'{os.path.splitext(os.path.basename(fname))[0]}_{chash[:8]}.zip')
 
     @staticmethod
     def sha256hash(fname: str) -> str:
