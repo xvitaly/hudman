@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import abc
+import datetime
 import os
 
 from ..dnmanager import DnManager
@@ -30,7 +31,10 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :return: Fully-qualified main URI.
         :rtype: str
         """
-        return '{}/{}'.format(os.path.dirname(self.mainuri), os.path.basename(filename))
+        urilist = self.mainuri.rsplit('/', 2)
+        urilist[1] = datetime.datetime.today().strftime('%Y-%m-%d')
+        urilist[2] = os.path.basename(filename)
+        return '/'.join(urilist)
 
     def _genmirroruri(self, filename: str) -> str:
         """
