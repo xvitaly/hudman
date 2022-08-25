@@ -25,9 +25,19 @@ class HUDCommon(metaclass=abc.ABCMeta):
         """
 
     def _genmainuri(self, filename: str) -> str:
+        """
+        Generate a new URI for the main download.
+        :return: Fully-qualified main URI.
+        :rtype: str
+        """
         return '{}/{}'.format(os.path.dirname(self.mainuri), os.path.basename(filename))
 
     def _genmirroruri(self, filename: str) -> str:
+        """
+        Generate a new URI for the mirror download.
+        :return: Fully-qualified mirror URI.
+        :rtype: str
+        """
         return '{}/{}'.format(os.path.dirname(self.mirroruri), os.path.basename(filename))
 
     @property
