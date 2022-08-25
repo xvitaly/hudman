@@ -32,7 +32,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :rtype: str
         """
         urilist = self.mainuri.rsplit('/', 2)
-        urilist[1] = datetime.datetime.today().strftime('%Y-%m-%d')
+        urilist[1] = datetime.datetime.today().strftime('%Y.%m.%d')
         urilist[2] = os.path.basename(filename)
         return '/'.join(urilist)
 
