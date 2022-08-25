@@ -42,7 +42,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :return: Fully-qualified mirror URI.
         :rtype: str
         """
-        return '{}/{}'.format(os.path.dirname(self.mirroruri), os.path.basename(filename))
+        return f'{os.path.dirname(self.mirroruri)}/{os.path.basename(filename)}'
 
     @property
     def hudname(self) -> str:
