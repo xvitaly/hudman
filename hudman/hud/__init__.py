@@ -24,6 +24,9 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :rtype: int
         """
 
+    def _genmainuri(self, filename: str) -> str:
+        return '{}/{}'.format(os.path.dirname(self.mainuri), os.path.basename(filename))
+
     @property
     def hudname(self) -> str:
         """
@@ -256,7 +259,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
         f = DnManager.renamefilehash(df, DnManager.sha256hash(df))
         updatefile = os.path.basename(f)
 
-        self.mainuri = '{}/{}'.format(os.path.dirname(self.mainuri), updatefile)
+        self.mainuri = self._genmainuri(f)
         self.mirroruri = '{}/{}'.format(os.path.dirname(self.mirroruri), updatefile)
         self.sha512hash = DnManager.sha512hash(f)
         self.lastupdate = self._checkresult
