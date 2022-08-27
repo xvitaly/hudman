@@ -7,6 +7,7 @@
 import hashlib
 import os
 import requests
+import zipfile
 
 from ..settings import Settings
 
@@ -63,6 +64,20 @@ class DnManager:
         :rtype: str
         """
         return DnManager.renamefile(fname, f'{os.path.splitext(os.path.basename(fname))[0]}_{chash[:8]}.zip')
+
+    @staticmethod
+    def findarchivedir(fname: str) -> str:
+        """
+        Open downloaded archive and find the base directory with HUD files.
+        :param fname: Archive file name.
+        :return: Base directory related path.
+        :rtype: str
+        """
+        with zipfile.ZipFile(fname) as archive:
+            hudbase = next((item for item in archive.namelist() if 'info.vdf' in item), None)
+            if not hudbase:
+                raise Exception(f'Cannot find the info.vdf file. {fname} is not a valid HUD archive.')
+            return os.path.dirname(hudbase)
 
     @staticmethod
     def sha256hash(fname: str) -> str:
