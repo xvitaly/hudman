@@ -277,6 +277,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
 
         self.mainuri = self._genmainuri(f)
         self.mirroruri = self._genmirroruri(f)
+        self.archivedir = DnManager.findarchivedir(f)
         self.sha512hash = DnManager.sha512hash(f)
         self.lastupdate = self._checkresult
         self.isupdated = True
