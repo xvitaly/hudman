@@ -28,6 +28,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def _genmainuri(self, filename: str) -> str:
         """
         Generate a new URI for the main download.
+        :param filename: Downloaded archive file name.
         :return: Fully-qualified main URI.
         :rtype: str
         """
@@ -39,6 +40,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def _genmirroruri(self, filename: str) -> str:
         """
         Generate a new URI for the mirror download.
+        :param filename: Downloaded archive file name.
         :return: Fully-qualified mirror URI.
         :rtype: str
         """
