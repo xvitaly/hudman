@@ -58,6 +58,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def hudname(self, value: str) -> None:
         """
         Set user friendly HUD name.
+        :param value: HUD name.
         """
         self._hudname.data = value
 
@@ -73,6 +74,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def gamename(self, value: str) -> None:
         """
         Set HUD's game name.
+        :param value: Game name.
         """
         self._gamename.data = value
 
@@ -88,21 +90,23 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def isupdated(self, value: bool) -> None:
         """
         Set if current HUD is up to date.
+        :param value: Update result.
         """
         self._isupdated.data = '1' if value else '0'
 
     @property
     def mainuri(self) -> str:
         """
-        Get local mirror URI.
-        :return: Mirror URI.
+        Get main local mirror URI.
+        :return: Main local mirror URI.
         """
         return self._mainuri.data
 
     @mainuri.setter
     def mainuri(self, value: str) -> None:
         """
-        Set local mirror URI.
+        Set main local mirror URI.
+        :param value: Main local mirror URI.
         """
         self._mainuri.data = value
 
@@ -118,6 +122,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def mirroruri(self, value: str) -> None:
         """
         Set local secondary server URI.
+        :param value: Mirror URI.
         """
         self._mirroruri.data = value
 
@@ -133,6 +138,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def upstreamuri(self, value: str) -> None:
         """
         Set upstream URI.
+        :param value: Upstream URI.
         """
         self._upstreamuri.data = value
 
@@ -148,6 +154,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def screenshoturi(self, value: str) -> None:
         """
         Set screenshot URI.
+        :param value: Screenshot URI.
         """
         self._screenshot.data = value
 
@@ -163,6 +170,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def repopath(self, value: str) -> None:
         """
         Set upstream repository URL.
+        :param value: Upstream repository URL.
         """
         self._repopath.data = value
 
@@ -178,6 +186,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def sha512hash(self, value: str) -> None:
         """
         Set SHA-512 hash sum of HUD file.
+        :param value: SHA-512 hash sum of HUD file.
         """
         self._sha512hash.data = value
 
@@ -193,6 +202,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def lastupdate(self, value: int) -> None:
         """
         Set last update time in Unixtime format.
+        :param value: Last update time.
         """
         self._lastupdate.data = str(value)
 
@@ -208,6 +218,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def homepage(self, value: str) -> None:
         """
         Set homepage of HUD.
+        :param value: Homepage of HUD.
         """
         self._homepage.data = value
 
@@ -223,21 +234,23 @@ class HUDCommon(metaclass=abc.ABCMeta):
     def archivedir(self, value: str) -> None:
         """
         Set actual archive dir inside archive.
+        :param value: Archive directory name.
         """
         self._archivedir.data = value
 
     @property
     def installdir(self) -> str:
         """
-        Get install directory of HUD.
-        :return: HUD install directory.
+        Get installation directory of HUD.
+        :return: HUD installation directory.
         """
         return self._installdir.data
 
     @installdir.setter
     def installdir(self, value: str) -> None:
         """
-        Set install directory of HUD.
+        Set installation directory of HUD.
+        :param value: HUD installation directory.
         """
         self._installdir.data = value
 
