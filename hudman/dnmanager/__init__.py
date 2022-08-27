@@ -70,7 +70,7 @@ class DnManager:
         """
         Open downloaded archive and find the base directory with HUD files.
         :param fname: Archive file name.
-        :return: Base directory related path.
+        :return: Base directory relative path.
         :rtype: str
         """
         with zipfile.ZipFile(fname) as archive:
