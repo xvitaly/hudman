@@ -7,7 +7,7 @@
 import argparse
 import logging
 
-from hudman import HUDManager
+from .. import HUDManager
 
 
 class App:
