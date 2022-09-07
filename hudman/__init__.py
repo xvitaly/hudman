@@ -10,6 +10,7 @@ import time
 
 import defusedxml.minidom
 
+from .exceptions import DBFileNotFound
 from .hud.factory import HUDFactory
 from .messages import Messages
 
@@ -39,7 +40,7 @@ class HUDManager:
         Read and parse HUD XML database file.
         """
         if not self.__checkdb():
-            raise FileNotFoundError(Messages.db_notfound.format(self.__gamedb))
+            raise DBFileNotFound(Messages.db_notfound.format(self.__gamedb))
 
         self.__huddb = defusedxml.minidom.parse(self.__gamedb)
         for hud in self.__huddb.getElementsByTagName('HUD'):
