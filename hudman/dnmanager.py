@@ -9,6 +9,7 @@ import os
 import requests
 import zipfile
 
+from .exceptions import ArchiveNotValid
 from .settings import Settings
 
 
@@ -76,7 +77,7 @@ class DnManager:
         with zipfile.ZipFile(fname) as archive:
             hudbase = next((item for item in archive.namelist() if 'info.vdf' in item), None)
             if not hudbase:
-                raise Exception(f'Cannot find the info.vdf file. {fname} is not a valid HUD archive.')
+                raise ArchiveNotValid(f'Cannot find the info.vdf file. {fname} is not a valid HUD archive.')
             return os.path.dirname(hudbase)
 
     @staticmethod
