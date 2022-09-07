@@ -8,7 +8,6 @@ import logging
 import sys
 
 from hudman.app import App
-from hudman.settings import Settings
 
 
 def setup_log() -> None:
@@ -18,7 +17,7 @@ def setup_log() -> None:
     root = logging.getLogger()
     root.setLevel(logging.INFO)
     e_handler = logging.StreamHandler(sys.stdout)
-    e_handler.setFormatter(logging.Formatter(Settings.logger_format))
+    e_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(message)s'))
     root.addHandler(e_handler)
 
 

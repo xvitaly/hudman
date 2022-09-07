@@ -22,11 +22,6 @@ class Settings:
     Return HTTP_USER_AGENT field used for the file downloads.
     """
 
-    logger_format: str = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
-    """
-    Return logger format string.
-    """
-
     github_user: str = os.getenv('HUDMAN_LOGIN')
     """
     Return GitHub API user name.
