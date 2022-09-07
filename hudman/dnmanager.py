@@ -9,7 +9,7 @@ import os
 import requests
 import zipfile
 
-from ..settings import Settings
+from .settings import Settings
 
 
 class DnManager:
