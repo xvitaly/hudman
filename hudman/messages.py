@@ -16,5 +16,5 @@ class Messages:
     hud_updated: str = '{} has been updated. SHA512: {}, time: {}, filename: {}.'
     hud_uptodate: str = '{} is up to date.'
     hud_outdated: str = '{} is too outdated and no updates were found.'
-    hud_error: str = 'An error while checking for {} updates.'
-    hud_exception: str = 'An error while checking for {} updates. The inner exception was: "{}".'
+    hud_error: str = 'An error while checking for {} updates. The inner exception was: "{}".'
+    hud_exception: str = 'An error while checking for {} updates.'

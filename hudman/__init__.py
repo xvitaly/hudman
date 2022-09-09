@@ -83,9 +83,9 @@ class HUDManager:
             try:
                 method(hud)
             except (requests.exceptions.HTTPError, ArchiveNotValid) as ex:
-                self.__logger.error(Messages.hud_exception.format(hud.hudname, ex))
+                self.__logger.error(Messages.hud_error.format(hud.hudname, ex))
             except Exception:
-                self.__logger.exception(Messages.hud_error.format(hud.hudname))
+                self.__logger.exception(Messages.hud_exception.format(hud.hudname))
 
     def getall(self) -> None:
         """
