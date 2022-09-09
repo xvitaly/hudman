@@ -74,14 +74,14 @@ class HUDManager:
             else:
                 self.__logger.info(Messages.hud_uptodate.format(hud.hudname))
 
-    def __processdb(self, method) -> None:
+    def __processdb(self, handler) -> None:
         """
         Process all HUDs from the database.
-        :param method: Method name.
+        :param handler: Handler method name.
         """
         for hud in self.__hudlist:
             try:
-                method(hud)
+                handler(hud)
             except (requests.exceptions.HTTPError, ArchiveNotValid) as ex:
                 self.__logger.error(Messages.hud_error.format(hud.hudname, ex))
             except Exception:
