@@ -9,8 +9,9 @@ import os
 import time
 
 import defusedxml.minidom
+import requests.exceptions
 
-from .exceptions import DBFileNotFound
+from .exceptions import ArchiveNotValid, DBFileNotFound
 from .hud.factory import HUDFactory
 from .messages import Messages
 
@@ -73,25 +74,30 @@ class HUDManager:
             else:
                 self.__logger.info(Messages.hud_uptodate.format(hud.hudname))
 
-    def getall(self) -> None:
+    def __processdb(self, method) -> None:
         """
-        Downloads all HUDs from the database.
+        Process all HUDs from the database.
+        :param method: Method name.
         """
         for hud in self.__hudlist:
             try:
-                self.__downloadhud(hud)
+                method(hud)
+            except (requests.exceptions.HTTPError, ArchiveNotValid) as ex:
+                self.__logger.error(Messages.hud_exception.format(hud.hudname, ex))
             except Exception:
                 self.__logger.exception(Messages.hud_error.format(hud.hudname))
 
+    def getall(self) -> None:
+        """
+        Download all HUDs from the database.
+        """
+        self.__processdb(self.__downloadhud)
+
     def updateall(self) -> None:
         """
-        Process and download updates for all HUDs from the database.
+        Download updates for all HUDs from the database.
         """
-        for hud in self.__hudlist:
-            try:
-                self.__updatehud(hud)
-            except Exception:
-                self.__logger.exception(Messages.hud_error.format(hud.hudname))
+        self.__processdb(self.__updatehud)
 
     def save(self) -> None:
         """
