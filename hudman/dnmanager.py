@@ -77,13 +77,12 @@ class DnManager:
         :rtype: str
         """
         with zipfile.ZipFile(fname) as archive:
-            flist = archive.namelist()
+            flist = list(item for item in archive.namelist() if 'info.vdf' in item)
+        if not flist:
+            raise ArchiveNotValid(f'Cannot find the info.vdf file. {fname} is not a valid HUD archive.')
         if f'{archivedir}/info.vdf' in flist:
             return archivedir
-        hudbase = next((item for item in flist if 'info.vdf' in item), None)
-        if not hudbase:
-            raise ArchiveNotValid(f'Cannot find the info.vdf file. {fname} is not a valid HUD archive.')
-        return os.path.dirname(hudbase)
+        return os.path.dirname(flist[0])
 
     @staticmethod
     def sha256hash(fname: str) -> str:
