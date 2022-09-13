@@ -67,18 +67,19 @@ class DnManager:
         return DnManager.renamefile(fname, f'{os.path.splitext(os.path.basename(fname))[0]}_{chash[:8]}.zip')
 
     @staticmethod
-    def findarchivedir(fname: str, defname: str) -> str:
+    def findarchivedir(fname: str, archivedir: str) -> str:
         """
         Open downloaded archive and find the base directory with HUD files.
         :param fname: Archive file name.
+        :param archivedir: Current directory path.
         :exception ArchiveNotValid: Downloaded archive validation failed.
         :return: Base directory relative path.
         :rtype: str
         """
         with zipfile.ZipFile(fname) as archive:
             flist = archive.namelist()
-        if f'{defname}/info.vdf' in flist:
-            return defname
+        if f'{archivedir}/info.vdf' in flist:
+            return archivedir
         hudbase = next((item for item in flist if 'info.vdf' in item), None)
         if not hudbase:
             raise ArchiveNotValid(f'Cannot find the info.vdf file. {fname} is not a valid HUD archive.')
