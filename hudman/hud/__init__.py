@@ -8,6 +8,8 @@ import abc
 import datetime
 import os
 
+import requests.exceptions
+
 from ..dnmanager import DnManager
 
 
@@ -45,6 +47,26 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :rtype: str
         """
         return f'{os.path.dirname(self.mirroruri)}/{os.path.basename(filename)}'
+
+    def _downloadmain(self, outdir: str) -> str:
+        """
+        Download HUD to the output directory using main URI.
+        :param outdir: Output directory.
+        :return: Absolute path of the downloaded HUD file.
+        :rtype: str
+        """
+        df = DnManager.downloadfile(self.mainuri, self.installdir, outdir)
+        return DnManager.renamefile(df, self.filename)
+
+    def _downloadmirror(self, outdir: str) -> str:
+        """
+        Download HUD to the output directory using mirror URI.
+        :param outdir: Output directory.
+        :return: Absolute path of the downloaded HUD file.
+        :rtype: str
+        """
+        df = DnManager.downloadfile(self.mirroruri, self.installdir, outdir)
+        return DnManager.renamefile(df, os.path.basename(self.mirroruri))
 
     @property
     def hudname(self) -> str:
@@ -278,9 +300,11 @@ class HUDCommon(metaclass=abc.ABCMeta):
         :return: Return True if the specified HUD was downloaded successfully.
         :rtype: bool
         """
-        df = DnManager.downloadfile(self.mainuri, self.installdir, outdir)
-        f = DnManager.renamefile(df, self.filename)
-        return DnManager.sha512hash(f) == self.sha512hash
+        try:
+            hudfile = self._downloadmain(outdir)
+        except requests.exceptions.HTTPError:
+            hudfile = self._downloadmirror(outdir)
+        return DnManager.sha512hash(hudfile) == self.sha512hash
 
     def update(self, outdir: str) -> None:
         """
