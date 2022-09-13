@@ -68,6 +68,16 @@ class HUDCommon(metaclass=abc.ABCMeta):
         df = DnManager.downloadfile(self.mirroruri, self.installdir, outdir)
         return DnManager.renamefile(df, os.path.basename(self.mirroruri))
 
+    def _downloadupstream(self, outdir: str) -> str:
+        """
+        Download HUD to the output directory using upstream URI.
+        :param outdir: Output directory.
+        :return: Absolute path of the downloaded HUD file.
+        :rtype: str
+        """
+        df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
+        return DnManager.renamefilehash(df, DnManager.sha256hash(df))
+
     @property
     def hudname(self) -> str:
         """
@@ -311,9 +321,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
         Download the latest version of the specified HUD.
         :param outdir: Output directory.
         """
-        df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
-        f = DnManager.renamefilehash(df, DnManager.sha256hash(df))
-
+        f = self._downloadupstream(outdir)
         self.archivedir = DnManager.findarchivedir(f, self.archivedir)
         self.mainuri = self._genmainuri(f)
         self.mirroruri = self._genmirroruri(f)
