@@ -290,7 +290,7 @@ class HUDCommon(metaclass=abc.ABCMeta):
         df = DnManager.downloadfile(self.upstreamuri, self.installdir, outdir)
         f = DnManager.renamefilehash(df, DnManager.sha256hash(df))
 
-        self.archivedir = DnManager.findarchivedir(f)
+        self.archivedir = DnManager.findarchivedir(f, self.archivedir)
         self.mainuri = self._genmainuri(f)
         self.mirroruri = self._genmirroruri(f)
         self.sha512hash = DnManager.sha512hash(f)
