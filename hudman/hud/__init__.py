@@ -321,11 +321,11 @@ class HUDCommon(metaclass=abc.ABCMeta):
         Download the latest version of the specified HUD.
         :param outdir: Output directory.
         """
-        f = self._downloadupstream(outdir)
-        self.archivedir = DnManager.findarchivedir(f, self.archivedir)
-        self.mainuri = self._genmainuri(f)
-        self.mirroruri = self._genmirroruri(f)
-        self.sha512hash = DnManager.sha512hash(f)
+        hudfile = self._downloadupstream(outdir)
+        self.archivedir = DnManager.findarchivedir(hudfile, self.archivedir)
+        self.mainuri = self._genmainuri(hudfile)
+        self.mirroruri = self._genmirroruri(hudfile)
+        self.sha512hash = DnManager.sha512hash(hudfile)
         self.lastupdate = self._checkresult
         self.isupdated = True
 
