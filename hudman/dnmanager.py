@@ -86,6 +86,12 @@ class DnManager:
 
     @staticmethod
     def findrealurl(url: str) -> str:
+        """
+        Recursively follow redirects and find the real URL.
+        :param url: Current URL.
+        :return: URL after the all redirects.
+        :rtype: str
+        """
         headers = {'User-Agent': Settings.apifetch_user_agent}
         with requests.head(url, allow_redirects=False, headers=headers) as response:
             if response.is_redirect:
