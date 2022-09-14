@@ -85,6 +85,14 @@ class DnManager:
         return os.path.dirname(flist[0])
 
     @staticmethod
+    def findrealurl(url: str) -> str:
+        headers = {'User-Agent': Settings.apifetch_user_agent}
+        with requests.head(url, allow_redirects=False, headers=headers) as response:
+            if response.is_redirect:
+                return DnManager.findrealurl(response.next.url)
+        return url
+
+    @staticmethod
     def sha256hash(fname: str) -> str:
         """
         Calculate SHA-256 hash sum of the specified file.
