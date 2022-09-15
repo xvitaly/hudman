@@ -85,17 +85,18 @@ class DnManager:
         return os.path.dirname(flist[0])
 
     @staticmethod
-    def findrealurl(url: str) -> str:
+    def findrealurl(url: str, depth: int = 0) -> str:
         """
         Recursively follow redirects and find the real URL.
         :param url: Current URL.
+        :param depth: Recursion depth.
         :return: URL after the all redirects.
         :rtype: str
         """
         headers = {'User-Agent': Settings.apifetch_user_agent}
         with requests.head(url, allow_redirects=False, headers=headers) as response:
-            if response.is_redirect:
-                return DnManager.findrealurl(response.next.url)
+            if response.is_redirect and depth < 5:
+                return DnManager.findrealurl(response.next.url, depth + 1)
         return url
 
     @staticmethod
