@@ -89,14 +89,14 @@ class DnManager:
         """
         Recursively follow redirects and find the real URL.
         :param url: Current URL.
-        :param depth: Recursion depth.
+        :param depth: Maximum recursion depth.
         :return: URL after the all redirects.
         :rtype: str
         """
         headers = {'User-Agent': Settings.apifetch_user_agent}
         with requests.head(url, allow_redirects=False, headers=headers) as response:
-            if response.is_redirect and depth < 5:
-                return DnManager.findrealurl(response.next.url, depth + 1)
+            if response.is_redirect and depth > 0:
+                return DnManager.findrealurl(response.next.url, depth - 1)
         return url
 
     @staticmethod
