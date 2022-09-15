@@ -85,7 +85,7 @@ class DnManager:
         return os.path.dirname(flist[0])
 
     @staticmethod
-    def findrealurl(url: str, depth: int = 0) -> str:
+    def findrealurl(url: str, depth: int = 5) -> str:
         """
         Recursively follow redirects and find the real URL.
         :param url: Current URL.
