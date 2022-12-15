@@ -32,7 +32,7 @@ pyinstaller ^
     --version-file=assets\version.txt ^
     --manifest=assets\hudman.manifest ^
     --icon=assets\hudman.ico ^
-    ..\..\hudman\app\run.py
+    ..\..\src\hudman\app\run.py
 
 echo Signing binaries...
 if [%CI_HASH%] == [] (
