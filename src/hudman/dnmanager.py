@@ -107,7 +107,9 @@ class DnManager:
         :return: SHA1 hash of the source file.
         :rtype: str
         """
-        return hashlib.sha256(open(fname, 'rb').read()).hexdigest()
+        with open(fname, 'rb') as f:
+            result = hashlib.sha256(f.read()).hexdigest()
+        return result
 
     @staticmethod
     def sha512hash(fname: str) -> str:
@@ -117,4 +119,6 @@ class DnManager:
         :return: SHA-512 hash of the source file.
         :rtype: str
         """
-        return hashlib.sha512(open(fname, 'rb').read()).hexdigest()
+        with open(fname, 'rb') as f:
+            result = hashlib.sha512(f.read()).hexdigest()
+        return result
