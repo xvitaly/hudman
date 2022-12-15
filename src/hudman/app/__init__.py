@@ -60,7 +60,9 @@ class App:
             else:
                 manager.updateall()
                 manager.save()
-        except Exception:
+        except KeyboardInterrupt:
+            self.__logger.error('Interrupted by user.')
+        except (Exception, SystemExit):
             self.__logger.exception('An error occurred while working with the %s database file!',
                                     self.__arguments.huddb)
 
