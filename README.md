@@ -3,6 +3,7 @@
 [![GitHub version](https://img.shields.io/github/v/release/xvitaly/hudman?sort=semver&color=brightgreen&logo=git&logoColor=white)](https://github.com/xvitaly/hudman/releases)
 [![PyPi Version](https://img.shields.io/pypi/v/hudman.svg?logo=pypi&logoColor=white)](https://pypi.org/project/hudman/)
 [![GitHub CI status](https://github.com/xvitaly/hudman/workflows/Python%20CI/badge.svg?branch=master)](https://github.com/xvitaly/hudman/actions)
+[![CodeQL](https://github.com/xvitaly/hudman/actions/workflows/codeql.yml/badge.svg)](https://github.com/xvitaly/hudman/actions/workflows/codeql.yml)
 [![AppVeyor CI status](https://ci.appveyor.com/api/projects/status/35yrms4i0thaw9vx?svg=true)](https://ci.appveyor.com/project/xvitaly/hudman)
 [![Codacy](https://app.codacy.com/project/badge/Grade/7cd1055493b44164b38dd70c02d05870)](https://www.codacy.com/gh/xvitaly/hudman/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/xvitaly/hudman/badge/master)](https://www.codefactor.io/repository/github/xvitaly/hudman/overview/master)
