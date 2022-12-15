@@ -6,9 +6,9 @@
 
 import requests
 
-from ...headertime import HeaderTime
-from ...hud import HUDCommon
-from ...settings import Settings
+from ..headertime import HeaderTime
+from ..hud import HUDCommon
+from ..settings import Settings
 
 
 class HUDOther(HUDCommon):
